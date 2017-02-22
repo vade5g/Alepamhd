@@ -12,6 +12,8 @@ import javax.persistence.Id;
  *
  * @author Vade
  */
+
+@Entity
 public class User {
     
     private String department;
