@@ -15,8 +15,7 @@ public class HibernateStuff {
     public HibernateStuff() {
         Configuration config = new Configuration();
 
-        //config.addAnnotatedClass(Model.Note.class);
-        //config.addAnnotatedClass(Model.User.class);
+        config.addAnnotatedClass(Model.Useri.class);
 
         config = config.configure();
         

@@ -4,7 +4,7 @@
  */
 package Resources;
 
-import Model.User;
+import Model.Useri;
 import Util.HibernateStuff;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class Users {
         session.beginTransaction();
         //actual stuff begins
         
-        User newUser = new User(firstname, lastname, username, password, category);
+        Useri newUser = new Useri(firstname, lastname, username, password, category);
         
         session.saveOrUpdate(newUser);
         session.getTransaction().commit();
