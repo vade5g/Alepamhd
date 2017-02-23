@@ -35,7 +35,8 @@ public class Notes {
     private SimpleDateFormat sdf; //Used to format the date
     private Long id; //ID for database table
     
-    public Notes() {        
+    public Notes() {
+        
     }
     
     public Notes(String content, String category, String targetUser, String author, String expireDate) throws ParseException {
