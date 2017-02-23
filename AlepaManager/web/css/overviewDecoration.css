@@ -10,8 +10,8 @@ body {
 
 .bigWindow {
     position:fixed;
-    width: 85%;
-    height: 90%;
+    width: 60em;
+    height: 40em;
     margin-left: 7.5%;
     top: 5%;
     background-color: rgba(204, 213, 229, 0.5);
@@ -37,8 +37,8 @@ body {
 
 #categoryBar {
     position: absolute;
-    width: 15%;
-    height: 80%;
+    width: 7em;
+    height: 20em;
     top: 5%; 
 }
 
@@ -72,12 +72,17 @@ body {
     cursor: pointer;
 }
 
-#noteTable {
-    width: 3em;
-    height: 5em;
-    table-layout: fixed;
+.noteTable {
+    position: absolute;
+
 }
-#noteImage {
-    width:30%;
-    height:30%;
+.noteImage {
+    width: 5em;
+    height: 5em;
+}
+.notePictures {
+    
+}
+.noteNames {
+    top:10%;
 }
