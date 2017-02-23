@@ -37,6 +37,7 @@ public class Notes {
     
     public Notes() {
         
+        
     }
     
     public Notes(String content, String category, String targetUser, String author, String expireDate) throws ParseException {
