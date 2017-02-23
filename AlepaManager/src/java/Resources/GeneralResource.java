@@ -1,8 +1,6 @@
 
 package Resources;
 
-import Model.Note;
-import Model.User;
 import Util.HibernateStuff;
 import java.util.ArrayList;
 import java.util.List;
