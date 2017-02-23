@@ -22,13 +22,15 @@ import org.hibernate.criterion.Restrictions;
 @Path("/users")
 public class Users {
     
-    @Path("{firstname}/{lastname}/{username}/{password}/{category}")
+    @Path("register/{firstname}/{lastname}/{username}/{password}/{category}/{email}")
     @POST
+    @Produces(MediaType.TEXT_PLAIN)
     public String addUser(@PathParam("firstname") String firstname,
                         @PathParam("lastname") String lastname,
                         @PathParam("username") String username,
                         @PathParam("password") String password,
-                        @PathParam("category") String category) {
+                        @PathParam("category") String category,
+                        @PathParam("email") String email) {
         
         //basic initializement
         SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
@@ -36,12 +38,41 @@ public class Users {
         session.beginTransaction();
         //actual stuff begins
         
-        Useri newUser = new Useri(firstname, lastname, username, password, category);
+        Useri newUser = new Useri(firstname, lastname, username, password, category, email);
         
         session.saveOrUpdate(newUser);
         session.getTransaction().commit();
         
-        return firstname+ " "+lastname +" "+ username +" "+ password +" "+ category;
+        return "Registration successful. User "+username+" has been added to the database.";
+    }
+    
+    @Path("login/{username}/{password}")
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    public String tryLogin(@PathParam("username") String username,
+                           @PathParam("password") String password) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        
+        Criteria criteria = session.createCriteria(Useri.class);
+        Useri target;
+        criteria.add(Restrictions.like("username", username));
+        List<Useri> matchList = criteria.list();
+        if (matchList.isEmpty()) {
+            return "This username doesn't exist. Please register to continue.";
+        }
+        criteria.add(Restrictions.like("password", password));
+        matchList = criteria.list();
+        if (matchList.isEmpty()) {
+            return "The password is wrong. Please try again.";
+        }
+        target = matchList.get(0);
+        session.getTransaction().commit();
+        return "Login successful. Welcome, " + target.getFirstname() + "!";
         
     }
     
