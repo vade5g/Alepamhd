@@ -61,7 +61,7 @@ body {
 }
 #viewHistory {
     position: absolute;
-    text-align: center;
+    text-align: right;
     width: 8%;
     height: 14%;
     top: 31%;
@@ -70,4 +70,14 @@ body {
 
 #writeMessage img, #viewHistoryImg {
     cursor: pointer;
+}
+
+#noteTable {
+    width: 3em;
+    height: 5em;
+    table-layout: fixed;
+}
+#noteImage {
+    width:30%;
+    height:30%;
 }
