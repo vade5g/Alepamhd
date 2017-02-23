@@ -19,16 +19,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class User implements Serializable {
+public class Useri implements Serializable {
+    
+    @Id @GeneratedValue
     private int id;
     private String firstname, lastname;
     private String username, password;
     private String category;
 
-    public User() {
+    public Useri() {
     }
     
-    public User(String firstname, String lastname, String username, String password, String category) {
+    public Useri(String firstname, String lastname, String username, String password, String category) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -36,7 +38,6 @@ public class User implements Serializable {
         this.category = category;
     }
     //GETTERS
-    @Id @GeneratedValue
     public int getId() {
         return id;
     }
