@@ -2,6 +2,7 @@ body {
     position:fixed;
     background-size: cover;
     background-image: url("alepakuva.jpg");
+    background-repeat:no-repeat;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     height: 100%;
@@ -74,6 +75,7 @@ body {
 
 .noteTable {
     position: absolute;
+    table-layout: fixed;
 
 }
 .noteImage {
@@ -84,5 +86,17 @@ body {
     
 }
 .noteNames {
-    top:10%;
+    background-image: url(noteImage.png);
+    background-color: #cccccc;
+    background-repeat: no-repeat;
+    width: 6.5em;
+    height: 6.5em;
+    text-align: center;
+    max-width: 6.5em;
+    max-height: 6.5em;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: black;
 }
