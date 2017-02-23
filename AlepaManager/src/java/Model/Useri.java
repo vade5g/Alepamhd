@@ -26,16 +26,18 @@ public class Useri implements Serializable {
     private String firstname, lastname;
     private String username, password;
     private String category;
+    private String email;
 
     public Useri() {
     }
     
-    public Useri(String firstname, String lastname, String username, String password, String category) {
+    public Useri(String firstname, String lastname, String username, String password, String category, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.password = password;
         this.category = category;
+        this.email = email;
     }
     //GETTERS
     public int getId() {
@@ -56,6 +58,10 @@ public class Useri implements Serializable {
     public String getCategory() {
         return category;
     }
+    public String getEmail() {
+        return email;
+    }
+    
 
     //SETTERS
     public void setId(int id) {
@@ -76,8 +82,7 @@ public class Useri implements Serializable {
     public void setCategory(String category) {
         this.category = category;
     }
-        
-    
-    
-    
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
