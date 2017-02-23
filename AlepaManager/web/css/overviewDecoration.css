@@ -1,0 +1,73 @@
+body {
+    position:fixed;
+    background-size: cover;
+    background-image: url("alepakuva.jpg");
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100%;
+    color:white;
+}
+
+.bigWindow {
+    position:fixed;
+    width: 85%;
+    height: 90%;
+    margin-left: 7.5%;
+    top: 5%;
+    background-color: rgba(204, 213, 229, 0.5);
+    border: 1px solid white;
+    border-radius: 15px;
+}
+
+.categoryButton {
+    background-color: #4286f4;
+    font-family: 'Montserrat', sans-serif;
+    float: left;
+    border: 1px solid white;
+    width: 100%;
+    height: 10%;
+    color: white;
+    overflow: auto;
+    left: 5%;
+    cursor: pointer;
+    border-collapse: collapse;
+    margin-top: -6px;
+    margin-left: -1px;
+}
+
+#categoryBar {
+    position: absolute;
+    width: 15%;
+    height: 80%;
+    top: 5%; 
+}
+
+#notesArea {
+    position: absolute;
+    top: 4%;
+    bottom: 5%;
+    left: 18%;
+    right: 14%;
+    border: 1px solid white;
+}
+
+#writeMessage {
+    position: absolute;
+    text-align: center;
+    width: 8%;
+    height: 18%;
+    top: 1%;
+    right: 3%;
+}
+#viewHistory {
+    position: absolute;
+    text-align: center;
+    width: 8%;
+    height: 14%;
+    top: 31%;
+    right: 3%;
+}
+
+#writeMessage img, #viewHistoryImg {
+    cursor: pointer;
+}
