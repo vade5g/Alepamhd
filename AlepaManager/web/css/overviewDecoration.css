@@ -52,24 +52,21 @@ body {
     border: 1px solid white;
 }
 
-#writeMessage {
+#rightPanelContainer {
     position: absolute;
-    text-align: center;
-    width: 8%;
-    height: 18%;
-    top: 1%;
-    right: 3%;
-}
-#viewHistory {
-    position: absolute;
-    text-align: right;
-    width: 8%;
-    height: 14%;
-    top: 31%;
-    right: 3%;
+    top: 0.1em;
+    right: 4em;
+    width : 1em;
 }
 
-#writeMessage img, #viewHistoryImg {
+.rightPanel {
+    text-align: center;
+    width: 3em;
+    height: 6em;
+    margin-top: 4em;
+}
+
+#writeMessage img, #viewHistoryImg, #searchUsersImg {
     cursor: pointer;
 }
 

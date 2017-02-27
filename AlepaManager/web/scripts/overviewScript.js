@@ -2,9 +2,11 @@ var main = function() {
     // hover animations for new note and history images
     var newNoteImg = $("#newNoteImg");
     var historyViewImg = $("#viewHistoryImg");
+    var searchUsersImg = $("#searchUsersImg");
     var newNote = $("#newNote");
     whiteBorderAnimation(newNoteImg);
     whiteBorderAnimation(historyViewImg);
+    whiteBorderAnimation(searchUsersImg);
     newNote.hide();
     
     newNoteImg.click(function(){
