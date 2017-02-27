@@ -40,6 +40,23 @@
                         </tr>
                     </tbody>
                 </table>
+                <div id="newNote">
+                    <form id="registerForm" name="register">
+                        <h1>Create a new note</h1>
+                        <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
+                        <div class="regLabel"><label>Target</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
+                        <div class="regLabel"><label>Message*</label><textarea id="newNoteMessage" name="newNoteMessage"></textarea></div>
+                        <div class="regLabel"><label>Deadline</label><input id="newNoteDeadline" type="text" name="newNoteDeadline"></div>
+                        <label class="regLabel">Category*</label><select id="registerCategoryOptions" multiple>
+                        <option value="manager">Manager</option>
+                        <option value="janitor">Janitor</option>
+                        <option value="guard">Security guard</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="storage">Storage worker</option>
+                        <option value="other">Other</option>
+                        </select>
+                    </form>
+                </div>
             </div>
             <div id="writeMessage">
                 <p>Create a new note</p>

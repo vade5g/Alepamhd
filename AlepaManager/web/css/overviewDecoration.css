@@ -73,6 +73,14 @@ body {
     cursor: pointer;
 }
 
+#newNote {
+    background-color: rgb(249, 241, 149);
+    color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
+}
+
 .noteTable {
     position: absolute;
     table-layout: fixed;

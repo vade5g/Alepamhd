@@ -2,8 +2,14 @@ var main = function() {
     // hover animations for new note and history images
     var newNoteImg = $("#newNoteImg");
     var historyViewImg = $("#viewHistoryImg");
+    var newNote = $("#newNote");
     whiteBorderAnimation(newNoteImg);
     whiteBorderAnimation(historyViewImg);
+    newNote.hide();
+    
+    newNoteImg.click(function(){
+        newNote.toggle();
+    });
     
     function whiteBorderAnimation(x) {
         $(x).mouseenter(function() {
