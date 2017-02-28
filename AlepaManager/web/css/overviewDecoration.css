@@ -87,9 +87,15 @@ body {
     width: 5em;
     height: 5em;
 }
-.notePictures {
-    
+
+#searchUsersDiv {
+    background-color: white;
+    color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
 }
+
 .noteDecoration {
     background-image: url(noteImage.png);
     background-color: #cccccc;

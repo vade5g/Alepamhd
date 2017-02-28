@@ -73,7 +73,73 @@ public class Users {
         target = matchList.get(0);
         session.getTransaction().commit();
         return "Login successful. Welcome, " + target.getFirstname() + "!";
-        
     }
     
+    @Path("find")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Useri> getAllUsers() {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        
+        Criteria criteria = session.createCriteria(Useri.class);
+        List<Useri> matchList = new ArrayList<>();
+        matchList = criteria.list();
+        session.getTransaction().commit();
+        return matchList;
+    }
+    
+    @Path("find/{entry}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Useri> findUsers(@PathParam("entry") String entry) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        
+        //initialize the tools we need to search the database
+        entry = entry.trim();
+        String[] entryList = entry.split(" ");
+        
+        Criteria criteria = session.createCriteria(Useri.class);
+        List<Useri> matchList = new ArrayList<>();
+        session.getTransaction().commit();
+        
+        if (entryList.length > 2) {
+            return matchList;
+        } else if (entryList.length == 1) {
+            String word = entryList[0];
+            criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+word+"%"),
+                                        Restrictions.like("lastname", "%"+word+"%")));
+            matchList = criteria.list();
+            return matchList;
+        } else if (entryList.length == 2) {
+            //the user entered for example "Jannu Pekka", we must try both words
+            String word = entryList[0];
+            criteria.add(Restrictions.or(Restrictions.like("firstname", "pekka"),
+                                        Restrictions.like("lastname", "%"+word+"%")));
+            matchList = criteria.list();
+            if (!matchList.isEmpty()) {
+                //if something was found with first word, return list
+                return matchList;
+            } else {
+                //nothing found in first or last names with this word!
+                //create new criteria and try again with the other word
+                word = entryList[1];
+                criteria = session.createCriteria(Useri.class);
+                criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+word+"%"),
+                                        Restrictions.like("lastname", "%"+word+"%")));
+                matchList = criteria.list();
+            }
+        }
+        //return whether it came out empty or not
+        return matchList;
+    }
 }

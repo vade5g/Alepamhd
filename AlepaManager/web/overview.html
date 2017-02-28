@@ -37,11 +37,12 @@
                             <td class="noteDecoration"></td>
                             <td class="noteDecoration"></td>
                             <td class="noteDecoration"></td>
+                            <td class="noteDecoration"></td>
                         </tr>
                     </tbody>
                 </table>
                 <div id="newNote">
-                    <form id="registerForm" name="register">
+                    <form>
                         <h1>Create a new note</h1>
                         <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
                         <div class="regLabel"><label>Target</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
@@ -55,6 +56,21 @@
                         <option value="storage">Storage worker</option>
                         <option value="other">Other</option>
                         </select>
+                    </form>
+                </div>
+                <div id="searchUsersDiv">
+                    <form>
+                        <h1>Search user database</h1>
+                        <div class="regLabel"><label>Search for name:</label>
+                            <input id="findUserField" type="text" name="findUserField">
+                        </div>
+                        <button type="button" id="searchButton" class="regButton white">Search</button>
+                        <div style="height:22em;overflow-y:scroll">
+                            <ul>
+                                <li style="height:2em;">asd</li>
+                                <li style="height:2em;">as</li>
+                            </ul>
+                        </div>
                     </form>
                 </div>
             </div>
