@@ -20,6 +20,7 @@ var main = function() {
     note.hide();
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
+    refreshNoteClickEvents();
     
     $("#newNoteAuthor").val(sessionStorage.getItem('loggedInUser'));
     
@@ -29,19 +30,19 @@ var main = function() {
             toggleElement.toggle();
         }); 
     }
+    function refreshNoteClickEvents() {
+        $(".individualNote").click(function() {
+            var action="getNote";
+            var type="GET";
+            var title = $(this).text();
+            var url = "resources/activenotes/"+title;
+            sendRequest(type, url, action);
+        }); 
+        $("#note button").click(function() {
+            note.hide();
+        }); 
+    }
 
-    $(".individualNote").click(function() {
-        alert("comes here");
-        var action="getNote";
-        var type="GET";
-        var title = $(this).text();
-        var url = "resources/activenotes/"+title;
-        sendRequest(type, url, action);
-        note.show();
-    }); 
-    $("#note button").click(function() {
-        note.hide();
-    }); 
 
     //close elements except the one defined in the parameter
     function closeOthers(element) {
@@ -94,7 +95,6 @@ var main = function() {
     }); 
     
     $(searchButton).click(function() {
-        alert("happens");
         var action = "findUser";
         var type="GET";
         var entry = findUserField.val();
@@ -198,6 +198,7 @@ var main = function() {
             $('#noteTable tr:last td:last').after("<td class='individualNote'>"+title+"</td>");
         }
         whiteBorderAnimation($('#noteTable td'));
+        refreshNoteClickEvents();
     }
     
     function changeNote(responseXML) {
@@ -208,15 +209,20 @@ var main = function() {
         var message = noteObject.getElementsByTagName("message")[0];
         var deadline = noteObject.getElementsByTagName("deadline")[0];
         var category = noteObject.getElementsByTagName("category")[0];
-        
-        $("#noteTitle").val("Title of note: " + title);
-        $("#noteTarget").val("Targeted to:: " + target);
-        $("#noteAuthor").val("Sent by " + author);
-        $("#noteMessage").val("Message: " + message);
-        $("#noteDueDate").val("Due by: " + deadline);
-        $("#noteCategory").val("Category: " + category);
+        title = title.childNodes[0].nodeValue;
+        target = target.childNodes[0].nodeValue;
+        author = author.childNodes[0].nodeValue;
+        message = message.childNodes[0].nodeValue;
+        //deadline = deadline.childNodes[0].nodeValue;
+        category = category.childNodes[0].nodeValue;
+        $("#noteTitle").text(title);
+        $("#noteTarget").text("Targeted to: " + target);
+        $("#noteAuthor").text("Sent by " + author);
+        $("#noteMessage").text("Message: " + message);
+        $("#noteDueDate").text("Due by: " + deadline);
+        $("#noteCategory").text("Category: " + category);
+        note.show();
     }
-    
 };
 
 $(document).ready(main);
