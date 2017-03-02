@@ -10,11 +10,14 @@ var main = function() {
     var searchButton = $("#searchButton");
     var searchResultsList = $("#searchResultList");
     var submitNoteButton = $("#submitNote");
+    var note = $("#note");
     whiteBorderAnimation(newNoteImg);
     whiteBorderAnimation(historyViewImg);
     whiteBorderAnimation(searchUsersImg);
+    whiteBorderAnimation($('#noteTable td'));
     newNote.hide();
     userDatabase.hide();
+    note.hide();
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
     
@@ -27,6 +30,19 @@ var main = function() {
         }); 
     }
 
+    $(".individualNote").click(function() {
+        alert("comes here");
+        var action="getNote";
+        var type="GET";
+        var title = $(this).text();
+        var url = "resources/activenotes/"+title;
+        sendRequest(type, url, action);
+        note.show();
+    }); 
+    $("#note button").click(function() {
+        note.hide();
+    }); 
+
     //close elements except the one defined in the parameter
     function closeOthers(element) {
         for (var i = 0; i < panelElementsList.length; i++) {
@@ -37,12 +53,13 @@ var main = function() {
     }
     
     function whiteBorderAnimation(x) {
+        $(x).css('border', "solid 2px rgba(255, 255, 255, 0.0)");
+        $(x).css('border-radius', "10px");
         $(x).mouseenter(function() {
             $(this).css('border', "solid 2px white");
-            $(this).css('border-radius', "10px");
         }); 
         $(x).mouseleave(function() {
-            $(this).css('border', "none");
+            $(x).css('border', "solid 2px rgba(255, 255, 255, 0.0)");
         }); 
     }
     
@@ -77,6 +94,7 @@ var main = function() {
     }); 
     
     $(searchButton).click(function() {
+        alert("happens");
         var action = "findUser";
         var type="GET";
         var entry = findUserField.val();
@@ -104,6 +122,8 @@ var main = function() {
                     processSearchResults(req.responseXML);
                 } else if (action === "addNote") {
                     addNoteToView(req.responseText);
+                } else if (action==="getNote") {
+                    changeNote(req.responseXML);
                 }
             }
         }
@@ -172,12 +192,29 @@ var main = function() {
         //$("#noteTable: last tr:last").append('<td>asdfasdfasdf</li>');
         var lastRowLength = $( "#noteTable tr:last td" ).length;
         alert("new note added");
-        
         if (lastRowLength === 6) {
-            $('#noteTable tr:last').after("<tr><td class='noteDecoration'>"+title+"</td></tr>");
+            $('#noteTable tr:last').after("<tr><td class='individualNote'>"+title+"</td></tr>");
         } else {
-            $('#noteTable tr:last td:last').after("<td class='noteDecoration'>"+title+"</td>");
+            $('#noteTable tr:last td:last').after("<td class='individualNote'>"+title+"</td>");
         }
+        whiteBorderAnimation($('#noteTable td'));
+    }
+    
+    function changeNote(responseXML) {
+        var noteObject = responseXML.getElementsByTagName("note")[0];
+        var title = noteObject.getElementsByTagName("title")[0];
+        var target = noteObject.getElementsByTagName("targetUser")[0];
+        var author = noteObject.getElementsByTagName("author")[0];
+        var message = noteObject.getElementsByTagName("message")[0];
+        var deadline = noteObject.getElementsByTagName("deadline")[0];
+        var category = noteObject.getElementsByTagName("category")[0];
+        
+        $("#noteTitle").val("Title of note: " + title);
+        $("#noteTarget").val("Targeted to:: " + target);
+        $("#noteAuthor").val("Sent by " + author);
+        $("#noteMessage").val("Message: " + message);
+        $("#noteDueDate").val("Due by: " + deadline);
+        $("#noteCategory").val("Category: " + category);
     }
     
 };

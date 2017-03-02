@@ -45,10 +45,10 @@ body {
 
 #notesArea {
     position: absolute;
-    top: 4%;
-    bottom: 5%;
-    left: 18%;
-    right: 14%;
+    width: 43em;
+    height: 30em;
+    left: 9em;
+    top: 2em;
     border: 1px solid white;
 }
 
@@ -66,7 +66,7 @@ body {
     margin-top: 4em;
 }
 
-#writeMessage img, #viewHistoryImg, #searchUsersImg {
+#writeMessage img, #viewHistoryImg, #searchUsersImg, td {
     cursor: pointer;
 }
 
@@ -78,14 +78,19 @@ body {
     width: 30em;
 }
 
+#note {
+    background-color: rgb(249, 241, 149);
+    color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
+    margin-left: 5em;
+}
+
 .noteTable {
     position: absolute;
     table-layout: fixed;
 
-}
-.noteImage {
-    width: 5em;
-    height: 5em;
 }
 
 #searchUsersDiv {
@@ -96,18 +101,20 @@ body {
     width: 30em;
 }
 
-.noteDecoration {
+#noteTable tr {
+    height: 7em;
+}
+
+#noteTable td {
+    width: 7em;
+}
+
+.individualNote {
+    background: no-repeat;
+    background-size: cover;
     background-image: url(noteImage.png);
-    background-color: #cccccc;
-    background-repeat: no-repeat;
-    width: 6.5em;
-    height: 6.5em;
-    text-align: center;
-    max-width: 6.5em;
-    max-height: 6.5em;
-    overflow: hidden;
-    word-wrap: break-word;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
     color: black;
+    text-align: center;
+    height: 5em;
+    width: 10em;
 }

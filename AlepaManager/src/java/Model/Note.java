@@ -32,8 +32,7 @@ public class Note implements Serializable {
     private String targetUser;  //The name the note is targeted at (optional)
     private String author;      //The one who made the note
     private String message; //Content of the note (written task)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date deadline; //The given date the note expires (optional)
+    private String deadline; //The given date the note expires (optional)
     private String category; //The category the note was assigned to
     private boolean active; //Is the task done or not
     private boolean expired; //Value that checks if the note is expired
@@ -59,8 +58,7 @@ public class Note implements Serializable {
     
     //Checks if the expiration date has passed the current date
     public boolean checkExpiration() {
-        this.expired = this.deadline.before(new Date());       
-        return this.expired;        
+        return false;      
     }
     
     //GETTERS
@@ -88,7 +86,7 @@ public class Note implements Serializable {
     public boolean getExpired() {
         return this.expired;
     }
-    public Date getDeadline() {
+    public String getDeadline() {
         return this.deadline;
     }
     
@@ -101,6 +99,9 @@ public class Note implements Serializable {
     }
     public void setMessage(String input) {
         this.message = input;
+    }
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
     public void setCategory(String input) {
         this.category = input;
@@ -123,6 +124,7 @@ public class Note implements Serializable {
     }
     
     //Prints out all the information
+    @Override
     public String toString() {
         return "Content: " + getMessage() + "\nCategory: " + getCategory() + 
                 "\nTarget User: " + getTargetUser() + "\nAuthor: " + getAuthor() + 

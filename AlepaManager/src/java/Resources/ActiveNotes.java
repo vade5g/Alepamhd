@@ -27,13 +27,12 @@ public class ActiveNotes {
     @Path("{title}/{target}/{author}/{message}/{deadline}/{category}")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    public String addUser(@PathParam("title") String title,
+    public String addNote(@PathParam("title") String title,
                         @PathParam("target") String target,
                         @PathParam("author") String author,
                         @PathParam("message") String message,
                         @PathParam("deadline") String deadline,
                         @PathParam("category") String category) {
-        
         //basic initializement
         SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
         Session session = sf.openSession();
@@ -44,13 +43,32 @@ public class ActiveNotes {
         } else if (deadline.equals("none")) {
             deadline=null;
         }
-        
-        
         Note newNote = new Note(title, target, author,  message, deadline, category);
-
         session.saveOrUpdate(newNote);
         session.getTransaction().commit();
         
         return title;
+    }
+    
+    @Path("{title}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Note getNote(@PathParam("title") String title) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        List<Note> matchList = new ArrayList<>();
+        Note note = null;
+        Criteria criteria = session.createCriteria(Note.class);
+        criteria.add(Restrictions.like("title", title));
+        matchList = criteria.list();
+        if (!matchList.isEmpty()) {
+            note = matchList.get(0);
+        }
+        session.getTransaction().commit();
+        return note;
     }
 }
