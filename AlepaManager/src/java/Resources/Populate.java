@@ -19,7 +19,7 @@ import org.hibernate.criterion.Restrictions;
 @Path("/populate")
 public class Populate {
     
-    @POST
+    @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String populate() {
         

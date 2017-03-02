@@ -43,12 +43,10 @@ public class Useri implements Serializable {
     public int getId() {
         return id;
     }
-    
     @XmlElement
     public String getFirstname() {
         return firstname;
     }
-    
     @XmlElement
     public String getLastname() {
         return lastname;

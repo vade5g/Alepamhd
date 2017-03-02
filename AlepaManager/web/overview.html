@@ -45,7 +45,8 @@
                     <form>
                         <h1>Create a new note</h1>
                         <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
-                        <div class="regLabel"><label>Target</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
+                        <div class="regLabel"><label>Target person</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
+                        <div class="regLabel"><label>Your name*</label><input id="newNoteAuthor" type="text" name="newNoteAuthor"></div>
                         <div class="regLabel"><label>Message*</label><textarea id="newNoteMessage" name="newNoteMessage"></textarea></div>
                         <div class="regLabel"><label>Deadline</label><input id="newNoteDeadline" type="text" name="newNoteDeadline"></div>
                         <label class="regLabel">Category*</label><select id="registerCategoryOptions" multiple>
@@ -56,6 +57,7 @@
                         <option value="storage">Storage worker</option>
                         <option value="other">Other</option>
                         </select>
+                        <button type="button" id="submitNote" class="regButton white">Add note</button>
                     </form>
                 </div>
                 <div id="searchUsersDiv">
@@ -65,10 +67,9 @@
                             <input id="findUserField" type="text" name="findUserField">
                         </div>
                         <button type="button" id="searchButton" class="regButton white">Search</button>
-                        <div style="height:22em;overflow-y:scroll">
-                            <ul>
-                                <li style="height:2em;">asd</li>
-                                <li style="height:2em;">as</li>
+                        <div id="resultsContainerDiv" style="height:22em;overflow-y:scroll">
+                            <ul id="searchResultList">
+                                
                             </ul>
                         </div>
                     </form>
