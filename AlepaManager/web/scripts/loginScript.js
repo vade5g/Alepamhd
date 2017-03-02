@@ -16,10 +16,33 @@ var main = function() {
     
     //tell the request function if we are trying to login or register
     $("#loginButton").click(function() {
-        sendRequest("login");
+        var action="login";
+        if (checkValid(action)===true) {
+            var type="POST";
+            var username = loginUsernameField.val();
+            var password = loginPasswordField.val();
+            var url = "resources/users/login/"+username+"/"+password;
+            sendRequest(type, url, action);
+        }
     });
+    
     $("#submitRegistrationButton").click(function() {
-        sendRequest("register");
+        var action="register";
+        if (checkValid(action)===true) {
+            var fullnameString = registerFullNameField.val();
+            fullnameString = fullnameString.trim();
+            fullnameString = fullnameString.split(" ");
+            var firstname = fullnameString[0];
+            var lastname = fullnameString[1];
+            var username = registerUsernameField.val();
+            var password = registerPasswordField.val();
+            var email = registerEmailField.val();
+            var category = registerCategoryField.val();
+            var url = "resources/users/register/"+firstname+"/"+lastname+"/"
+                +username+"/"+password+"/"+category+"/"+email;
+            var type = "POST";
+            sendRequest(type, url, action);
+        }
     });
     
     var loginUsernameField = $("#loginUsername");
@@ -30,47 +53,40 @@ var main = function() {
     var registerEmailField = $("#registerEmail");
     var registerCategoryField = $("#registerCategoryOptions");
     
+    var loggedInUser;
+    
     //AJAX request function for both login and register
-    function sendRequest(action) {
-        var url;
-        if (action==="login") {
-            if (checkValid("login")===false) {
-                
-            } else {
-                var username = loginUsernameField.val();
-                var password = loginPasswordField.val();
-                url = "resources/users/login/"+username+"/"+password;
-            }
-        } else if (action==="register") {
-            if (checkValid("register")===false) {
-                
-            } else {
-                var fullnameString = registerFullNameField.val();
-                fullnameString = fullnameString.trim();
-                fullnameString = fullnameString.split(" ");
-                var firstname = fullnameString[0];
-                var lastname = fullnameString[1];
-                var username = registerUsernameField.val();
-                var password = registerPasswordField.val();
-                var email = registerEmailField.val();
-                var category = registerCategoryField.val();
-                url = "resources/users/register/"+firstname+"/"+lastname+"/"
-                    +username+"/"+password+"/"+category+"/"+email;
-            }
-
-        }
+    function sendRequest(type, url, action) {
         req = new XMLHttpRequest();
-        req.open("POST", url, true);
-        req.onreadystatechange = callback;
+        req.open(type, url, true);
+        req.onreadystatechange = function() {
+            callback(action);
+        };
         req.send(null);
     }
     
-    function callback() {
+    function callback(action) {
         if (req.readyState === 4) {
             if (req.status === 200) {
-                alert(req.responseText);
-                if (req.responseText.includes("Login successful")) {
-                    window.location.href = "overview.html";
+                if (action==="login") {
+                    //if login was successful, save the logged in user:
+                    if (!req.responseText.includes("bad")) {
+                        loggedInUser = req.responseText;
+                        if(typeof(sessionStorage) !== "undefined") {
+                            //clear old ones
+                            sessionStorage.clear();
+                            //set name of logged in user so we remember it later
+                            sessionStorage.setItem('loggedInUser', loggedInUser);
+                        }
+                        alert("Login successful!");
+                        window.location.href = "overview.html";
+                    } else if (req.responseText.includes("bad username")) {
+                        alert("This username doesn't exist. Please register to continue.");
+                    } else if (req.responseText.includes("bad password")) {
+                        alert("The password is wrong. Please try again.");
+                    }
+                } else if (action==="register") {
+                    alert(req.responseText);
                 }
             }
         }

@@ -51,6 +51,6 @@ public class ActiveNotes {
         session.saveOrUpdate(newNote);
         session.getTransaction().commit();
         
-        return "Note added to database!";
+        return title;
     }
 }

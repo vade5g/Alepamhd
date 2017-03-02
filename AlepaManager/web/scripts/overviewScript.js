@@ -18,6 +18,8 @@ var main = function() {
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
     
+    $("#newNoteAuthor").val(sessionStorage.getItem('loggedInUser'));
+    
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
             closeOthers(toggleElement);
@@ -32,10 +34,6 @@ var main = function() {
                 panelElementsList[i].hide();
             }
         }
-    }
-    
-    function abababaababa() {
-        
     }
     
     function whiteBorderAnimation(x) {
@@ -67,35 +65,35 @@ var main = function() {
     });
     
     $(submitNoteButton).click(function() {
-        sendRequest("addNote");
+        var action="addNote";
+        var type="POST";
+        var url;
+        if (noteFieldsOK()===true) {
+            url = checkNoteFields();
+            sendRequest(type, url, action);
+        } else {
+            alert("Please fill out all the required fields!");
+        }
     }); 
     
     $(searchButton).click(function() {
-        sendRequest("findUser");
+        var action = "findUser";
+        var type="GET";
+        var entry = findUserField.val();
+        if (/^\w+$/.test(entry)===false) {
+            entry="";
+        }
+        var url = "resources/users/find/"+entry;
+        sendRequest(type, url, action);
     }); 
     
     //AJAX request function for sending requests
-    function sendRequest(action) {
-        var url, type;
-        if (action==="findUser") {
-            type="GET";
-            var entry = findUserField.val();
-            if (/^\w+$/.test(entry)===false) {
-                entry="";
-            }
-            url = "resources/users/find/"+entry;
-        } else if (action==="addNote") {
-            type="POST";
-            if (noteFieldsOK()===true) {
-                url = checkNoteFields();
-            } else {
-                alert("Please fill out all the required fields!");
-                return;
-            }
-        }
+    function sendRequest(type, url, action) {
         req = new XMLHttpRequest();
         req.open(type, url, true);
-        req.onreadystatechange = callback(action);
+        req.onreadystatechange = function() {
+            callback(action);
+        };
         req.send(null);
     }
     
@@ -105,7 +103,7 @@ var main = function() {
                 if (action === "findUser") {
                     processSearchResults(req.responseXML);
                 } else if (action === "addNote") {
-                    addNoteToView();
+                    addNoteToView(req.responseText);
                 }
             }
         }
@@ -170,8 +168,16 @@ var main = function() {
         return url;
     }
     
-    function addNoteToView() {
-        $("#noteTable: last tr:last").append('<td>asdfasdfasdf</li>');
+    function addNoteToView(title) {
+        //$("#noteTable: last tr:last").append('<td>asdfasdfasdf</li>');
+        var lastRowLength = $( "#noteTable tr:last td" ).length;
+        alert("new note added");
+        
+        if (lastRowLength === 6) {
+            $('#noteTable tr:last').after("<tr><td class='noteDecoration'>"+title+"</td></tr>");
+        } else {
+            $('#noteTable tr:last td:last').after("<td class='noteDecoration'>"+title+"</td>");
+        }
     }
     
 };

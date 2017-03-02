@@ -63,16 +63,16 @@ public class Users {
         criteria.add(Restrictions.like("username", username));
         List<Useri> matchList = criteria.list();
         if (matchList.isEmpty()) {
-            return "This username doesn't exist. Please register to continue.";
+            return "bad username";
         }
         criteria.add(Restrictions.like("password", password));
         matchList = criteria.list();
         if (matchList.isEmpty()) {
-            return "The password is wrong. Please try again.";
+            return "bad password";
         }
         target = matchList.get(0);
         session.getTransaction().commit();
-        return "Login successful. Welcome, " + target.getFirstname() + "!";
+        return target.getFirstname()+" "+target.getLastname();
     }
     
     @Path("find")
@@ -97,7 +97,6 @@ public class Users {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public List<Useri> findUsers(@PathParam("entry") String entry) {
-        
         //basic initializement
         SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
         Session session = sf.openSession();

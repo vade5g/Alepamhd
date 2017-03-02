@@ -21,32 +21,30 @@
                 <button class="categoryButton">3rd party</button>
             </div>
             <div id="notesArea">
-                <table class="noteTable">
-                    <tbody>
-                        <tr>
-                            <td class="noteDecoration">Siivoa vessat</td>
-                            <td class="noteDecoration">kakkonen kolmonen nelonen</td>
-                            <td class="noteDecoration">kolmonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                        </tr>
-                        <tr>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                        </tr>
-                    </tbody>
+                <table id="noteTable" class="noteTable">
+                    <tr>
+                        <td class="noteDecoration">Siivoa vessat</td>
+                        <td class="noteDecoration">kakkonen kolmonen nelonen</td>
+                        <td class="noteDecoration">kolmonen</td>
+                        <td class="noteDecoration">nelonen</td>
+                        <td class="noteDecoration">nelonen</td>
+                        <td class="noteDecoration">nelonen</td>
+                    </tr>
+                    <tr>
+                        <td class="noteDecoration"></td>
+                        <td class="noteDecoration"></td>
+                        <td class="noteDecoration"></td>
+                        <td class="noteDecoration"></td>
+                        <td class="noteDecoration"></td>
+                        <td class="noteDecoration"></td>
+                    </tr>
                 </table>
                 <div id="newNote">
                     <form>
                         <h1>Create a new note</h1>
                         <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
                         <div class="regLabel"><label>Target person</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
-                        <div class="regLabel"><label>Your name*</label><input id="newNoteAuthor" type="text" name="newNoteAuthor"></div>
+                        <div class="regLabel"><label>Author*</label><input id="newNoteAuthor" type="text" name="newNoteAuthor" readonly></div>
                         <div class="regLabel"><label>Message*</label><textarea id="newNoteMessage" name="newNoteMessage"></textarea></div>
                         <div class="regLabel"><label>Deadline</label><input id="newNoteDeadline" type="text" name="newNoteDeadline"></div>
                         <label class="regLabel">Category*</label><select id="registerCategoryOptions" multiple>
