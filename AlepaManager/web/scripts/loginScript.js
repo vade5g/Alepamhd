@@ -1,4 +1,22 @@
 var main = function() {
+    
+    $("#loginPageSquare").css("left", $(window).width()/2);
+    $("body h1").css("left", $(window).width()/2);
+    $(".regInput").css("left", $("#loginPageSquare").width()/2);
+    $(".regInput").css("width", $("#loginPageSquare").width()/2);
+    $(".regInput").css("margin-left", -$("#loginPageSquare").width()/4);
+    //$("#loginPageSquare").css("top", $(window).height()/4);
+    $(".loginField").css("width", $("#loginPageSquare").width()/2.4);
+    $( window ).resize(function() {
+        $("#loginPageSquare").css("left", $(window).width()/2);
+        //$("#loginPageSquare").css("top", $(window).height()/4);
+        $("body h1").css("left", $(window).width()/2);
+        $(".regInput").css("left", $("#loginPageSquare").width()/2);
+        $(".regInput").css("width", $("#loginPageSquare").width()/2);
+        $(".regInput").css("margin-left", -$("#loginPageSquare").width()/4);
+        $(".loginField").css("width", $("#loginPageSquare").width()/2.4);
+    });
+    
     //hide unwanted things initially
     $("#registerForm").hide();
     $("#submitRegistrationButton").hide();
@@ -6,8 +24,8 @@ var main = function() {
     //extension to reveal hidden textfields on "register" click
     $( "#registerButton" ).click(function() {
         $("#loginPageSquare").animate({
-            height: "+=330px",
-            top: "-=10%"
+            height: "+=23em",
+            top: "-=5em"
         }, 500);
         $("#registerForm").show();
         $("#submitRegistrationButton").show();
@@ -87,6 +105,19 @@ var main = function() {
                     }
                 } else if (action==="register") {
                     alert(req.responseText);
+                    if (req.responseText.includes("Registration successful")) {
+                        loginUsernameField.val(registerUsernameField.val());
+                        loginPasswordField.val(registerPasswordField.val());
+                        $('#registerForm')[0].reset();
+                        $("#loginPageSquare").animate({
+                            height: "-=22em",
+                            top: "+=5em"
+                        }, 500, function() {
+                            $("#registerForm").hide();
+                            $("#submitRegistrationButton").hide();
+                            $("#registerButton").show();
+                        });
+                    }
                 }
             }
         }

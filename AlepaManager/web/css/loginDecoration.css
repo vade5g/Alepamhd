@@ -1,10 +1,20 @@
 body {
     position:fixed;
+    color: black;
     background-size: cover;
-    background-image: url("alepakuva.jpg");
+    background-color: #fedc00;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     height: 100%;
+}
+
+body h1 {
+    position: absolute;
+    width: 11em;
+    height: 3em;
+    margin-left: -5.5em;
+    text-align: center;
+    z-index: 2;
 }
 
 *
@@ -15,29 +25,28 @@ body {
 }
 
 #loginPageSquare {
-    background-color: rgba(111, 157, 232, 0.9);
-    width: 30%;
-    height: 220px;
     position: absolute;
-    top: 20%;
-    left: 35%;
-    border-radius: 10px;
-    border: 5px solid white;
+    top: 15em;
+    z-index: 2;
+    background-color: #fedc00;
+    width: 30em;
+    height: 17em;
+    margin-left: -15em;
+    border-radius: 0.1em;
+    border: 0.3em solid red;
     text-align:center;
-    color: white;
 }
 
 .regLabel {
     display:block;
-    margin-top: 6%;
-    margin-bottom: 2%;
+    margin-top: 1.7em;
 }
 
 .regInput {
     position: absolute;
     display:block;
-    left: 25%;
-    width: 50%;
+    margin-left: -7em;
+    width: 16em;
 }
 
 .centered {
@@ -48,15 +57,11 @@ body {
     margin: 0;
 }
 
-.white {
-    color: white;
-}
-
 .regButton {
     display: inline-block;
-    margin: 2%;
+    margin: 1em;
     color: white;
-    border-radius: 4px;
+    border-radius: 0.1em;
     background: #60ba4d;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -67,18 +72,88 @@ body {
 
 .bigButton {
     display: inline-block;
-    margin: 6%;
+    margin: 1em;
     color: white;
-    border-radius: 4px;
+    border-radius: 0.1em;
     background: #60ba4d;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0.05em 0.05em rgba(0, 0, 0, 0.2);
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     width: 10em;
     height: 4em;
 }
 
+#cucumber1, #cucumber2, #cucumber3, #cucumber4 {
+    position: absolute;
+}
+
+#cucumber1 {
+    top: -1em;
+    left: 70em;
+}
+
+#cucumber2 {
+    top: 23em;
+    left: 54em;
+    height: 38em;
+    width: 66em;
+}
+
+#cucumber3 {
+    height: 42em;
+    width : 56em;
+    top: 20em;
+    left: -1em;
+}
+
+#cucumber4 {
+    z-index: 1;
+    width: 37em;
+    height: 30em;
+    left: -1em;
+    top: -1em;
+}
+
 ::-webkit-input-placeholder {
    color: grey;
+}
+
+body {
+    font-size: 70%;
+  }
+  
+@media (min-width: 70em) and (min-height: 41em) {
+  body {
+    font-size: 75%;
+  }
+}  
+  
+@media (min-width: 85em) and (min-height: 44.5em) {
+  body {
+    font-size: 80%;
+  }
+}
+@media (min-width: 89.2em) and (min-height: 47.5em) {
+  body {
+    font-size: 85%;
+  }
+}
+
+@media (min-width: 94.5em) and (min-height: 50.5em) {
+  body {
+    font-size: 90%;
+  }
+}
+
+@media (min-width: 99.5em) and (min-height: 53em) {
+  body {
+    font-size: 95%;
+  }
+}
+
+@media (min-width: 105em) and (min-height: 56em) {
+  body {
+    font-size: 100%;
+  }
 }
 

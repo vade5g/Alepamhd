@@ -12,17 +12,21 @@
         <script src="scripts/loginScript.js"></script>
     </head>
     <body>
-        <h1 class="white centered">ALEPA MANAGER 0.1 - PROTO-TURBO EDITION</h1>
+        <img id="cucumber1" src="css/cucumber1.jpg">
+        <img id="cucumber2" src="css/cucumber2.jpg">
+        <img id="cucumber3" src="css/cucumber3.png">
+        <img id="cucumber4" src="css/cucumber4.jpg">
+        <h1 class="centered">ALEPA MANAGER 0.1 - PROTO-HYPER-TURBO EDITION</h1>
         <div id="loginPageSquare">
             <p>Enter login credentials:</p>
             <form name="login">
-                <input id="loginUsername" type="text" name="username" placeholder="Username" >
-                <input id="loginPassword" type="password" name="password" placeholder="Password" >
+                <input id="loginUsername" class="loginField" type="text" name="username" placeholder="Username" >
+                <input id="loginPassword" class="loginField" type="password" name="password" placeholder="Password" >
             </form>
-            <button id="loginButton" class="regButton white">Log in</button>
+            <button id="loginButton" class="regButton">Log in</button>
             <p class="noMargin" style="margin-top: 3%;">
             Not registered? Register here:</p>
-            <button id="registerButton" class="regButton white">Register</button>
+            <button id="registerButton" class="regButton">Register</button>
             <form id="registerForm" name="register">
                 <div class="regLabel"><label>Full Name:</label><input id="registerFullName" class="regInput" type="text" name="fullName" placeholder="Jaska Meikäläinen"></div>
                 <div class="regLabel"><label>Username:</label><input id="registerUsername" class="regInput" type="text" name="regUsername" placeholder="Jaska69"></div>
@@ -37,7 +41,7 @@
                 <option value="other">Other</option>
                 </select>
             </form>
-            <button id="submitRegistrationButton" class="bigButton white">Submit information</button>
+            <button id="submitRegistrationButton" class="bigButton">Submit information</button>
         </div>
     </body>
 </html>
