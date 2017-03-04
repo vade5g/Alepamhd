@@ -11,7 +11,19 @@
         <script src="scripts/overviewScript.js"></script>
     </head>
     <body>
+        <img src="css/alepalogo.png" style="left: 2.3em; position:absolute;">
+        <p id="managerText">MANAGER</p>
+        <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
         <div class="bigWindow">
+            <div id="personalBar">
+                <button class="categoryButton">Your view</button>
+                <div id="bellArea"></div>
+                <img id="bellImage" src="css/notificationbell.png">
+                <a href="" id="notificationNumber">0</a>
+                <div id="notificationContainer">
+                    <button id="notificationWindow" class="categoryButton">[x] new notes</button>
+                </div>
+            </div>
             <div id="categoryBar">
                 <button class="categoryButton">Manager</button>
                 <button class="categoryButton">Cashier</button>
@@ -23,20 +35,12 @@
             <div id="notesArea">
                 <table id="noteTable" class="noteTable">
                     <tr>
-                        <td class="individualNote">Siivoa vessat</td>
-                        <td class="individualNote">kakkonen kolmonen nelonen</td>
-                        <td class="individualNote">kolmonen</td>
-                        <td class="individualNote">nelonen</td>
-                        <td class="individualNote">nelonen</td>
-                        <td class="individualNote">nelonen</td>
-                    </tr>
-                    <tr>
-                        <td class="individualNote"></td>
-                        <td class="individualNote"></td>
-                        <td class="individualNote"></td>
-                        <td class="individualNote"></td>
-                        <td class="individualNote"></td>
-                        <td class="individualNote"></td>
+                        <td class="individualNote"><p class="noteText">Siivoa vessat</p></td>
+                        <td class="individualNote"><p class="noteText">kakkonen kolmonen nelonen</td>
+                        <td class="individualNote"><p class="noteText">kolmonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
                     </tr>
                 </table>
                 <div id="note">
@@ -84,18 +88,19 @@
             </div>
             <div id="rightPanelContainer">
                 <div id="writeMessage" class='rightPanel'>
-                    <p>Create a new note</p>
                     <img id="newNoteImg" src="css/writemessage.png" style="width:5em;height:5em;">
+                    <p>Create a new note</p>
                 </div>
                 <div id="viewHistory" class='rightPanel'>
-                    <p>View history</p>
                     <img id="viewHistoryImg" src="css/historyicon.png" style="width:5em;height:5em;">
+                    <p>View history (expired notes)</p>
                 </div>
                 <div id="searchUsers" class='rightPanel'>
-                    <p>Search the userbase</p>
                     <img id="searchUsersImg" src="css/searchicon.png" style="width:5em;height:5em;">
+                    <p>Search the userbase</p>
                 </div>
             </div>
+            <img id="alepaCucumber" src="css/alepacucumber.png">
         </div>
     </body>
 </html>

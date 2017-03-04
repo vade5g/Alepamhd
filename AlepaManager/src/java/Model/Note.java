@@ -48,7 +48,7 @@ public class Note implements Serializable {
         this.author = author;
         this.message = message;
         if(deadline != null) {
-            
+            this.deadline = deadline;
         }
         this.category = category;
         

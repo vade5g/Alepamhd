@@ -23,7 +23,6 @@ import org.hibernate.criterion.Restrictions;
 @Path("/activenotes")
 public class ActiveNotes {
     
-    
     @Path("{title}/{target}/{author}/{message}/{deadline}/{category}")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
