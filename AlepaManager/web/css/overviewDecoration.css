@@ -196,7 +196,7 @@ body {
 #managerText {
     position: absolute;
     top: 0.5em;
-    left: 7.8em;
+    left: 7.5em;
     font-size: 1.5em;
 }
 
@@ -230,8 +230,14 @@ body {
 }
 
 body {
-    font-size: 80%;
+    font-size: 70%;
   }
+  
+@media (min-width: 70em) and (min-height: 41em) {
+  body {
+    font-size: 75%;
+  }
+}  
   
 @media (min-width: 85em) and (min-height: 44.5em) {
   body {
