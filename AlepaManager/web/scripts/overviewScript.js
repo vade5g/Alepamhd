@@ -66,6 +66,18 @@ var main = function() {
         }); 
     }
     
+    $(".topAnimation").click(function() {
+        var name = ($(this).text());
+        $("#topInfoBar").animate({
+                height: "-=5em"
+            }, 250, function() {
+                $("#topInfoBar p").text("Category: " + name);
+            });
+        $("#topInfoBar").animate({
+                height: "+=5em"
+            }, 250);
+    });
+    
     $("#bellArea").click(function() {
         $("#notificationWindow").show();
     });
