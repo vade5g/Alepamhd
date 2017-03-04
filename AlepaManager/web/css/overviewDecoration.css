@@ -213,7 +213,7 @@ body {
 #topInfoBar {
     position: absolute;
     color: white;
-    left: 50%;
+    left: 52em;
     margin-left: -13em;
     width: 26em;
     height: 5em;
@@ -228,3 +228,37 @@ body {
     text-align: center;
     font-size: 2em;
 }
+
+body {
+    font-size: 80%;
+  }
+  
+@media (min-width: 85em) and (min-height: 44.5em) {
+  body {
+    font-size: 80%;
+  }
+}
+@media (min-width: 89.2em) and (min-height: 47.5em) {
+  body {
+    font-size: 85%;
+  }
+}
+
+@media (min-width: 94.5em) and (min-height: 50.5em) {
+  body {
+    font-size: 90%;
+  }
+}
+
+@media (min-width: 99.5em) and (min-height: 53em) {
+  body {
+    font-size: 95%;
+  }
+}
+
+@media (min-width: 105em) and (min-height: 56em) {
+  body {
+    font-size: 100%;
+  }
+}
+
