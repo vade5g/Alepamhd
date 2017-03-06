@@ -160,13 +160,16 @@ body {
 /*These next parts will modife the opened note window*/
 
 #note {
-    background-color: rgb(249, 241, 149);
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(note_window.png);
     color: black;
     position:fixed;
-    height: 30em;
-    width: 30em;
+    margin-top: 3em;
+    height: 40em;
+    width: 45em;
     margin-left: 5em;
-    opacity: 0.95;
+    
 }
 #note h1 {
     text-align: center;
@@ -176,24 +179,23 @@ body {
     text-align: right;
     margin-right: 2em;
 }
-#noteAuthor {
-    position:absolute;
-    bottom: 1.2em;
-    left: 1.5em;
-
-}
 #noteMessage {
     text-align: center;
     margin-left: 2em;
     margin-right: 2em;
 }
 #noteDueDate {
-    margin-left: 2em;
+    margin-left: 5.5em;
 }
 #noteCategory {
     position:absolute;
-    bottom: 3em;
-    left: 1.5em;
+    bottom: 4em;
+    left: 5.5em;
+}
+#noteAuthor {
+    position:absolute;
+    bottom: 2.2em;
+    left: 5.5em;
 }
 #closeButton {
     position:absolute;
