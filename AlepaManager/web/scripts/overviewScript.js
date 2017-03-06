@@ -252,7 +252,6 @@ var main = function() {
                 $("#sendNoteField").val($(this).text());
             });
             $("#sendNoteToButton").click(function() {
-                alert("saatana");
                 $("#newNoteTarget").val($("#sendNoteField").val());
                 newNoteImg.trigger("click");
             });
@@ -325,8 +324,9 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
-        deadline = deadline.childNodes[0].nodeValue;
+        //deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
+        alert(title+target+author+message+category);
         $("#noteTitle").text(title);
         $("#noteTarget").text("Targeted to: " + target);
         $("#noteAuthor").text("Sent by " + author);
