@@ -71,20 +71,20 @@ public class ActiveNotes {
         return note;
     }
     
-//    @Path("{id}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public List<Note> getNotesOfAuthor(@PathParam("id") int userID) {
-//        //basic initializement
-//        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
-//        Session session = sf.openSession();
-//        session.beginTransaction();
-//        
-//        //stuff begins
+    @Path("/category/{category}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Note> getNotesByID(@PathParam("category") String category) {
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        
+        //stuff begins
 //        Criteria criteria = session.createCriteria(Useri.class);
 //        criteria.add(Restrictions.like("id", userID));
 //        List<Useri> userList = new ArrayList<>(); Useri user;
-//        List<Note> notes = new ArrayList<>();
+        List<Note> notes = new ArrayList<>();
 //        userList = criteria.list();
 //        if (!userList.isEmpty()) {
 //            //get the user by this ID
@@ -92,13 +92,13 @@ public class ActiveNotes {
 //        } else {
 //            return notes;
 //        }
-//        String category = user.getCategory();
-//        //reset criteria
-//        criteria = session.createCriteria(Note.class);
-//        criteria.add(Restrictions.like("category", category));
-//        //criteria.add(Restrictions.like("expired", true));
-//        notes = criteria.list();
-//        session.getTransaction().commit();
-//        return notes;
-//    }
+//        String author = user.getFirstname() + " " + user.getLastname();
+        //reset criteria
+        Criteria criteria = session.createCriteria(Note.class);
+        criteria.add(Restrictions.like("category", category));
+        criteria.add(Restrictions.eq("active", true));
+        notes = criteria.list();
+        session.getTransaction().commit();
+        return notes;
+    }
 }

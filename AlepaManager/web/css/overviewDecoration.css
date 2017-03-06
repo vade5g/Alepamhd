@@ -279,14 +279,13 @@ body {
 #topInfoBar {
     position: absolute;
     color: white;
-    left: 52em;
+    left: 40em;
     margin-left: -13em;
-    width: 26em;
+    width: 50em;
     height: 5em;
     top: -1em;
     background-color: #28c12d;
-    border-radius: 0.4em;
-    border: 0.4em solid white;
+    border: 0.1em solid white;
 }
 
 #topInfoBar p {
