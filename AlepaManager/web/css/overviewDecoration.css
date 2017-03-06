@@ -166,7 +166,26 @@ body {
     height: 30em;
     width: 30em;
     margin-left: 5em;
+    opacity: 0.95;
+}
+#note h1 {
+    text-align: center;
+    
+}
+#noteTarget {
+    text-align: right;
+    margin-right: 2em;
+}
+#noteAuthor {
+    position:absolute;
+    bottom: 1.2em;
+    left: 1.5em;
 
+}
+#noteMessage {
+    text-align: center;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 #noteDueDate {
     margin-left: 2em;
@@ -226,6 +245,7 @@ body {
     background-image: url(noteImage.png);
     color: black;
     text-align: center;
+    cursor: pointer;
 }
 
 
