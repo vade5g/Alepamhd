@@ -18,7 +18,7 @@ var main = function() {
     whiteBorderAnimation($('#noteTable td'));
     newNote.hide();
     userDatabase.hide();
-    note.hide();
+    //note.hide();
     $("#notificationWindow").hide();
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
@@ -196,7 +196,7 @@ var main = function() {
     }
     
     function changeAreaToHistory(responseXML) {
-        clearNotesArea(); 
+        clearNotesArea();  
         var notes = responseXML.getElementsByTagName("notes")[0];
         for (var loop = 0; loop < notes.childNodes.length; loop++) {
             var note = notes.childNodes[loop];
@@ -206,8 +206,10 @@ var main = function() {
         }
     }
     
+    //This Method removes table rows and table data from the table area
     function clearNotesArea() {
-        $("#noteTable tr").remove(); 
+        $("#noteTable tr").remove();
+        $("#noteTable td").remove();
     }
     
     function processSearchResults(responseXML) {
