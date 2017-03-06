@@ -1,10 +1,10 @@
 /* global req, responseXML */
 
 var main = function() {
-    // hover animations for new note and history images
-    var newNoteImg = $("#newNoteImg");
-    var historyViewImg = $("#viewHistoryImg");
-    var searchUsersImg = $("#searchUsersImg");
+    var shadow = $("#shade");
+    var newNoteImg = $("#writeMessage");
+    var historyViewImg = $("#viewHistory");
+    var searchUsersImg = $("#searchUsers");
     var newNote = $("#newNote");
     var userDatabase = $("#searchUsersDiv");
     var panelElementsList = [newNote, userDatabase];
@@ -16,12 +16,15 @@ var main = function() {
     whiteBorderAnimation($("#bellArea"));
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
+    shadow.hide();
     newNote.hide();
     userDatabase.hide();
     //note.hide();
     $("#notificationWindow").hide();
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
+    addPanelClickEvent($("#newNote .closeButton"), newNote);
+    addPanelClickEvent($("#searchUsersDiv .closeButton"), userDatabase);
     
     refreshNoteClickEvents();
     var storedUser = sessionStorage.getItem('loggedInUser');
@@ -53,6 +56,9 @@ var main = function() {
             toggleElement.toggle();
         }); 
     }
+    
+    
+    
     function refreshNoteClickEvents() {
         $(".individualNote").click(function() {
             var action="getNote";
@@ -228,11 +234,33 @@ var main = function() {
                 appendUserListElement(firstname.childNodes[0].nodeValue,
                                       lastname.childNodes[0].nodeValue);
             }
+            $("li p").css({
+                "display" : "inline-block",
+                "cursor" : "pointer"
+            });
+            $("li p").mouseenter(function() {
+                $(this).css({
+                    "text-decoration" : "underline"
+                });
+            }); 
+            $("li p").mouseleave(function() {
+                $(this).css({
+                    "text-decoration" : "none"
+                });
+            });
+            $("li p").click(function() {
+                $("#sendNoteField").val($(this).text());
+            });
+            $("#sendNoteToButton").click(function() {
+                alert("saatana");
+                $("#newNoteTarget").val($("#sendNoteField").val());
+                newNoteImg.trigger("click");
+            });
         }
     }
     
     function appendUserListElement(firstname, lastname) {
-        searchResultsList.append('<li>'+firstname+" "+lastname+'</li>');
+        searchResultsList.append('<li><p>'+firstname+" "+lastname+'</p></li>');
     }
     
     function clearTable() {

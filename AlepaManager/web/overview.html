@@ -11,6 +11,7 @@
         <script src="scripts/overviewScript.js"></script>
     </head>
     <body>
+        <div id="shade"></div>
         <img src="css/alepalogo.png" style="left: 2.3em; position:absolute; height: 4.5em; width: 10em;">
         <p id="managerText">MANAGER</p>
         <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
@@ -37,11 +38,6 @@
                 <table id="noteTable" class="noteTable">
                     <tr>
                         <td class="individualNote"><p class="noteText">Siivoa vessat</p></td>
-                        <td class="individualNote"><p class="noteText">kakkonen kolmonen nelonen</td>
-                        <td class="individualNote"><p class="noteText">kolmonen</p></td>
-                        <td class="individualNote"><p class="noteText">nelonen</p></td>
-                        <td class="individualNote"><p class="noteText">nelonen</p></td>
-                        <td class="individualNote"><p class="noteText">nelonen</p></td>
                     </tr>
                 </table>
                 <div id="note">
@@ -69,8 +65,9 @@
                         <option value="cashier">Cashier</option>
                         <option value="storage">Storage worker</option>
                         <option value="other">Other</option>
-                        </select>
+                        </select><br>
                         <button type="button" id="submitNote" class="regButton white">Add note</button>
+                        <button type="button" class="closeButton">Close</button>
                     </form>
                 </div>
                 <div id="searchUsersDiv">
@@ -78,13 +75,19 @@
                         <h1>Search user database</h1>
                         <div class="regLabel"><label>Search for name:</label>
                             <input id="findUserField" type="text" name="findUserField">
+                            <button type="button" id="searchButton" class="regButton white">Search</button>
                         </div>
-                        <button type="button" id="searchButton" class="regButton white">Search</button>
                         <div id="resultsContainerDiv" style="height:22em;overflow-y:scroll">
                             <ul id="searchResultList">
                                 
                             </ul>
                         </div>
+                        <div class="regLabel"><label>Send note to:</label>
+                            <input id="sendNoteField" type="text">
+                            <button type="button" id="sendNoteToButton">Send</button>
+                        </div>
+                        <button type="button" class="closeButton pointer" 
+                                style="position: absolute; top:0; right:0;"><b>X</b></button>
                     </form>
                 </div>
             </div>

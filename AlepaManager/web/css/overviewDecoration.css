@@ -9,6 +9,16 @@ body {
     color:black;
 }
 
+#shade {
+    z-index: 1;
+    position: absolute;
+    width: 400em;
+    height: 400em;
+    left: -100em;
+    top: -100em;
+    background-color: rgba(119, 120, 122, 0.6);
+}
+
 .bigWindow {
     position:fixed;
     width: 60em;
@@ -140,9 +150,11 @@ body {
 #newNote {
     background-color: rgb(249, 241, 149);
     color: black;
-    position:fixed;
+    position:absolute;
     height: 30em;
     width: 30em;
+    border: 1px solid #919191;
+    z-index: 2;
 }
 
 /*These next parts will modife the opened note window*/
@@ -154,26 +166,7 @@ body {
     height: 30em;
     width: 30em;
     margin-left: 5em;
-    opacity: 0.95;
-}
-#note h1 {
-    text-align: center;
-    
-}
-#noteTarget {
-    text-align: right;
-    margin-right: 2em;
-}
-#noteAuthor {
-    position:absolute;
-    bottom: 1.2em;
-    left: 1.5em;
 
-}
-#noteMessage {
-    text-align: center;
-    margin-left: 2em;
-    margin-right: 2em;
 }
 #noteDueDate {
     margin-left: 2em;
@@ -200,15 +193,23 @@ body {
 .noteTable {
     position: absolute;
     table-layout: fixed;
+}
 
+.pointer {
+    cursor: pointer;
 }
 
 #searchUsersDiv {
+    margin-left: 18.75em;
+    margin-top: 5em;
     background-color: white;
     color: black;
-    position:fixed;
-    height: 30em;
+    position:absolute;
+    height: 33em;
     width: 30em;
+    border: 1px solid #919191;
+    z-index: 2;
+    display : inline-block;
 }
 
 #noteTable tr {
@@ -225,8 +226,8 @@ body {
     background-image: url(noteImage.png);
     color: black;
     text-align: center;
-    cursor: pointer;
 }
+
 
 #alepaCucumber {
     position: absolute;
