@@ -1,76 +1,157 @@
 body {
     position:fixed;
     background-size: cover;
-    background-image: url("alepakuva.jpg");
+    background-color: #ffe301;
     background-repeat:no-repeat;
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     height: 100%;
-    color:white;
+    color:black;
 }
 
 .bigWindow {
     position:fixed;
     width: 60em;
     height: 40em;
-    margin-left: 7.5%;
-    top: 5%;
-    background-color: rgba(204, 213, 229, 0.5);
-    border: 1px solid white;
-    border-radius: 15px;
+    top: 5em;
+    width: 100em;
+
 }
 
 .categoryButton {
-    background-color: #4286f4;
+    background-color: #e21f25;
     font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
     float: left;
-    border: 1px solid white;
-    width: 100%;
-    height: 10%;
+    border: 0.1em solid white;
+    width: 15em;
+    height: 5em;
     color: white;
     overflow: auto;
-    left: 5%;
     cursor: pointer;
     border-collapse: collapse;
-    margin-top: -6px;
-    margin-left: -1px;
+    margin-top: -0.2em;
+    margin-left: -0.1em;
 }
 
 #categoryBar {
     position: absolute;
     width: 7em;
     height: 20em;
-    top: 5%; 
+    top: 20em; 
+}
+
+#personalBar {
+    position: absolute;
+    top: 2em;
+    height: 15em;
+    width: 3em;
+}
+
+#bellImage {
+    margin-top: 1.5em;
+    margin-left: 3em;
+    height: 10em;
+    width: 10em;
+    cursor:pointer;
+}
+
+#bellArea {
+    position: absolute;
+    height: 11.8em;
+    width: 13em;
+    top: 5.3em;
+    left: 0.8em;
+    border: 1px solid black;
+    z-index: 2;
+    cursor: pointer;
+}
+
+#notificationNumber {
+    color: white;
+    text-decoration: none;
+    position: absolute;
+    top: 1.7em;
+    left: 2.15em;
+    z-index: 1;
+    font-size: 4em;
+}
+
+#notificationWindow {
+    z-index: 3;
+    position: absolute;
+    top: 0.1em;
+    left: 10em;
+    background-color: #e21f25;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    border: 0.1em solid white;
+    width: 10em;
+    height: 3em;
+    cursor: pointer;
+}
+
+#notificationContainer {
+    position:absolute;
+    top: 4em;
+    left: 2em;
+    width: 16em;
+    height: 13em;    
 }
 
 #notesArea {
+    overflow-y: scroll;
     position: absolute;
-    top: 4%;
-    bottom: 5%;
-    left: 18%;
-    right: 14%;
-    border: 1px solid white;
+    width: 67.5em;
+    height: 46.9em;
+    left: 18em;
+    top: 1.8em;
+    border: 1px solid #919191;
+    background-color: #eaeaea;
 }
 
-#writeMessage {
+#rightPanelContainer {
     position: absolute;
+    top: 1.9em;
+    width : 15em;
+    height: 30em;
+    right: -4em;
+    background-color: #e21f25;
+    font-size: 1em;
+    border: 0.1em solid white;
+    color: white;
     text-align: center;
-    width: 8%;
-    height: 18%;
-    top: 1%;
-    right: 3%;
-}
-#viewHistory {
-    position: absolute;
-    text-align: right;
-    width: 8%;
-    height: 14%;
-    top: 31%;
-    right: 3%;
 }
 
-#writeMessage img, #viewHistoryImg {
+.rightPanel {
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 0.55em;
+    height: 9em;
     cursor: pointer;
+}
+
+#rightPanelContainer p {
+    margin: 0;
+}
+
+#newNote {
+    background-color: rgb(249, 241, 149);
+    color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
+}
+
+#note {
+    background-color: rgb(249, 241, 149);
+    color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
+    margin-left: 5em;
 }
 
 .noteTable {
@@ -78,25 +159,112 @@ body {
     table-layout: fixed;
 
 }
-.noteImage {
-    width: 5em;
-    height: 5em;
-}
-.notePictures {
-    
-}
-.noteDecoration {
-    background-image: url(noteImage.png);
-    background-color: #cccccc;
-    background-repeat: no-repeat;
-    width: 6.5em;
-    height: 6.5em;
-    text-align: center;
-    max-width: 6.5em;
-    max-height: 6.5em;
-    overflow: hidden;
-    word-wrap: break-word;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
+
+#searchUsersDiv {
+    background-color: white;
     color: black;
+    position:fixed;
+    height: 30em;
+    width: 30em;
 }
+
+#noteTable tr {
+    height: 11.1em;
+}
+
+#noteTable td {
+    width: 11.1em;
+}
+
+.individualNote {
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(noteImage.png);
+    color: black;
+    text-align: center;
+    cursor: pointer;
+}
+
+#alepaCucumber {
+    position: absolute;
+    left: 87em;
+    top: 33em;
+    height: 18em;
+    width: 18em;
+}
+
+#managerText {
+    position: absolute;
+    top: 0.5em;
+    left: 7.5em;
+    font-size: 1.5em;
+}
+
+#bottomText {
+    position: absolute;
+    top: 58.2em;
+}
+
+.noteText {
+    width: 9em;
+    margin: 0 auto;
+}
+
+#topInfoBar {
+    position: absolute;
+    color: white;
+    left: 52em;
+    margin-left: -13em;
+    width: 26em;
+    height: 5em;
+    top: -1em;
+    background-color: #28c12d;
+    border-radius: 0.4em;
+    border: 0.4em solid white;
+}
+
+#topInfoBar p {
+    margin-top: 0.7em;
+    text-align: center;
+    font-size: 2em;
+}
+
+body {
+    font-size: 70%;
+  }
+  
+@media (min-width: 70em) and (min-height: 41em) {
+  body {
+    font-size: 75%;
+  }
+}  
+  
+@media (min-width: 85em) and (min-height: 44.5em) {
+  body {
+    font-size: 80%;
+  }
+}
+@media (min-width: 89.2em) and (min-height: 47.5em) {
+  body {
+    font-size: 85%;
+  }
+}
+
+@media (min-width: 94.5em) and (min-height: 50.5em) {
+  body {
+    font-size: 90%;
+  }
+}
+
+@media (min-width: 99.5em) and (min-height: 53em) {
+  body {
+    font-size: 95%;
+  }
+}
+
+@media (min-width: 105em) and (min-height: 56em) {
+  body {
+    font-size: 100%;
+  }
+}
+

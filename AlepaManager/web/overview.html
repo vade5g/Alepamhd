@@ -11,44 +11,97 @@
         <script src="scripts/overviewScript.js"></script>
     </head>
     <body>
+        <img src="css/alepalogo.png" style="left: 2.3em; position:absolute; height: 4.5em; width: 10em;">
+        <p id="managerText">MANAGER</p>
+        <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
+        <div id="topInfoBar"><p>PERSONAL NOTES</p></div>
         <div class="bigWindow">
+            <div id="personalBar">
+                <button class="categoryButton topAnimation">Your view</button>
+                <div id="bellArea"></div>
+                <img id="bellImage" src="css/notificationbell.png">
+                <a href="" id="notificationNumber">0</a>
+                <div id="notificationContainer">
+                    <button id="notificationWindow" class="categoryButton">[x] new notes</button>
+                </div>
+            </div>
             <div id="categoryBar">
-                <button class="categoryButton">Manager</button>
-                <button class="categoryButton">Cashier</button>
-                <button class="categoryButton">Warehouse</button>
-                <button class="categoryButton">Janitor</button>
-                <button class="categoryButton">Guard</button>
-                <button class="categoryButton">3rd party</button>
+                <button class="categoryButton topAnimation">Manager</button>
+                <button class="categoryButton topAnimation">Cashier</button>
+                <button class="categoryButton topAnimation">Warehouse</button>
+                <button class="categoryButton topAnimation">Janitor</button>
+                <button class="categoryButton topAnimation">Guard</button>
+                <button class="categoryButton topAnimation">3rd party</button>
             </div>
             <div id="notesArea">
-                <table class="noteTable">
-                    <tbody>
-                        <tr>
-                            <td class="noteDecoration">Siivoa vessat</td>
-                            <td class="noteDecoration">kakkonen kolmonen nelonen</td>
-                            <td class="noteDecoration">kolmonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                            <td class="noteDecoration">nelonen</td>
-                        </tr>
-                        <tr>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                            <td class="noteDecoration"></td>
-                        </tr>
-                    </tbody>
+                <table id="noteTable" class="noteTable">
+                    <tr>
+                        <td class="individualNote"><p class="noteText">Siivoa vessat</p></td>
+                        <td class="individualNote"><p class="noteText">kakkonen kolmonen nelonen</td>
+                        <td class="individualNote"><p class="noteText">kolmonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
+                        <td class="individualNote"><p class="noteText">nelonen</p></td>
+                    </tr>
                 </table>
+                <div id="note">
+                    <h1 id="noteTitle">Title of note</h1>
+                    <p id="noteTarget">Targeted to: Jaska</p>
+                    <p id="noteAuthor">Sent by Tiina</p>
+                    <p id="noteMessage">Message: Pese käytävät hei</p>
+                    <p id="noteDueDate">Due by: 27.03.2017</p>
+                    <p id="noteCategory">Category: Janitor</p>
+                    <button>CLOSE</button>
+                </div>
+                <div id="newNote">
+                    <form>
+                        <h1>Create a new note</h1>
+                        <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
+                        <div class="regLabel"><label>Target person</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
+                        <div class="regLabel"><label>Author*</label><input id="newNoteAuthor" type="text" name="newNoteAuthor" readonly></div>
+                        <div class="regLabel"><label>Message*</label><textarea id="newNoteMessage" name="newNoteMessage"></textarea></div>
+                        <div class="regLabel"><label>Deadline</label><input id="newNoteDeadline" type="text" name="newNoteDeadline"></div>
+                        <label class="regLabel">Category*</label><select id="registerCategoryOptions" multiple>
+                        <option value="manager">Manager</option>
+                        <option value="janitor">Janitor</option>
+                        <option value="guard">Security guard</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="storage">Storage worker</option>
+                        <option value="other">Other</option>
+                        </select>
+                        <button type="button" id="submitNote" class="regButton white">Add note</button>
+                    </form>
+                </div>
+                <div id="searchUsersDiv">
+                    <form>
+                        <h1>Search user database</h1>
+                        <div class="regLabel"><label>Search for name:</label>
+                            <input id="findUserField" type="text" name="findUserField">
+                        </div>
+                        <button type="button" id="searchButton" class="regButton white">Search</button>
+                        <div id="resultsContainerDiv" style="height:22em;overflow-y:scroll">
+                            <ul id="searchResultList">
+                                
+                            </ul>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div id="writeMessage">
-                <p>Create a new note</p>
-                <img id="newNoteImg" src="css/writemessage.png" style="width:5em;height:5em;">
+            <div id="rightPanelContainer">
+                <div id="writeMessage" class='rightPanel'>
+                    <img id="newNoteImg" src="css/writemessage.png" style="width:5em;height:5em;">
+                    <p>Create a new note</p>
+                </div>
+                <div id="viewHistory" class='rightPanel'>
+                    <img id="viewHistoryImg" src="css/historyicon.png" style="width:5em;height:5em;">
+                    <p>View history (expired notes)</p>
+                </div>
+                <div id="searchUsers" class='rightPanel'>
+                    <img id="searchUsersImg" src="css/searchicon.png" style="width:5em;height:5em;">
+                    <p>Search the userbase</p>
+                </div>
             </div>
-            <div id="viewHistory">
-                <p>View history</p>
-                <img id="viewHistoryImg" src="css/historyicon.png" style="width:5em;height:5em;">
-            </div>
+            <img id="alepaCucumber" src="css/alepacucumber.png">
         </div>
     </body>
 </html>
