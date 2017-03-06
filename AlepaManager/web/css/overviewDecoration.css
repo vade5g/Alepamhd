@@ -157,6 +157,8 @@ body {
     z-index: 2;
 }
 
+/*These next parts will modife the opened note window*/
+
 #note {
     background-color: rgb(249, 241, 149);
     color: black;
@@ -164,8 +166,29 @@ body {
     height: 30em;
     width: 30em;
     margin-left: 5em;
-    border: 1px solid #919191;
+
 }
+#noteDueDate {
+    margin-left: 2em;
+}
+#noteCategory {
+    position:absolute;
+    bottom: 3em;
+    left: 1.5em;
+}
+#closeButton {
+    position:absolute;
+    bottom: 1.2em;
+    right: 1.5em;
+}
+#doneButton {
+    position: absolute;
+    bottom: 1.2em;
+    right: 8em;
+}
+/*And here ends the opened note window css part*/
+
+
 
 .noteTable {
     position: absolute;
@@ -203,8 +226,8 @@ body {
     background-image: url(noteImage.png);
     color: black;
     text-align: center;
-    cursor: pointer;
 }
+
 
 #alepaCucumber {
     position: absolute;
