@@ -145,6 +145,8 @@ body {
     width: 30em;
 }
 
+/*These next parts will modife the opened note window*/
+
 #note {
     background-color: rgb(249, 241, 149);
     color: black;
@@ -152,7 +154,48 @@ body {
     height: 30em;
     width: 30em;
     margin-left: 5em;
+    opacity: 0.95;
 }
+#note h1 {
+    text-align: center;
+    
+}
+#noteTarget {
+    text-align: right;
+    margin-right: 2em;
+}
+#noteAuthor {
+    position:absolute;
+    bottom: 1.2em;
+    left: 1.5em;
+
+}
+#noteMessage {
+    text-align: center;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+#noteDueDate {
+    margin-left: 2em;
+}
+#noteCategory {
+    position:absolute;
+    bottom: 3em;
+    left: 1.5em;
+}
+#closeButton {
+    position:absolute;
+    bottom: 1.2em;
+    right: 1.5em;
+}
+#doneButton {
+    position: absolute;
+    bottom: 1.2em;
+    right: 8em;
+}
+/*And here ends the opened note window css part*/
+
+
 
 .noteTable {
     position: absolute;
