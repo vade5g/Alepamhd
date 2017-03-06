@@ -252,7 +252,6 @@ var main = function() {
                 $("#sendNoteField").val($(this).text());
             });
             $("#sendNoteToButton").click(function() {
-                alert("saatana");
                 $("#newNoteTarget").val($("#sendNoteField").val());
                 newNoteImg.trigger("click");
             });
