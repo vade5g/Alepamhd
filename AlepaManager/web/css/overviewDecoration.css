@@ -177,35 +177,80 @@ body {
 }
 #noteTarget {
     text-align: right;
-    margin-right: 2em;
+    position: absolute;
+    right: 2em;
+    top: 3.6em;
 }
 #noteMessage {
-    text-align: center;
+    position:absolute;
+    top: 8.5em;
+    left:6em;
+    height:26.5em;
+    width: 35em;
+    text-align: left;
     margin-left: 2em;
     margin-right: 2em;
-}
+    line-height: 2.5em;
+    font-size: 1em;
+    }
 #noteDueDate {
-    margin-left: 5.5em;
+    position: absolute;
+    top: 6em;
+    left: 7.5em;
 }
 #noteCategory {
     position:absolute;
-    bottom: 4em;
-    left: 5.5em;
+    top: 6.0em;
+    right: 2em;
+    text-align: left;
 }
 #noteAuthor {
     position:absolute;
-    bottom: 2.2em;
-    left: 5.5em;
+    bottom: 3em;
+    right: 2.0em;
 }
 #closeButton {
     position:absolute;
-    bottom: 1.2em;
-    right: 1.5em;
+    bottom: 0.4em;
+    right: 14.5em;
 }
 #doneButton {
     position: absolute;
-    bottom: 1.2em;
-    right: 8em;
+    bottom: 0.4em;
+    left: 15.5em;
+}
+.btn {
+  background: #e21f25;
+  background-image: -webkit-linear-gradient(top, #e21f25, #f5161e);
+  background-image: -moz-linear-gradient(top, #e21f25, #f5161e);
+  background-image: -ms-linear-gradient(top, #e21f25, #f5161e);
+  background-image: -o-linear-gradient(top, #e21f25, #f5161e);
+  background-image: linear-gradient(to bottom, #e21f25, #f5161e);
+  color: white;
+  font-size: 1em;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #d12323;
+  text-decoration: none;
+}
+.doneBtn {
+  background: #28c12d;
+  background-image: -webkit-linear-gradient(top, #28c12d, #28c12d);
+  background-image: -moz-linear-gradient(top, #28c12d, #28c12d);
+  background-image: -ms-linear-gradient(top, #28c12d, #28c12d);
+  background-image: -o-linear-gradient(top, #28c12d, #28c12d);
+  background-image: linear-gradient(to bottom, #28c12d, #28c12d);
+  color: #ffffff;
+  font-size: 1em;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+.doneBtn :hover {
+  background: #208c22;
+  text-decoration: none;
 }
 /*And here ends the opened note window css part*/
 
