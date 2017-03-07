@@ -397,6 +397,31 @@ body {
     text-align: center;
     cursor: pointer;
 }
+.invidualNoteExp {
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(noteImageEX.png);
+    color: black;
+    text-align: center;
+    cursor: pointer;
+}
+.invidualNotePe {
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(noteImagePe.png);
+    color: black;
+    text-align: center;
+    cursor: pointer;
+}
+.invidualNotePeExp {
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(noteImagePeEX.png);
+    color: black;
+    text-align: center;
+    cursor: pointer;
+}
+
 
 
 #alepaCucumber {
