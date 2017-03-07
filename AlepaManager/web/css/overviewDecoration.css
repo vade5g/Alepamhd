@@ -146,17 +146,47 @@ body {
 #rightPanelContainer p {
     margin: 0;
 }
+/*This will modify the new note which opens at the part when you create new not*/
 
 #newNote {
-    background-color: rgb(249, 241, 149);
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(note_window.png);
     color: black;
-    position:absolute;
-    height: 30em;
-    width: 30em;
-    border: 1px solid #919191;
-    z-index: 2;
+    position:fixed;
+    margin-top: 3em;
+    height: 40em;
+    width: 45em;
+    margin-left: 5em;
+    border: 1px dotted black;
 }
-
+#newNote h1 {
+    text-align: center;
+    
+}
+#newNote form {
+    margin-left: 7.5em
+}
+#submitNote {
+    position: absolute;
+    bottom: 0.4em;
+    left: 15.5em;
+}
+#regLabel {
+    backface-visibility: hidden;
+}
+#newNoteTitle {
+    
+}
+#newNoteTarget {
+    
+}
+#newNoteDeadline {
+    
+}
+#newNoteMessage {
+    
+}
 /*These next parts will modife the opened note window*/
 
 #note {
@@ -213,6 +243,20 @@ body {
     position:absolute;
     bottom: 0.4em;
     right: 14.5em;
+    background: #e21f25;
+    background-image: -webkit-linear-gradient(top, #e21f25, #f5161e);
+    background-image: -moz-linear-gradient(top, #e21f25, #f5161e);
+    background-image: -ms-linear-gradient(top, #e21f25, #f5161e);
+    background-image: -o-linear-gradient(top, #e21f25, #f5161e);
+    background-image: linear-gradient(to bottom, #e21f25, #f5161e);
+    color: white;
+    font-size: 1em;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+#closeButton {
+    background: #d12323;
+    text-decoration: none;
 }
 #doneButton {
     position: absolute;
@@ -248,8 +292,8 @@ body {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
-.doneBtn :hover {
-  background: #208c22;
+.doneBtn:hover {
+  background: #27a829;
   text-decoration: none;
 }
 /*And here ends the opened note window css part*/
