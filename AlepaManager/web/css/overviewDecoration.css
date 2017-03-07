@@ -147,7 +147,9 @@ body {
     margin: 0;
 }
 /*This will modify the new note which opens at the part when you create new not*/
-
+*:focus {
+    outline: none;
+}
 #newNote {
     background: no-repeat;
     background-size: cover;
@@ -165,27 +167,84 @@ body {
     
 }
 #newNote form {
-    margin-left: 7.5em
+    margin-left: 7.5em;
 }
 #submitNote {
     position: absolute;
     bottom: 0.4em;
     left: 15.5em;
 }
-#regLabel {
-    backface-visibility: hidden;
+.regLabel {
+    top:15em;
+    line-height: 2.5em;
 }
 #newNoteTitle {
-    
+    background: transparent;
+    border: none;
+}
+#nNoteTitle {
+    position: absolute;
+    top: 7.3em;
+    left: 7.5em;
 }
 #newNoteTarget {
-    
+    background: transparent;
+    border: none;
+}
+#nNoteTarget {
+    text-align: right;
+    position: absolute;
+    right: 2em;
+    top: 7em;
 }
 #newNoteDeadline {
-    
+    background: transparent;
+    border: none;
+}
+#nNoteDeadline {
+    position: absolute;
+    top: 10em;
+    left: 7.5em;
 }
 #newNoteMessage {
-    
+    background: transparent;
+    height:18em;
+    width: 35em;
+    border-style: none; 
+    border-color: Transparent;
+    line-height: 2.5em;
+}
+#nNoteMessage {
+    position:absolute;
+    top: 11.8em;
+    left:7.5em;
+    height:26.5em;
+    width: 35em;
+    text-align: left;
+    line-height: 2.5em;
+    font-size: 1em;
+}
+#newNoteAuthor {
+    background: transparent;
+    border: none;
+     
+}
+#nNoteAuthor {
+    position:absolute;
+    bottom: 4em;
+    right: 1.0em;
+}
+#nCatecory {
+    position:absolute;
+    top: 9.8em;
+    right: 7.5em;
+}
+.selectStyle {
+    background-color: transparent;
+}
+
+.selectStyle select:focus {
+    outline: none;
 }
 /*These next parts will modife the opened note window*/
 
