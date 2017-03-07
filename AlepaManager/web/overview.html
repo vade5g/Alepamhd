@@ -15,7 +15,7 @@
         <img src="css/alepalogo.png" style="left: 2.3em; position:absolute; height: 4.5em; width: 10em;">
         <p id="managerText">MANAGER</p>
         <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
-        <div id="topInfoBar"><p>PERSONAL NOTES</p></div>
+        <div id="topInfoBar"><p>Your view</p></div>
         <div class="bigWindow">
             <div id="personalBar">
                 <button class="categoryButton topAnimation">Your view</button>
@@ -45,7 +45,11 @@
                     <p id="noteTarget">Targeted to: Jaska</p>
                     <p id="noteDueDate">Due by: 27.03.2017</p>
                     <p id="noteCategory">Category: Janitor</p>
-                    <p id="noteMessage">orem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. Quisque ligula eros ullamcorper quis, lacinia quis facilisis sed sapien. Mauris varius diam vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget velit. Sed augue orci, lacinia eu tincidunt et eleifend nec lacus. Donec ultricies nisl ut felis, suspendisse potenti. Lorem ipsum ligula ut hendrerit mollis, ipsum erat vehicula risus, eu suscipit sem libero nec erat. Aliquam erat volutpat. Sed congue augue vitae neque. Nulla consectetuer porttitor pede. Fusce purus morbi tortor magna condimentum vel, placerat id blandit sit amet tortor.</p>
+                    <p id="noteMessage">orem ipsum dolor sit amet, consectetuer adipiscing elit. Sed posuere interdum sem. Quisque ligula eros ullamcorper 
+                        quis, lacinia quis facilisis sed sapien. Mauris varius diam vitae arcu. Sed arcu lectus auctor vitae, consectetuer et venenatis eget
+                        velit. Sed augue orci, lacinia eu tincidunt et eleifend nec lacus. Donec ultricies nisl ut felis, suspendisse potenti. Lorem ipsum ligula
+                        ut hendrerit mollis, ipsum erat vehicula risus, eu suscipit sem libero nec erat. Aliquam erat volutpat. Sed congue augue vitae neque. Nulla
+                        consectetuer porttitor pede. Fusce purus morbi tortor magna condimentum vel, placerat id blandit sit amet tortor.</p>
                     <p id="noteAuthor">Sent by Tiina</p>
                     <button id="closeButton" class="btn">CLOSE</button>
                     <button id="doneButton" class="doneBtn">DONE</button>
@@ -53,19 +57,20 @@
                 <div id="newNote">
                     <form>
                         <h1>Create a new note</h1>
-                        <div class="regLabel"><label>Title*</label><input id="newNoteTitle" type="text" name="newNoteTite"></div>
-                        <div class="regLabel"><label>Target person</label><input id="newNoteTarget" type="text" name="newNoteTarget"></div>
-                        <div class="regLabel"><label>Author*</label><input id="newNoteAuthor" type="text" name="newNoteAuthor" readonly></div>
-                        <div class="regLabel"><label>Message*</label><textarea id="newNoteMessage" name="newNoteMessage"></textarea></div>
-                        <div class="regLabel"><label>Deadline</label><input id="newNoteDeadline" type="text" name="newNoteDeadline"></div>
-                        <label class="regLabel">Category*</label><select id="registerCategoryOptions" multiple>
-                        <option value="manager">Manager</option>
-                        <option value="janitor">Janitor</option>
-                        <option value="guard">Security guard</option>
-                        <option value="cashier">Cashier</option>
-                        <option value="storage">Storage worker</option>
-                        <option value="other">3rd party</option>
-                        </select><br>
+                        <div id="nNoteTitle"><label>Title* </label><input id="newNoteTitle" type="text" name="newNoteTite" placeholder="Your Title"></div>
+                        <div id="nNoteTarget"><label>Target person </label><input id="newNoteTarget" type="text" name="newNoteTarget" placeholder="Who is this for?"></div>
+                        <div id="nNoteAuthor"><label>Author:  </label><input id="newNoteAuthor" type="text" name="newNoteAuthor" readonly></div>
+                        <div id="nNoteMessage"><label>Message* </label><br><textarea id="newNoteMessage" name="newNoteMessage" placeholder="Everything is wrong again..."></textarea></div>
+                        <div id="nNoteDeadline"><label>Deadline </label><input id="newNoteDeadline" type="text" name="newNoteDeadline" placeholder="dd.mm.yyyy"></div>
+                        <div id="nCatecory"><label>Category* </label><select id="CategoryOptions" class="selectStyle">
+                                <option value="Manager">Manager</option>
+                                <option value="Janitor">Janitor</option>
+                                <option value="Guard">Guard</option>
+                                <option value="Cashier">Cashier</option>
+                                <option value="Warehouse">Warehouse</option>
+                                <option value="3rd party">3rd party</option>
+                            </select>
+                        </div><br>
                         <button type="button" id="submitNote" class="doneBtn">Add note</button>
                         <button type="button" id="closeButton" class="closeButton">Close</button>
                     </form>
