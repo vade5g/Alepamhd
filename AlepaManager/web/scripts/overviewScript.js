@@ -20,7 +20,7 @@ var main = function() {
     shadow.hide();
     newNote.hide();
     userDatabase.hide();
-    //note.hide();
+    note.hide();
     $("#notificationWindow").hide();
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
