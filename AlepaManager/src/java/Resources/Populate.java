@@ -61,10 +61,10 @@ public class Populate {
         notes.add(new Note("Fill shelves", "Pena Peippola", "Maria Muurila", "Fetch 30 boxes of chicken from warehouse to B2", "10.03.2017", "cashier"));
         notes.add(new Note("Ketchup accident", null, "Maria Muurila", "Ketchup accident in D1", null, "janitor"));
         notes.add(new Note("Out of apples", "Valtteri Vattula", "Tuija Tuijala", "Need apples to D5", null, "warehouse"));
-        notes.add(new Note("Need guard asap", null, "Tuuli Tuulimylly", "Suspicious people hanging around the front door", "07.03.2017", "guard"));
+        notes.add(new Note("Need guard asap", null, "Tuuli Tuulimylly", "Suspicious people hanging around the front door", "07.03.2017", "guard", false));
         notes.add(new Note("Make coffee", "Pena Peippola", "Maria Muurila", "Make sure there is coffee at the meeting tomorrow 13:00", "15.03.2017", "janitor"));
         notes.add(new Note("Cash register C1 not working", "Matti Miettinen", "Sirpa Sirpola", "Glass broken in section A4", null, "manager"));
-        notes.add(new Note("Need assistance with cash register", null, "Pena Peippola", "I need some assistance using the cash register", null, "cashier"));
+        notes.add(new Note("Need assistance with cash register", null, "Pena Peippola", "I need some assistance using the cash register", null, "cashier", false));
         notes.add(new Note("Filling shelves", null, "Emmi Virtanen", "At B2 theres a few packed boxes that could be filled into shelves", null, "cashier"));
         notes.add(new Note("Meat delivery", "Valtteri Vattula", "Uuno Ukkola", "Meat delivery coming at 08:00", "10.03.2017", "warehouse"));
         notes.add(new Note("Fish delivery", "Uuno Ukkola", "Valtteri Vattula", "Fish delivery coming at 07:00", "10.03.2017", "warehouse"));

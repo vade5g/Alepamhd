@@ -182,7 +182,7 @@ var main = function() {
         if (category==="Your view") {
             url = "resources/history/"+storedUserID;
         } else {
-            url = "resources/history/"+category;
+            url = "resources/history/category/"+category;
         }
         var type="GET";
         console.log(type+ "-"+url+"-"+action);
