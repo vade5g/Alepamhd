@@ -262,7 +262,12 @@ var main = function() {
             var note = notes.childNodes[loop];
             var title = note.getElementsByTagName("title")[0];
             title = title.childNodes[0].nodeValue;
-            addNoteToView(title);
+            var active = note.getElementsByTagName("active")[0];
+            active = active.childNodes[0].nodeValue;
+            var target = note.getElementsByTagName("targetUser")[0];
+            target = target.childNodes[0].nodeValue;
+            addNoteToView(title,active,target);
+            
         }
     }
     
@@ -360,15 +365,42 @@ var main = function() {
         return url;
     }
     
-    function addNoteToView(title) {
+    function addNoteToView(title,active,target) {
+        var storedUser = sessionStorage.getItem('loggedInUser');
+        console.log(active);
         if ($("#noteTable tr").length === 0) {
-            $("#noteTable").append("<tr><td class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
+            if (target!==storedUser && active) {
+                $("#noteTable").append("<tr><td id='individualNote' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
+            }  else if (target!==storedUser && !active) {
+                $("#noteTable").append("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
+            } else if (target === storedUser && active) {
+                $("#noteTable").append("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+            } else if (target === storedUser && !active) {
+                $("#noteTable").append("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+            }
         } else {
-            var lastRowLength = $( "#noteTable tr:last td" ).length;
+            var lastRowLength = $("#noteTable tr:last td").length;
             if (lastRowLength === 6) {
-                $('#noteTable tr:last').after("<tr><td class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
-            } else {
-                $('#noteTable tr:last td:last').after("<td class='individualNote'><p class='noteText'>"+title+"</p></td>");
+                if (target !== storedUser && active) {
+                    $('#noteTable tr:last').after("<tr><td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target !== storedUser && !active) {
+                    $('#noteTable tr:last').after("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target === storedUser && active) {
+                    $('#noteTable tr:last').after("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target === storedUser && !active) {
+                    $('#noteTable tr:last').after("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                }
+                 
+            } else {  
+                if (target !== storedUser && active) {
+                   $('#noteTable tr:last td:last').after("<td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
+                } else if (target !== storedUser && !active) {
+                   $('#noteTable tr:last td:last').after("<td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
+                } else if (target === storedUser && active) {
+                   $('#noteTable tr:last td:last').after("<td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
+                } else if (target === storedUser && !active) {
+                   $('#noteTable tr:last td:last').after("<td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                }
             }
         }
         whiteBorderAnimation($('#noteTable td'));

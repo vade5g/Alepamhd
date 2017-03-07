@@ -118,7 +118,13 @@ body {
     left: 18em;
     top: 1.8em;
     border: 1px solid #919191;
+    background-image: url(cucumber2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-color: #eaeaea;
+}
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 #rightPanelContainer {
@@ -160,7 +166,10 @@ body {
     height: 40em;
     width: 45em;
     margin-left: 5em;
-    border: 1px dotted black;
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
+    border: 3px solid #ff0839;
 }
 #newNote h1 {
     text-align: center;
@@ -258,7 +267,11 @@ body {
     height: 40em;
     width: 45em;
     margin-left: 5em;
-    
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
+    border: 3px solid #ff0839;
+
 }
 #note h1 {
     text-align: center;
@@ -392,11 +405,23 @@ body {
 .individualNote {
     background: no-repeat;
     background-size: cover;
-    background-image: url(noteImage.png);
     color: black;
     text-align: center;
     cursor: pointer;
 }
+#individualNote {
+    background-image: url(noteImage.png);
+}
+#individualNoteExp {
+    background-image: url(noteImageEX.png);
+}
+#individualNotePe {
+    background-image: url(noteImagePe.png);
+}
+#individualNotePeExp {
+    background-image: url(noteImagePeEX.png);
+}
+
 
 
 #alepaCucumber {
