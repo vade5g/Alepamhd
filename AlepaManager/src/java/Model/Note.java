@@ -4,6 +4,7 @@ This Note class stores all the information the notes have.
 */
 package Model;
   
+import java.io.Console;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,7 +48,7 @@ public class Note implements Serializable {
     }
 
     public Note(String title, String targetUser, String author, String message, String deadline, String category) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.title = title;
         if (targetUser != null) { //Checks if any input was given
             this.targetUser = targetUser; 
@@ -63,7 +64,9 @@ public class Note implements Serializable {
                 if (checkIfExpired(deadlineDate)==true) {
                     this.expired = true;
                 }
-            } catch(ParseException p) {}
+            } catch(ParseException p) {
+                this.deadline = "PARSING ERROR";
+            }
         } else {
             this.deadline = "none";
         }
@@ -73,13 +76,15 @@ public class Note implements Serializable {
     
     //Checks if the expiration date has passed the current date
     public boolean checkIfExpired(Date otherDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Date currentDate;
         try {
             currentDate = dateFormat.parse(dateFormat.format(new Date()));
+            System.out.println("Tried to compare current date("+currentDate+") and "+otherDate);
         } catch (ParseException ex) {
             return false;
         }
+            System.out.println("is current date after this date? "+currentDate.after(otherDate));
         return currentDate.after(otherDate);   
     }
     
@@ -91,11 +96,7 @@ public class Note implements Serializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         try {
             Date deadlineDate = dateFormat.parse(this.deadline);
-            if (checkIfExpired(deadlineDate)==true) {
-                this.expired = true;
-            } else {
-                this.expired = false;
-            }
+            this.expired = checkIfExpired(deadlineDate)==true;
         } catch(ParseException p) {}
     }
     

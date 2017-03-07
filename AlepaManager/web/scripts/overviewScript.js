@@ -83,9 +83,16 @@ var main = function() {
         $("#topInfoBar").animate({
                 height: "+=5em"
             }, 250);
-        var action="getNotes";
+        var url, action;
+            if (name==="Your view") {
+                url = "resources/activenotes/personal/"+storedUserID;
+                action="getPersonalNotes";
+            } else {
+                action="getNotes";
+                var type="GET";
+                url = "resources/activenotes/category/"+name;
+            }
         var type="GET";
-        var url = "resources/activenotes/category/"+name;
         sendRequest(type, url, action);
     });
     
@@ -203,6 +210,8 @@ var main = function() {
                 } else if (action==="getHistory") {
                     changeArea(req.responseXML);
                 } else if (action==="getNotes") {
+                    changeArea(req.responseXML);
+                } else if (action==="getPersonalNotes") {
                     changeArea(req.responseXML);
                 }
             }
@@ -332,9 +341,8 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
-        //deadline = deadline.childNodes[0].nodeValue;
+        deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
-        alert(title+target+author+message+category);
         $("#noteTitle").text(title);
         $("#noteTarget").text("Targeted to: " + target);
         $("#noteAuthor").text("Sent by " + author);
