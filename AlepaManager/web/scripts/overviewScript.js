@@ -1,7 +1,14 @@
 /* global req, responseXML */
 
 var main = function() {
+    //begin by refreshing "your view":
     console.log("main");
+    var action="getNotes";
+    var type="GET";
+    var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
+    sendRequest(type, url, action);
+
+    //declarations for individual elements for easier selection
     var shadow = $("#shade");
     var newNoteImg = $("#writeMessage");
     var historyViewImg = $("#viewHistory");
@@ -17,22 +24,30 @@ var main = function() {
     whiteBorderAnimation($("#bellArea"));
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
+    
+    //hide stuff that gets toggled from menus
     shadow.hide();
     newNote.hide();
     userDatabase.hide();
     note.hide();
     $("#notificationWindow").hide();
+    
+    //add toggle onclick events to newnote and search and their close-buttons
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
     addPanelClickEvent($("#newNote .closeButton"), newNote);
     addPanelClickEvent($("#searchUsersDiv .closeButton"), userDatabase);
     
+    //give the first notes their click events
     refreshNoteClickEvents();
+    
+    //store name of logged in user and his ID
     var storedUser = sessionStorage.getItem('loggedInUser');
     $("#newNoteAuthor").val(storedUser);
     var storedUserID;
     setStoredUserID();
     
+    //function for getting the user's ID based on the login firstname and lastname
     function setStoredUserID() {
         var action = "findUser";
         var type="GET";
@@ -53,13 +68,14 @@ var main = function() {
         req.send(null);
     }
     
+    //give the basic toggle action click event for the 1st paremeter(clickelement)
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
             closeOthersExcept(toggleElement);
         }); 
     }
     
-        //close elements except the one defined in the parameter
+    //close elements except the one defined in the parameter
     function closeOthersExcept(element) {
         for (var i = 0; i < panelElementsList.length; i++) {
             if (panelElementsList[i] !== element) {
@@ -69,6 +85,7 @@ var main = function() {
         element.toggle();
     }
     
+    //select all the visible notes and give them their click-event
     function refreshNoteClickEvents() {
         $(".individualNote").click(function() {
             var action="getNote";
@@ -323,9 +340,7 @@ var main = function() {
         }
         return "ok";
     }
-    
-    
-    
+
     function checkNoteFields() {
         //initialize as none, if the field is not empty it's replaced anyway
         //on the backend side "none" is puts that variable as null
