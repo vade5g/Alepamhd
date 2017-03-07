@@ -1,6 +1,7 @@
 /* global req, responseXML */
 
 var main = function() {
+    console.log("main");
     var shadow = $("#shade");
     var newNoteImg = $("#writeMessage");
     var historyViewImg = $("#viewHistory");
@@ -43,8 +44,10 @@ var main = function() {
             if (req.readyState===4) {
                 var users = req.responseXML.getElementsByTagName("useris")[0];
                 var user = users.childNodes[0];
+                console.log(user);
                 storedUserID = user.getElementsByTagName("id")[0].childNodes[0].nodeValue;
-                storedUserID = Integer.parseInt(storedUserID);
+                storedUserID = parseInt(storedUserID);
+                sessionStorage.setItem('storedUserID', storedUserID);
             }
         };
         req.send(null);
@@ -75,6 +78,7 @@ var main = function() {
     //what happens when you click a category button:
     $(".topAnimation").click(function() {
         var name = ($(this).text());
+        sessionStorage.setItem('currentCategory', name);
         $("#topInfoBar").animate({
                 height: "-=5em"
             }, 250, function() {
@@ -83,9 +87,16 @@ var main = function() {
         $("#topInfoBar").animate({
                 height: "+=5em"
             }, 250);
-        var action="getNotes";
+        var url, action;
+            if (name==="Your view") {
+                url = "resources/activenotes/personal/"+storedUserID;
+                action="getPersonalNotes";
+            } else {
+                action="getNotes";
+                var type="GET";
+                url = "resources/activenotes/category/"+name;
+            }
         var type="GET";
-        var url = "resources/activenotes/category/"+name;
         sendRequest(type, url, action);
     });
     
@@ -162,11 +173,19 @@ var main = function() {
         }
     }); 
     
+    //what happens when you click "view history" on the right side panel
     $(historyViewImg).click(function() {
-        var category = $("#topInfoBar p").val();
-        var action="getHistory";
+        var category = sessionStorage.getItem('currentCategory');
+        var action, url;
+        console.log(category);
+        action="getHistory";
+        if (category==="Your view") {
+            url = "resources/history/"+storedUserID;
+        } else {
+            url = "resources/history/category/"+category;
+        }
         var type="GET";
-        var url = "resources/history/" +"/" + storedUserID;
+        console.log(type+ "-"+url+"-"+action);
         sendRequest(type, url, action);
     }); 
     
@@ -194,6 +213,7 @@ var main = function() {
     function callback(action) {
         if (req.readyState === 4) {
             if (req.status === 200) {
+                console.log(action +" successful");
                 if (action === "findUser") {
                     processSearchResults(req.responseXML);
                 } else if (action === "addNote") {
@@ -204,12 +224,15 @@ var main = function() {
                     changeArea(req.responseXML);
                 } else if (action==="getNotes") {
                     changeArea(req.responseXML);
+                } else if (action==="getPersonalNotes") {
+                    changeArea(req.responseXML);
                 }
             }
         }
     }
 
     function changeArea(responseXML) {
+        console.log("changeArea invoked");
         clearNotesArea();
         var notes = responseXML.getElementsByTagName("notes")[0];
         for (var loop = 0; loop < notes.childNodes.length; loop++) {
@@ -332,9 +355,8 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
-        //deadline = deadline.childNodes[0].nodeValue;
+        deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
-        alert(title+target+author+message+category);
         $("#noteTitle").text(title);
         $("#noteTarget").text("Targeted to: " + target);
         $("#noteAuthor").text("Sent by " + author);
