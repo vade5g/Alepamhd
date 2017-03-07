@@ -74,6 +74,34 @@ public class Note implements Serializable {
         this.active = true;  
     }
     
+    public Note(String title, String targetUser, String author,
+            String message, String deadline, String category, boolean active) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        this.title = title;
+        if (targetUser != null) { //Checks if any input was given
+            this.targetUser = targetUser; 
+        }
+        this.author = author;
+        this.message = message;
+        //set expired to false, if deadline is given it's changed after
+        this.expired = false;
+        if(deadline != null) {
+            this.deadline = deadline;
+            try {
+                Date deadlineDate = dateFormat.parse(this.deadline);
+                if (checkIfExpired(deadlineDate)==true) {
+                    this.expired = true;
+                }
+            } catch(ParseException p) {
+                this.deadline = "PARSING ERROR";
+            }
+        } else {
+            this.deadline = "none";
+        }
+        this.category = category;
+        this.active = active;  
+    }
+    
     //Checks if the expiration date has passed the current date
     public boolean checkIfExpired(Date otherDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -96,7 +124,7 @@ public class Note implements Serializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         try {
             Date deadlineDate = dateFormat.parse(this.deadline);
-            this.expired = checkIfExpired(deadlineDate)==true;
+            this.expired = checkIfExpired(deadlineDate);
         } catch(ParseException p) {}
     }
     

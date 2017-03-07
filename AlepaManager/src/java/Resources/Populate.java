@@ -53,10 +53,10 @@ public class Populate {
         
         //adding notes to database
         List<Note> notes = new ArrayList<>();
-        notes.add(new Note("Dirt on shelf", "Valtteri Vattula", "Valtteri Vattula", "Warehouse shelf is possibly cracked? Can you fix?", "08.03.2017", "warehouse"));
+        notes.add(new Note("Dirt on shelf", "Valtteri Vattula", "Valtteri Vattula", "Warehouse shelf is possibly cracked? Can you fix?", "08.03.2017", "warehouse", false));
         notes.add(new Note("Jenkki gum", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of Jenkki gum", "06.03.2017", "warehouse"));
         notes.add(new Note("Pepper ham", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of peppered ham", "05.03.2017", "warehouse"));
-        notes.add(new Note("Dip delivery", "Valtteri Vattula", "Tuuli Tuulimylly", "Special dip delivery coming in at some point next week", "15.03.2017", "warehouse"));
+        notes.add(new Note("Dip delivery", "Valtteri Vattula", "Tuuli Tuulimylly", "Special dip delivery coming in at some point next week", "15.03.2017", "warehouse", false));
         notes.add(new Note("Excess boxes in backroom", "Valtteri Vattula", "Tuuli Tuulimylly", "Stack of empty box cartons in the storage, pls clean", null, "warehouse"));
         notes.add(new Note("Fill shelves", "Pena Peippola", "Maria Muurila", "Fetch 30 boxes of chicken from warehouse to B2", "10.03.2017", "cashier"));
         notes.add(new Note("Ketchup accident", null, "Maria Muurila", "Ketchup accident in D1", null, "janitor"));
