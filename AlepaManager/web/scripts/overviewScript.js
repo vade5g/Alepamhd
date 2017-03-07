@@ -8,12 +8,12 @@ var main = function() {
     var searchUsersImg = $("#searchUsers");
     var newNote = $("#newNote");
     var userDatabase = $("#searchUsersDiv");
-    var panelElementsList = [newNote, userDatabase];
+    var note = $("#note");
+    var panelElementsList = [newNote, userDatabase, note];
     var findUserField = $("#findUserField");
     var searchButton = $("#searchButton");
     var searchResultsList = $("#searchResultList");
     var submitNoteButton = $("#submitNote");
-    var note = $("#note");
     whiteBorderAnimation($("#bellArea"));
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
@@ -55,12 +55,19 @@ var main = function() {
     
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
-            closeOthers(toggleElement);
-            toggleElement.toggle();
+            closeOthersExcept(toggleElement);
         }); 
     }
     
-    
+        //close elements except the one defined in the parameter
+    function closeOthersExcept(element) {
+        for (var i = 0; i < panelElementsList.length; i++) {
+            if (panelElementsList[i] !== element) {
+                panelElementsList[i].hide();
+            }
+        }
+        element.toggle();
+    }
     
     function refreshNoteClickEvents() {
         $(".individualNote").click(function() {
@@ -70,6 +77,7 @@ var main = function() {
             var url = "resources/activenotes/"+title;
             sendRequest(type, url, action);
         }); 
+        //at the moment, both send and close do same thing
         $("#note button").click(function() {
             note.hide();
         }); 
@@ -121,16 +129,6 @@ var main = function() {
         }
     }); 
 
-
-    //close elements except the one defined in the parameter
-    function closeOthers(element) {
-        for (var i = 0; i < panelElementsList.length; i++) {
-            if (panelElementsList[i] !== element) {
-                panelElementsList[i].hide();
-            }
-        }
-    }
-    
     function whiteBorderAnimation(x) {
         $(x).css('border', "solid 0.15em rgba(255, 255, 255, 0.0)");
         $(x).css('border-radius', "10px");
@@ -164,12 +162,12 @@ var main = function() {
         var action="addNote";
         var type="POST";
         var url;
-        if (noteFieldsOK()===true) {
+        if (noteFieldsOK()==="ok") {
             url = checkNoteFields();
             sendRequest(type, url, action);
             alert("new note added!");
         } else {
-            alert("Please fill out all the required fields!");
+            alert(noteFieldsOK());
         }
     }); 
     
@@ -177,6 +175,7 @@ var main = function() {
     $(historyViewImg).click(function() {
         var category = sessionStorage.getItem('currentCategory');
         var action, url;
+        storedUserID = sessionStorage.getItem('storedUserID');
         console.log(category);
         action="getHistory";
         if (category==="Your view") {
@@ -217,7 +216,14 @@ var main = function() {
                 if (action === "findUser") {
                     processSearchResults(req.responseXML);
                 } else if (action === "addNote") {
-                    addNoteToView(req.responseText);
+                    action="getNotes";
+                    var type="GET";
+                    if (sessionStorage.getItem("currentCategory")==="Your view") {
+                        var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
+                    } else {
+                        var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
+                    }
+                    sendRequest(type, url, action);
                 } else if (action==="getNote") {
                     changeNote(req.responseXML);
                 } else if (action==="getHistory") {
@@ -300,14 +306,25 @@ var main = function() {
     }
     
     function noteFieldsOK() {
-        if ($("#newNoteTitle").val().trim()===""
-          || $("#newNoteAuthor").val().trim()===""
-          || $("#newNoteMessage").val().trim()===""
-          || $("#registerCategoryOptions").val()===null) {
-            return false;
+        if ($("#newNoteTitle").val().trim()==="") {
+            return "Please add a title!";
+        } else if ($("#newNoteMessage").val().trim()==="") {
+            return "Please enter a message!";
+        } else if ($("#CategoryOptions").val()===null) {
+            return "Please choose a category!";
+        } else if ($("#newNoteDeadline").val()!=="") {
+            var entry = $("#newNoteDeadline").val().trim();
+            entry = entry.replace(/(^\.+|\.+$)/mg, '');
+            if (/(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[012])\.(19|20)\d\d/.test(entry)===false) {
+                return "Please enter a proper date!\nThe correct format is dd.mm.yyyy," 
+                +"for example: 25.02.2019,\n"
+                + "check also that the date you entered actually exists.";
+            }
         }
-        return true;
+        return "ok";
     }
+    
+    
     
     function checkNoteFields() {
         //initialize as none, if the field is not empty it's replaced anyway
@@ -323,7 +340,7 @@ var main = function() {
         title = $("#newNoteTitle").val();
         author = $("#newNoteAuthor").val();
         message = $("#newNoteMessage").val();
-        category = $("#registerCategoryOptions").val();
+        category = $("#CategoryOptions").val();
         var url = "resources/activenotes/"+title+"/"+target+"/"+author+"/"+message+"/"+deadline+"/"+category;
         return url;
     }
@@ -355,6 +372,7 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
+        console.log(title+" "+target+" "+author+" "+message+" "+deadline+" "+category);
         deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
         $("#noteTitle").text(title);
@@ -365,6 +383,7 @@ var main = function() {
         $("#noteCategory").text("Category: " + category);
         note.show();
     }
+    
 };
 
 $(document).ready(main);

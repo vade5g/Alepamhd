@@ -47,11 +47,15 @@ public class Note implements Serializable {
     public Note() {
     }
 
-    public Note(String title, String targetUser, String author, String message, String deadline, String category) {
+    public Note(String title, String targetUser, String author, String message,
+            String deadline, String category) {
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.title = title;
         if (targetUser != null) { //Checks if any input was given
             this.targetUser = targetUser; 
+        } else {
+            this.targetUser = "-";
         }
         this.author = author;
         this.message = message;
@@ -68,7 +72,7 @@ public class Note implements Serializable {
                 this.deadline = "PARSING ERROR";
             }
         } else {
-            this.deadline = "none";
+            this.deadline = "-";
         }
         this.category = category;
         this.active = true;  
@@ -76,10 +80,13 @@ public class Note implements Serializable {
     
     public Note(String title, String targetUser, String author,
             String message, String deadline, String category, boolean active) {
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.title = title;
         if (targetUser != null) { //Checks if any input was given
             this.targetUser = targetUser; 
+        } else {
+            this.targetUser = "-";
         }
         this.author = author;
         this.message = message;
@@ -96,7 +103,7 @@ public class Note implements Serializable {
                 this.deadline = "PARSING ERROR";
             }
         } else {
-            this.deadline = "none";
+            this.deadline = "-";
         }
         this.category = category;
         this.active = active;  
