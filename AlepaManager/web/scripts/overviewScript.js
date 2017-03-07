@@ -8,12 +8,12 @@ var main = function() {
     var searchUsersImg = $("#searchUsers");
     var newNote = $("#newNote");
     var userDatabase = $("#searchUsersDiv");
-    var panelElementsList = [newNote, userDatabase];
+    var note = $("#note");
+    var panelElementsList = [newNote, userDatabase, note];
     var findUserField = $("#findUserField");
     var searchButton = $("#searchButton");
     var searchResultsList = $("#searchResultList");
     var submitNoteButton = $("#submitNote");
-    var note = $("#note");
     whiteBorderAnimation($("#bellArea"));
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
@@ -55,12 +55,19 @@ var main = function() {
     
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
-            closeOthers(toggleElement);
-            toggleElement.toggle();
+            closeOthersExcept(toggleElement);
         }); 
     }
     
-    
+        //close elements except the one defined in the parameter
+    function closeOthersExcept(element) {
+        for (var i = 0; i < panelElementsList.length; i++) {
+            if (panelElementsList[i] !== element) {
+                panelElementsList[i].hide();
+            }
+        }
+        element.toggle();
+    }
     
     function refreshNoteClickEvents() {
         $(".individualNote").click(function() {
@@ -70,6 +77,7 @@ var main = function() {
             var url = "resources/activenotes/"+title;
             sendRequest(type, url, action);
         }); 
+        //at the moment, both send and close do same thing
         $("#note button").click(function() {
             note.hide();
         }); 
@@ -121,16 +129,6 @@ var main = function() {
         }
     }); 
 
-
-    //close elements except the one defined in the parameter
-    function closeOthers(element) {
-        for (var i = 0; i < panelElementsList.length; i++) {
-            if (panelElementsList[i] !== element) {
-                panelElementsList[i].hide();
-            }
-        }
-    }
-    
     function whiteBorderAnimation(x) {
         $(x).css('border', "solid 0.15em rgba(255, 255, 255, 0.0)");
         $(x).css('border-radius', "10px");
@@ -355,6 +353,7 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
+        console.log(title+" "+target+" "+author+" "+message+" "+deadline+" "+category);
         deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
         $("#noteTitle").text(title);
@@ -365,6 +364,7 @@ var main = function() {
         $("#noteCategory").text("Category: " + category);
         note.show();
     }
+    
 };
 
 $(document).ready(main);
