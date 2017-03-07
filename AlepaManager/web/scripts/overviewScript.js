@@ -218,7 +218,11 @@ var main = function() {
                 } else if (action === "addNote") {
                     action="getNotes";
                     var type="GET";
-                    var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
+                    if (sessionStorage.getItem("currentCategory")==="Your view") {
+                        var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
+                    } else {
+                        var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
+                    }
                     sendRequest(type, url, action);
                 } else if (action==="getNote") {
                     changeNote(req.responseXML);
