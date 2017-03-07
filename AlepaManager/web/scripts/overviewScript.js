@@ -72,6 +72,7 @@ var main = function() {
         }); 
     }
     
+    //what happens when you click a category button:
     $(".topAnimation").click(function() {
         var name = ($(this).text());
         $("#topInfoBar").animate({
@@ -82,6 +83,10 @@ var main = function() {
         $("#topInfoBar").animate({
                 height: "+=5em"
             }, 250);
+        var action="getNotes";
+        var type="GET";
+        var url = "resources/activenotes/category/"+name;
+        sendRequest(type, url, action);
     });
     
     $("#bellArea").click(function() {
@@ -158,9 +163,10 @@ var main = function() {
     }); 
     
     $(historyViewImg).click(function() {
+        var category = $("#topInfoBar p").val();
         var action="getHistory";
         var type="GET";
-        var url = "resources/history/" + storedUserID;
+        var url = "resources/history/" +"/" + storedUserID;
         sendRequest(type, url, action);
     }); 
     
@@ -195,14 +201,16 @@ var main = function() {
                 } else if (action==="getNote") {
                     changeNote(req.responseXML);
                 } else if (action==="getHistory") {
-                    changeAreaToHistory(req.responseXML);
-                } 
+                    changeArea(req.responseXML);
+                } else if (action==="getNotes") {
+                    changeArea(req.responseXML);
+                }
             }
         }
     }
-    
-    function changeAreaToHistory(responseXML) {
-        clearNotesArea();  
+
+    function changeArea(responseXML) {
+        clearNotesArea();
         var notes = responseXML.getElementsByTagName("notes")[0];
         for (var loop = 0; loop < notes.childNodes.length; loop++) {
             var note = notes.childNodes[loop];
@@ -252,7 +260,6 @@ var main = function() {
                 $("#sendNoteField").val($(this).text());
             });
             $("#sendNoteToButton").click(function() {
-                alert("saatana");
                 $("#newNoteTarget").val($("#sendNoteField").val());
                 newNoteImg.trigger("click");
             });
@@ -325,8 +332,9 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
-        deadline = deadline.childNodes[0].nodeValue;
+        //deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
+        alert(title+target+author+message+category);
         $("#noteTitle").text(title);
         $("#noteTarget").text("Targeted to: " + target);
         $("#noteAuthor").text("Sent by " + author);

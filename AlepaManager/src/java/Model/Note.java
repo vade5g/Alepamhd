@@ -4,6 +4,10 @@ This Note class stores all the information the notes have.
 */
 package Model;
   
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Temporal;
 
 @XmlRootElement
@@ -41,24 +47,56 @@ public class Note implements Serializable {
     }
 
     public Note(String title, String targetUser, String author, String message, String deadline, String category) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         this.title = title;
         if (targetUser != null) { //Checks if any input was given
             this.targetUser = targetUser; 
         }
         this.author = author;
         this.message = message;
+        //set expired to false, if deadline is given it's changed after
+        this.expired = false;
         if(deadline != null) {
             this.deadline = deadline;
+            try {
+                Date deadlineDate = dateFormat.parse(this.deadline);
+                if (checkIfExpired(deadlineDate)==true) {
+                    this.expired = true;
+                }
+            } catch(ParseException p) {}
+        } else {
+            this.deadline = "none";
         }
         this.category = category;
-        
-        this.active = true;    
-        this.expired = false;
+        this.active = true;  
     }
     
     //Checks if the expiration date has passed the current date
-    public boolean checkExpiration() {
-        return false;      
+    public boolean checkIfExpired(Date otherDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        Date currentDate;
+        try {
+            currentDate = dateFormat.parse(dateFormat.format(new Date()));
+        } catch (ParseException ex) {
+            return false;
+        }
+        return currentDate.after(otherDate);   
+    }
+    
+    public void deactivate() {
+        this.active = false;
+    }
+    
+    public void updateExpired() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        try {
+            Date deadlineDate = dateFormat.parse(this.deadline);
+            if (checkIfExpired(deadlineDate)==true) {
+                this.expired = true;
+            } else {
+                this.expired = false;
+            }
+        } catch(ParseException p) {}
     }
     
     //GETTERS

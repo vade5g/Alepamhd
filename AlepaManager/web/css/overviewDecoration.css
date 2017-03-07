@@ -160,21 +160,42 @@ body {
 /*These next parts will modife the opened note window*/
 
 #note {
-    background-color: rgb(249, 241, 149);
+    background: no-repeat;
+    background-size: cover;
+    background-image: url(note_window.png);
     color: black;
     position:fixed;
-    height: 30em;
-    width: 30em;
+    margin-top: 3em;
+    height: 40em;
+    width: 45em;
     margin-left: 5em;
-
+    
+}
+#note h1 {
+    text-align: center;
+    
+}
+#noteTarget {
+    text-align: right;
+    margin-right: 2em;
+}
+#noteMessage {
+    text-align: center;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 #noteDueDate {
-    margin-left: 2em;
+    margin-left: 5.5em;
 }
 #noteCategory {
     position:absolute;
-    bottom: 3em;
-    left: 1.5em;
+    bottom: 4em;
+    left: 5.5em;
+}
+#noteAuthor {
+    position:absolute;
+    bottom: 2.2em;
+    left: 5.5em;
 }
 #closeButton {
     position:absolute;
@@ -226,6 +247,7 @@ body {
     background-image: url(noteImage.png);
     color: black;
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -257,14 +279,13 @@ body {
 #topInfoBar {
     position: absolute;
     color: white;
-    left: 52em;
+    left: 40em;
     margin-left: -13em;
-    width: 26em;
+    width: 50em;
     height: 5em;
     top: -1em;
     background-color: #28c12d;
-    border-radius: 0.4em;
-    border: 0.4em solid white;
+    border: 0.1em solid white;
 }
 
 #topInfoBar p {
