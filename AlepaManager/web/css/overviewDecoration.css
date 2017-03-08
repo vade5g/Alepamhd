@@ -9,6 +9,14 @@ body {
     color:black;
 }
 
+button {
+    cursor: pointer;
+}
+
+#personalBar a {
+    z-index: 0;
+}
+
 #shade {
     z-index: 1;
     position: absolute;
@@ -16,7 +24,7 @@ body {
     height: 400em;
     left: -100em;
     top: -100em;
-    background-color: rgba(119, 120, 122, 0.6);
+    background-color: rgba(119, 120, 122, 0.4);
 }
 
 .bigWindow {
@@ -118,7 +126,13 @@ body {
     left: 18em;
     top: 1.8em;
     border: 1px solid #919191;
+    background-image: url(cucumber2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-color: #eaeaea;
+}
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 #rightPanelContainer {
@@ -160,7 +174,11 @@ body {
     height: 40em;
     width: 45em;
     margin-left: 5em;
-    border: 1px dotted black;
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
+    border: 3px solid #ff0839;
+    z-index: 2;
 }
 #newNote h1 {
     text-align: center;
@@ -177,6 +195,7 @@ body {
 .regLabel {
     top:15em;
     line-height: 2.5em;
+    text-align: center;
 }
 #newNoteTitle {
     background: transparent;
@@ -258,7 +277,11 @@ body {
     height: 40em;
     width: 45em;
     margin-left: 5em;
-    
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
+    border: 3px solid #ff0839;
+    z-index: 2;
 }
 #note h1 {
     text-align: center;
@@ -371,7 +394,9 @@ body {
 #searchUsersDiv {
     margin-left: 18.75em;
     margin-top: 5em;
-    background-color: white;
+    background: repeat;
+    background-color: #ffe301;
+    opacity: 0.9;
     color: black;
     position:absolute;
     height: 33em;
@@ -380,6 +405,7 @@ body {
     z-index: 2;
     display : inline-block;
 }
+
 
 #noteTable tr {
     height: 11.1em;
@@ -392,11 +418,23 @@ body {
 .individualNote {
     background: no-repeat;
     background-size: cover;
-    background-image: url(noteImage.png);
     color: black;
     text-align: center;
     cursor: pointer;
 }
+#individualNote {
+    background-image: url(noteImage.png);
+}
+#individualNoteExp {
+    background-image: url(noteImageEX.png);
+}
+#individualNotePe {
+    background-image: url(noteImagePe.png);
+}
+#individualNotePeExp {
+    background-image: url(noteImagePeEX.png);
+}
+
 
 
 #alepaCucumber {

@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Overview</title>
+        <link rel="shortcut icon" href="">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/overviewDecoration.css">
@@ -11,12 +12,12 @@
         <script src="scripts/overviewScript.js"></script>
     </head>
     <body>
-        <div id="shade"></div>
         <img src="css/alepalogo.png" style="left: 2.3em; position:absolute; height: 4.5em; width: 10em;">
         <p id="managerText">MANAGER</p>
         <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
         <div id="topInfoBar"><p>Your view</p></div>
         <div class="bigWindow">
+            <div id="shade"></div>
             <div id="personalBar">
                 <button class="categoryButton topAnimation">Your view</button>
                 <div id="bellArea"></div>
@@ -78,7 +79,7 @@
                 <div id="searchUsersDiv">
                     <form>
                         <h1>Search user database</h1>
-                        <div class="regLabel"><label>Search for name:</label>
+                        <div class="regLabel"><label style="text-align: center">Search for name:</label>
                             <input id="findUserField" type="text" name="findUserField">
                             <button type="button" id="searchButton" class="regButton white">Search</button>
                         </div>
@@ -103,7 +104,7 @@
                 </div>
                 <div id="viewHistory" class='rightPanel'>
                     <img id="viewHistoryImg" src="css/historyicon.png" style="width:5em;height:5em;">
-                    <p>View history (expired notes)</p>
+                    <p>View history (earlier notes)</p>
                 </div>
                 <div id="searchUsers" class='rightPanel'>
                     <img id="searchUsersImg" src="css/searchicon.png" style="width:5em;height:5em;">

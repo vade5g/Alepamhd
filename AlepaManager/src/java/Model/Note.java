@@ -100,7 +100,7 @@ public class Note implements Serializable {
                     this.expired = true;
                 }
             } catch(ParseException p) {
-                this.deadline = "PARSING ERROR";
+                this.deadline = "-";
             }
         } else {
             this.deadline = "-";

@@ -27,6 +27,7 @@ public class Useri implements Serializable {
     private String username, password;
     private String category;
     private String email;
+    private int notifications;
 
     public Useri() {
     }
@@ -38,6 +39,7 @@ public class Useri implements Serializable {
         this.password = password;
         this.category = category;
         this.email = email;
+        this.notifications = 0;
     }
     //GETTERS
     public int getId() {
@@ -63,7 +65,9 @@ public class Useri implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+    public int getNotifications() {
+        return notifications;
+    }
 
     //SETTERS
     public void setId(int id) {
@@ -87,4 +91,8 @@ public class Useri implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    public void setNotifications(int notifications) {
+        this.notifications = notifications;
+    }
+    
 }

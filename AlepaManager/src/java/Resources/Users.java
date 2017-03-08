@@ -102,17 +102,17 @@ public class Users {
         Session session = sf.openSession();
         session.beginTransaction();
         //actual stuff begins
-        
+        System.out.println(entry);
         //initialize the tools we need to search the database
         entry = entry.trim();
         String[] entryList = entry.split(" ");
-        
         Criteria criteria = session.createCriteria(Useri.class);
         List<Useri> matchList = new ArrayList<>();
-        session.getTransaction().commit();
         
+        //if the entry was invalid, return empty
         if (entryList.length > 2) {
             return matchList;
+        //if the entry was one word
         } else if (entryList.length == 1) {
             String word = entryList[0];
             criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+word+"%"),
@@ -121,24 +121,91 @@ public class Users {
             return matchList;
         } else if (entryList.length == 2) {
             //the user entered for example "Jannu Pekka", we must try both words
-            String word = entryList[0];
-            criteria.add(Restrictions.or(Restrictions.like("firstname", "pekka"),
-                                        Restrictions.like("lastname", "%"+word+"%")));
+            String firstname = entryList[0];
+            String lastname = entryList[1];
+            System.out.println("Searched for "+firstname+" "+lastname);
+            //first we see if first part of entry is in firstnames
+            criteria = session.createCriteria(Useri.class);
+            criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+firstname+"%"),
+                                        Restrictions.like("lastname", "%"+firstname+"%")));
             matchList = criteria.list();
             if (!matchList.isEmpty()) {
-                //if something was found with first word, return list
+                //if something was found, move onto the second word and update more precise list
+                criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+lastname+"%"),
+                                        Restrictions.like("lastname", "%"+lastname+"%")));
+                matchList = criteria.list();
                 return matchList;
             } else {
-                //nothing found in first or last names with this word!
-                //create new criteria and try again with the other word
-                word = entryList[1];
-                criteria = session.createCriteria(Useri.class);
-                criteria.add(Restrictions.or(Restrictions.like("firstname", "%"+word+"%"),
-                                        Restrictions.like("lastname", "%"+word+"%")));
-                matchList = criteria.list();
+                return matchList;
             }
         }
         //return whether it came out empty or not
+        session.getTransaction().commit();
         return matchList;
+    }
+    
+    @Path("/getid/{entry}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public int getIdByName(@PathParam("entry") String entry) {
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        
+        //initialize the tools we need to search the database
+        entry = entry.trim();
+        String[] entryList = entry.split(" ");
+        
+        Criteria criteria = session.createCriteria(Useri.class);
+        List<Useri> matchList = new ArrayList<>();
+        session.getTransaction().commit();
+        Useri user; int id=-1;
+        //if the entry was invalid, return empty array
+        if (entryList.length != 2) {
+            return -1;
+            //if the entry was one word
+        } else {
+            String firstname = entryList[0];
+            String lastname= entryList[1];
+            criteria.add(Restrictions.like("firstname", firstname));
+            criteria.add(Restrictions.like("lastname", lastname));
+            matchList = criteria.list();
+            //if nothing was found, return empty array
+            if (matchList.isEmpty()) {
+                return -1;
+            } else {
+                matchList = criteria.list();
+                user = matchList.get(0);
+                id = user.getId();
+            }
+        }
+        return id;
+    }
+    
+    @Path("/resetnotifications/{id}")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public int getNotificationsByID(@PathParam("id") int userID) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        
+        Criteria criteria = session.createCriteria(Useri.class);
+        criteria.add(Restrictions.like("id", userID));
+        List<Useri> matchList = new ArrayList<>();
+        matchList = criteria.list();
+        if (!matchList.isEmpty()) {
+            Useri user = matchList.get(0);
+            user.setNotifications(0);
+        } else {
+            return -1;
+        }
+        session.getTransaction().commit();
+        return 0;
     }
 }
