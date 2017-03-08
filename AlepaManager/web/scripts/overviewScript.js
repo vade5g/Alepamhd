@@ -326,7 +326,9 @@ var main = function() {
             active = active.childNodes[0].nodeValue;
             var target = note.getElementsByTagName("targetUser")[0];
             target = target.childNodes[0].nodeValue;
-            addNoteToView(title,active,target);
+            var expired = note.getElementsByTagName("expired")[0];
+            target = target.childNodes[0].nodeValue;
+            addNoteToView(title,active,target,expired);
             
         }
     }
@@ -426,7 +428,7 @@ var main = function() {
         return url;
     }
     
-    function addNoteToView(title,active,target) {
+    function addNoteToView(title,active,target, expired) {
         if (active==="true") {
             active=true;
         } else if (active==="false") {
@@ -455,7 +457,6 @@ var main = function() {
                 } else if (target === storedUser && active===false) {
                     $('#noteTable tr:last').after("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
                 }
-                 
             } else {  
                 if (target !== storedUser && active===true) {
                    $('#noteTable tr:last td:last').after("<td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
