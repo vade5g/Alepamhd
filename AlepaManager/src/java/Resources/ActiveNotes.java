@@ -43,6 +43,22 @@ public class ActiveNotes {
             deadline=null;
         }
         Note newNote = new Note(title, target, author,  message, deadline, category);
+        
+        //if the target is a valid person, give him a notification
+        if (target!=null && target.contains(" ")) {
+            List<Useri> userList = new ArrayList<>(); Useri user;
+            String firstname = target.split(" ")[0];
+            String lastname = target.split(" ")[1];
+            Criteria criteria = session.createCriteria(Useri.class);
+            criteria.add(Restrictions.like("firstname", firstname));
+            criteria.add(Restrictions.like("lastname", lastname));
+            userList = criteria.list();
+            if (!userList.isEmpty()) {
+                user = userList.get(0);
+                //notifications++
+                user.setNotifications(user.getNotifications()+1);
+            }
+        } 
         session.saveOrUpdate(newNote);
         session.getTransaction().commit();
         
@@ -66,6 +82,29 @@ public class ActiveNotes {
         matchList = criteria.list();
         if (!matchList.isEmpty()) {
             note = matchList.get(0);
+        }
+        session.getTransaction().commit();
+        return note;
+    }
+    
+    @Path("/disable/{title}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Note markAsInactive(@PathParam("title") String title) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        List<Note> matchList = new ArrayList<>();
+        Note note = null;
+        Criteria criteria = session.createCriteria(Note.class);
+        criteria.add(Restrictions.like("title", title));
+        matchList = criteria.list();
+        if (!matchList.isEmpty()) {
+            note = matchList.get(0);
+            note.setActive(false);
         }
         session.getTransaction().commit();
         return note;
