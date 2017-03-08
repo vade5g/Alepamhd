@@ -86,6 +86,7 @@ var main = function() {
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
             closeOthersExcept(toggleElement);
+            shadow.toggle();
         }); 
     }
     
@@ -107,22 +108,27 @@ var main = function() {
             var title = $(this).text();
             var url = "resources/activenotes/"+title;
             sendRequest(type, url, action);
+            shadow.show();
         }); 
         //at the moment, both send and close do same thing
-        $("#note button").click(function() {
+        $("#closeButton").click(function() {
             note.hide();
+            shadow.hide();
         }); 
     }
     
     //clicking DONE on the note
     $("#note .doneBtn").click(function() {
-        confirm("Are you sure you want to mark note as finished?");
-        var action="disable";
-        var type="GET";
-        var parentDiv = $(this).parent();
-        var title = parentDiv.children().first().text();
-        var url = "resources/activenotes/disable/"+title;
-        sendRequest(type, url, action);
+        var r = confirm("Are you sure you want to mark note as finished?");
+        if (r === true) {
+            var action="disable";
+            var type="GET";
+            var parentDiv = $(this).parent();
+            var title = parentDiv.children().first().text();
+            var url = "resources/activenotes/disable/"+title;
+            sendRequest(type, url, action);
+            shadow.hide();
+        } 
     });
     
     //what happens when you click a category button:
@@ -217,6 +223,9 @@ var main = function() {
             url = checkNoteFields();
             sendRequest(type, url, action);
             alert("new note added!");
+            shadow.hide();
+            newNote.hide();
+            $('#categoryBar button:contains('+$("#CategoryOptions").val()+')').trigger("click");
         } else {
             alert(noteFieldsOK());
         }
@@ -361,6 +370,7 @@ var main = function() {
             $("#sendNoteToButton").click(function() {
                 $("#newNoteTarget").val($("#sendNoteField").val());
                 newNoteImg.trigger("click");
+                shadow.hide();
             });
         }
     }

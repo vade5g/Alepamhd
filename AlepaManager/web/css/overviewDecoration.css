@@ -9,6 +9,14 @@ body {
     color:black;
 }
 
+button {
+    cursor: pointer;
+}
+
+#personalBar a {
+    z-index: 0;
+}
+
 #shade {
     z-index: 1;
     position: absolute;
@@ -16,7 +24,7 @@ body {
     height: 400em;
     left: -100em;
     top: -100em;
-    background-color: rgba(119, 120, 122, 0.6);
+    background-color: rgba(119, 120, 122, 0.4);
 }
 
 .bigWindow {
@@ -170,6 +178,7 @@ body {
     -moz-border-radius: 11px 11px 11px 11px;
     -webkit-border-radius: 11px 11px 11px 11px;
     border: 3px solid #ff0839;
+    z-index: 2;
 }
 #newNote h1 {
     text-align: center;
@@ -271,7 +280,7 @@ body {
     -moz-border-radius: 11px 11px 11px 11px;
     -webkit-border-radius: 11px 11px 11px 11px;
     border: 3px solid #ff0839;
-
+    z-index: 2;
 }
 #note h1 {
     text-align: center;
