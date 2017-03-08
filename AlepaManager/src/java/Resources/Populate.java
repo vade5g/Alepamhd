@@ -53,28 +53,62 @@ public class Populate {
         
         //adding notes to database
         List<Note> notes = new ArrayList<>();
-        notes.add(new Note("Dirt on shelf", "Valtteri Vattula", "Valtteri Vattula", "Warehouse shelf is possibly cracked? Can you fix?", null, "warehouse"));
-        notes.add(new Note("Jenkki gum", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of Jenkki gum", null, "warehouse"));
-        notes.add(new Note("Pepper ham", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of peppered ham", null, "warehouse"));
-        notes.add(new Note("Dip delivery", "Valtteri Vattula", "Tuuli Tuulimylly", "Special dip delivery coming in at some point next week", null, "warehouse"));
+        //warehouse
+        notes.add(new Note("Dirt on shelf", "Valtteri Vattula", "Valtteri Vattula", "Warehouse shelf is possibly cracked? Can you fix?", "08.03.2017", "warehouse", false));
+        notes.add(new Note("Dip delivery", "Valtteri Vattula", "Tuuli Tuulimylly", "Special dip delivery coming in at some point next week", "15.03.2017", "warehouse", false));
+        notes.add(new Note("Jenkki gum", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of Jenkki gum", "06.03.2017", "warehouse", false));
+        notes.add(new Note("Pepper ham", "Valtteri Vattula", "Tuuli Tuulimylly", "Check up on weekly consumption of peppered ham", "05.03.2017", "warehouse"));
         notes.add(new Note("Excess boxes in backroom", "Valtteri Vattula", "Tuuli Tuulimylly", "Stack of empty box cartons in the storage, pls clean", null, "warehouse"));
-        notes.add(new Note("Fill shelves", "Pena Peippola", "Maria Muurila", "Fetch 30 boxes of chicken from warehouse to B2", "10.3.2017", "cashier"));
-        notes.add(new Note("Ketchup accident", null, "Maria Muurila", "Ketchup accident in D1", null, "janitor"));
+        notes.add(new Note("Meat delivery", "Valtteri Vattula", "Uuno Ukkola", "Meat delivery coming at 08:00", "10.03.2017", "warehouse"));
+        notes.add(new Note("Paper delivery", "Valtteri Vattula", "Uuno Ukkola", "Paper delivery coming at 11:00", "10.03.2017", "warehouse"));
         notes.add(new Note("Out of apples", "Valtteri Vattula", "Tuija Tuijala", "Need apples to D5", null, "warehouse"));
-        notes.add(new Note("Need guard asap", null, "Tuuli Tuulimylly", "Suspicious people hanging around the front door", "7.3.2017", "guard"));
-        notes.add(new Note("Make coffee", "Pena Peippola", "Maria Muurila", "Make sure there is coffee at the meeting tomorrow 13:00", "15.3.2017", "janitor"));
+        notes.add(new Note("Spices delivery", "Uuno Ukkola", "Valtteri Vattula", "Spices delivery coming at 12:00", "10.03.2017", "warehouse"));
+        notes.add(new Note("Fish delivery", "Uuno Ukkola", "Valtteri Vattula", "Fish delivery coming at 07:00", "10.03.2017", "warehouse"));
+        //cashier
+        notes.add(new Note("Need assistance with cash register", null, "Pena Peippola", "I need some assistance using the cash register", null, "cashier", false));        
+        notes.add(new Note("Fill shelves", "Pena Peippola", "Maria Muurila", "Fetch 30 boxes of chicken from warehouse to B2", null, "cashier", false));
+        notes.add(new Note("Filling shelves", null, "Emmi Virtanen", "At B2 theres a few packed boxes that could be filled into shelves", "02.03.2017", "cashier"));
+        notes.add(new Note("Make coffee", "Pena Peippola", "Maria Muurila", "Make sure there is coffee at the meeting tomorrow 13:00", "15.03.2017", "cashier"));        
+        notes.add(new Note("Remove the sale add", null, "Valtteri Vattula", "Remove the sale add next to candy shelves", "04.03.2017", "cashier"));
+        notes.add(new Note("Mark almost expired items", null, "Maria Muurila", "Put sale tags on expire", "10.03.2017", "cashier"));        
+        notes.add(new Note("Fill meat shelves", null, "Emmi Virtanen", "The meat shelves need to be filled", null, "cashier"));
+        notes.add(new Note("More cookies needed", null, "Maria Muurila", "Cookie shelves are almost empty and need filling", null, "cashier"));
+        notes.add(new Note("Remove the add stand", null, "Maria Muurila", "The add stand in the meat section should be removed completely. Move it to the storage somewhere where it isn't blocking anything", "10.03.2017", "chashier"));
+        //janitor 
+        notes.add(new Note("Ketchup accident", null, "Maria Muurila", "Ketchup accident in D1", null, "janitor", false));
+        notes.add(new Note("Clean the soda", null, "Maria Muurila", "Some kids spilled soda next to the candy shelves", null, "janitor", false));
+        notes.add(new Note("Clean break room", null, "Matti Miettinen", "Break room is a mess, please clean it up", "28.02.2017", "janitor"));
+        notes.add(new Note("Move the cleaning wagons", null, "Sirpa Sirpola", "The cleaning wagon is left at A3, please move it somewhere else", "07.03.2017", "janitor"));
+        notes.add(new Note("Clean cahsregister C1", null, "Emmi Virtanen", "Sirpa threw up in the cashier. I think you should clean it up as soon as possible", null, "janitor"));
+        notes.add(new Note("Bums", "Pekka Mannunen", "Jonathan Johnson", "Take care of the bodies. It's pretty messy here", "08.03.2017", "janitor"));
+        notes.add(new Note("Hooligans mess", null, "Kalle Koskinen", "The holigans left a huge mess in the break room. There is piss and shit everywhere", "11.03.2017", "janitor"));
+        //guard
+        notes.add(new Note("Beavers!!!", null, "Tuuli Tuulimylly", "There are freaking beavers on the vegetable section! Remove them at once!!", null, "guard", false));
+        notes.add(new Note("Need guard asap", null, "Tuuli Tuulimylly", "Suspicious people hanging around the front door", "07.03.2017", "guard"));        
+        notes.add(new Note("Check slot machine users", null, "Tuuli Tuulimylly", "The users on the slot machine seem underage, please check", "01.03.2017", "guard"));
+        notes.add(new Note("Bums on the front door", null, "Maria Muurila", "The bums are hanging in fornt of the store again. Finish them off!", "08.03.2017", "guard"));
+        notes.add(new Note("Sirpa has been drinking again", null, "Uuno Ukkola", "Sirpa has been drinking again... She is dancing half naked in the halls and disturbing customers. Please take care of her", "01.02.2017", "guard"));
+        notes.add(new Note("Hooligans stole cleaning wagon", null, "Maria Muurila", "Hooligans stole the cleaning wagon and are playing outside with it", "07.03.2017", "guard"));
+        notes.add(new Note("Common shoplifter", null, "Maria Muurila", "Slick Tony is in the store again. Go keep an eye on him", null, "guard"));
+        notes.add(new Note("Hooligan invasion", null, "Pena Peippola", "The hooligans have invaded again! They're barricaded in the break room", null, "guard"));
+        notes.add(new Note("Raccoons", null, "Kalle Koskinen", "Raccoons in the dumpster again", null, "guard"));
+        //manager
+        notes.add(new Note("More money pls boss!!!", "Matti Miettinen", "Pena Peippola", "Pls boss. More moneyz. I need it. Tymanty", "10.10.2017", "manager", false));
+        notes.add(new Note("Sirpa's drinking problem", "Matti Miettinen", "Jonathan Johnson", "Please talk with Sirpa about her drinking. This is starting to affect us all", null, "manager", false));        
         notes.add(new Note("Cash register C1 not working", "Matti Miettinen", "Sirpa Sirpola", "Glass broken in section A4", null, "manager"));
-        notes.add(new Note("Need assistance with cash register", null, "Pena Peippola", "I need some assistance using the cash register", null, "cashier"));
-        notes.add(new Note("Filling shelves", null, "Emmi Virtanen", "At B2 theres a few packed boxes that could be filled into shelves", null, "cashier"));
-        notes.add(new Note("Meat delivery", "Valtteri Vattula", "Uuno Ukkola", "Meat delivery coming at 08:00", "10.3.2017", "warehouse"));
-        notes.add(new Note("Fish delivery", "Uuno Ukkola", "Valtteri Vattula", "Fish delivery coming at 07:00", "10.3.2017", "warehouse"));
-        notes.add(new Note("Paper delivery", "Valtteri Vattula", "Uuno Ukkola", "Paper delivery coming at 11:00", "10.3.2017", "warehouse"));
-        notes.add(new Note("Spices delivery", "Uuno Ukkola", "Valtteri Vattula", "Spices delivery coming at 12:00", "10.3.2017", "warehouse"));
-        notes.add(new Note("Clean break room", null, "Matti Miettinen", "Break room is a mess, please clean it up", null, "janitor"));
-        notes.add(new Note("Move the cleaning wagons", null, "Sirpa Sirpola", "The cleaning wagon is left at A3, please move it somewhere else", "7.3.2017", "janitor"));
         notes.add(new Note("Cleaning wagon missing", "Matti Miettinen", "Margetta Marjala", "Someone has stolen the cleaning wagon while I was in the toilet", null, "manager"));
-        notes.add(new Note("Hooligans stole cleaning wagon", null, "Maria Muurila", "Hooligans stole the cleaning wagon and are playing outside with it", "7.3.2017", "guard"));
-                        
+        notes.add(new Note("New coffee machine", "Ma Miettinen", "Kalle Koskinen", "The coffee machine is starting to fall apart, we need a new one", null, "manager"));
+        //3rd party
+        notes.add(new Note("New freezer arriving", null, "Matti Miettinen", "The new fridge I ordered for the break room is arriving today at some point. Please be aware about it and guide the delivery people to the break room", "06.01.2017", "3rd party", false));
+        notes.add(new Note("New summer helper coming", null, "Matti Miettinen", "The new summer helper is coming today to sign papers. Please help him to find the break room when he arrives.", "15.05.2016", "3rd party", false));
+        notes.add(new Note("Clothes in the break room", null, "Pekka Mannunen", "Someone's clothes are lying on the floor in the break room. Please come and pick them up and put them into your locker immediately!", null, "3rd party", false));
+        notes.add(new Note("Stuck on the toilet! Please Help!", null, "Markus Markkula", "We are out of toilet paper! Please someone bring some to the WC, so I can get out of here!", null, "3rd party", false));
+        notes.add(new Note("Repair for the cashier C1", null, "Matti Miettinen", "The repair man is coming 17.03.2017 to check the Cashier C1. Help him find cashier C1 and assist him if needed", "17.03.2017", "3rd party"));
+        notes.add(new Note("Slot machine having some issues", null, "Emmi Virtanen", "A customer mentioned that the slot machine seems to not work properly. Could someone go and check it please", null, "3rd party"));
+        notes.add(new Note("Someone lost their wallet", null, "Margetta Marjala", "Someone has dropped their wallet in the entrance hall. I put it in the break room, so if someone comes asking for a missing wallet you know where to find it", null, "3rd party"));
+        notes.add(new Note("Lost earring", null, "Sirpa Sipola", "I lost my other earring somewhere in the store. If you find it please bring it to me. thanks", null, "3rd party"));
+        notes.add(new Note("Out of coffee", null, "Pena Peippola", "We are out of coffee. I don't know who I should notify about it, so I'll just post about it here", null, "3rd party"));
+        
         for (Note s : notes) {
             session.saveOrUpdate(s);
         }

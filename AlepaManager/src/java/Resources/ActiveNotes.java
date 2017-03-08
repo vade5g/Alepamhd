@@ -43,6 +43,22 @@ public class ActiveNotes {
             deadline=null;
         }
         Note newNote = new Note(title, target, author,  message, deadline, category);
+        
+        //if the target is a valid person, give him a notification
+        if (target!=null && target.contains(" ")) {
+            List<Useri> userList = new ArrayList<>(); Useri user;
+            String firstname = target.split(" ")[0];
+            String lastname = target.split(" ")[1];
+            Criteria criteria = session.createCriteria(Useri.class);
+            criteria.add(Restrictions.like("firstname", firstname));
+            criteria.add(Restrictions.like("lastname", lastname));
+            userList = criteria.list();
+            if (!userList.isEmpty()) {
+                user = userList.get(0);
+                //notifications++
+                user.setNotifications(user.getNotifications()+1);
+            }
+        } 
         session.saveOrUpdate(newNote);
         session.getTransaction().commit();
         
@@ -71,10 +87,33 @@ public class ActiveNotes {
         return note;
     }
     
+    @Path("/disable/{title}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Note markAsInactive(@PathParam("title") String title) {
+        
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        //actual stuff begins
+        List<Note> matchList = new ArrayList<>();
+        Note note = null;
+        Criteria criteria = session.createCriteria(Note.class);
+        criteria.add(Restrictions.like("title", title));
+        matchList = criteria.list();
+        if (!matchList.isEmpty()) {
+            note = matchList.get(0);
+            note.setActive(false);
+        }
+        session.getTransaction().commit();
+        return note;
+    }
+    
     @Path("/category/{category}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public List<Note> getNotesByID(@PathParam("category") String category) {
+    public List<Note> getNotesByCategory(@PathParam("category") String category) {
         //basic initializement
         SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
         Session session = sf.openSession();
@@ -96,6 +135,37 @@ public class ActiveNotes {
         //reset criteria
         Criteria criteria = session.createCriteria(Note.class);
         criteria.add(Restrictions.like("category", category));
+        criteria.add(Restrictions.eq("active", true));
+        notes = criteria.list();
+        session.getTransaction().commit();
+        return notes;
+    }
+    
+    @Path("/personal/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Note> getNotesByID(@PathParam("id") int userID) {
+        //basic initializement
+        SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
+        Session session = sf.openSession();
+        session.beginTransaction();
+        
+        //stuff begins
+        Criteria criteria = session.createCriteria(Useri.class);
+        criteria.add(Restrictions.like("id", userID));
+        List<Useri> userList = new ArrayList<>(); Useri user;
+        List<Note> notes = new ArrayList<>();
+        userList = criteria.list();
+        if (!userList.isEmpty()) {
+            //get the user by this ID
+            user = userList.get(0);
+        } else {
+            return notes;
+        }
+        String target = user.getFirstname() + " " + user.getLastname();
+        //reset criteria
+        criteria = session.createCriteria(Note.class);
+        criteria.add(Restrictions.like("targetUser", target));
         criteria.add(Restrictions.eq("active", true));
         notes = criteria.list();
         session.getTransaction().commit();
