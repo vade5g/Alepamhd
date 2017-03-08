@@ -373,6 +373,7 @@ button {
   font-size: 1em;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  opacity: 1.0;
 }
 .doneBtn:hover {
   background: #27a829;
@@ -395,7 +396,7 @@ button {
     margin-left: 18.75em;
     margin-top: 5em;
     background: repeat;
-    background-color: #ffe301;
+    background-color: white;
     opacity: 0.9;
     color: black;
     position:absolute;
@@ -404,6 +405,10 @@ button {
     border: 1px solid #919191;
     z-index: 2;
     display : inline-block;
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
+    border: 3px solid #ff0839;
 }
 
 
