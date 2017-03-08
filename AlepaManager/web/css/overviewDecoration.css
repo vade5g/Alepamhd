@@ -457,6 +457,45 @@ button {
     font-size: 1.5em;
 }
 
+#loggedAs {
+    position: absolute;
+    top: -1em;
+    left: 53.5em;
+    font-size: 1.5em;
+}
+
+#loggedUser {
+    position: absolute;
+    top: -1em;
+    left: 60em;
+    font-size: 1.5em;
+}
+
+#logout {
+    position: absolute;
+    top: 1.5em;
+    left: 60em;
+    font-size: 1.5em;
+}
+
+.logoutButton {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #28c12d;
+  padding: 3px 15px 3px 15px;
+  border: solid #ffffff 1px;
+  text-decoration: none;
+}
+
+.logoutButton:hover {
+  background: #27a829;
+  text-decoration: none;
+}
+
 #bottomText {
     position: absolute;
     top: 58.2em;

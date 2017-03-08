@@ -18,6 +18,9 @@ var main = function() {
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
     
+    //show user name
+    $("#loggedUser").text(sessionStorage.getItem("loggedInUser"));
+    
     //hide stuff that gets toggled from menus
     shadow.hide();
     newNote.hide();
