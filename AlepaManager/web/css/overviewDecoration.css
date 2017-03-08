@@ -488,9 +488,17 @@ button {
 
 #logout {
     position: absolute;
-    top: 1.5em;
-    left: 60em;
+    left: 59.2em;
     font-size: 1.5em;
+    top: 1.8em;
+}
+
+#logoutImg {
+    position: absolute;
+    width : 2em;
+    height: 2em;
+    left: 4.5em;
+    top: -0.3em;
 }
 
 .logoutButton {
