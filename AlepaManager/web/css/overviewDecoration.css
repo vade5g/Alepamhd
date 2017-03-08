@@ -395,8 +395,8 @@ button {
     margin-left: 18.75em;
     margin-top: 5em;
     background: repeat;
-    background-color: moccasin;
-    opacity: 0.7;
+    background-color: #ffe301;
+    opacity: 0.9;
     color: black;
     position:absolute;
     height: 33em;
