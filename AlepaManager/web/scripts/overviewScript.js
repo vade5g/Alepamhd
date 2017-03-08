@@ -243,14 +243,17 @@ var main = function() {
             url = "resources/history/category/"+category;
         }
         var type="GET";
-        $("#topInfoBar").animate({
+        //if top bar doesnt contain "history", animate it
+        if ($("#topInfoBar p").text().includes("history")===false) {
+            $("#topInfoBar").animate({
                 height: "-=5em"
             }, 150, function() {
                 $("#topInfoBar p").text($("#topInfoBar p").text()+" (history)");
             });
-        $("#topInfoBar").animate({
+            $("#topInfoBar").animate({
                 height: "+=5em"
             }, 150);
+        }
         sendRequest(type, url, action);
         
     }); 
