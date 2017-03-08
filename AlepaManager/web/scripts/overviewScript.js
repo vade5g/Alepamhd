@@ -436,39 +436,71 @@ var main = function() {
         } else if (active==="false") {
             active=false;
         }
+        if (expired==="true") {
+            expired=false;
+        } else if (expired==="false") {
+            expired=true;
+        }
         var storedUser = sessionStorage.getItem('loggedInUser');
         if ($("#noteTable tr").length === 0) {
-            if (target!==storedUser && active===true) {
-                $("#noteTable").append("<tr><td id='individualNote' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
-            }  else if (target!==storedUser && active===false) {
-                $("#noteTable").append("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
-            } else if (target === storedUser && active===true) {
-                $("#noteTable").append("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-            } else if (target === storedUser && active===false) {
-                $("#noteTable").append("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+            if (active) {
+                if (target !== storedUser && expired === true) {
+                    $("#noteTable").append("<tr><td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target !== storedUser && expired === false) {
+                    $("#noteTable").append("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target === storedUser && expired === true) {
+                    $("#noteTable").append("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                } else if (target === storedUser && expired === false) {
+                    $("#noteTable").append("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                }
+            } else {
+                if (target !== storedUser) {
+                   $("#noteTable").append("<tr><td id='individualNoteCh' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>"); 
+                } else {
+                   $("#noteTable").append("<tr><td id='individualNoteChPe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                }
             }
+            
         } else {
             var lastRowLength = $("#noteTable tr:last td").length;
             if (lastRowLength === 6) {
-                if (target !== storedUser && active===true) {
-                    $('#noteTable tr:last').after("<tr><td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target !== storedUser && active===false) {
-                    $('#noteTable tr:last').after("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target === storedUser && active===true) {
-                    $('#noteTable tr:last').after("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target === storedUser && active===false) {
-                    $('#noteTable tr:last').after("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                if (active) {
+                    if (target !== storedUser && expired === true) {
+                        $('#noteTable tr:last').after("<tr><td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    } else if (target !== storedUser && expired === false) {
+                        $('#noteTable tr:last').after("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    } else if (target === storedUser && expired === true) {
+                        $('#noteTable tr:last').after("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    } else if (target === storedUser && active === false) {
+                        $('#noteTable tr:last').after("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    }
+                } else {
+                    if (target !== storedUser) {
+                        $('#noteTable tr:last').after("<tr><td id='individualNoteCh' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    } else {
+                        $('#noteTable tr:last').after("<tr><td id='individualNoteChPe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
+                    }
                 }
+                
             } else {  
-                if (target !== storedUser && active===true) {
-                   $('#noteTable tr:last td:last').after("<td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target !== storedUser && active===false) {
-                   $('#noteTable tr:last td:last').after("<td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target === storedUser && active===true) {
-                   $('#noteTable tr:last td:last').after("<td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target === storedUser && active===false) {
-                   $('#noteTable tr:last td:last').after("<td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                if (active) {
+                    if (target !== storedUser && expired === true) {
+                        $('#noteTable tr:last td:last').after("<td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    } else if (target !== storedUser && expired === false) {
+                        $('#noteTable tr:last td:last').after("<td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    } else if (target === storedUser && expired === true) {
+                        $('#noteTable tr:last td:last').after("<td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    } else if (target === storedUser && expired === false) {
+                        $('#noteTable tr:last td:last').after("<td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    }
+                } else {
+                    if (target !== storedUser) {
+                        $('#noteTable tr:last td:last').after("<td id='individualNoteCh' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    } else {
+                        $('#noteTable tr:last td:last').after("<td id='individualNoteChPe' class='individualNote'><p class='noteText'>" + title + "</p></td>");
+                    }
                 }
+
             }
         }
         whiteBorderAnimation($('#noteTable td'));

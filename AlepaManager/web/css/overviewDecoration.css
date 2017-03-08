@@ -131,7 +131,7 @@ button {
     background-repeat: no-repeat;
     background-color: #eaeaea;
 }
-::-webkit-scrollbar { 
+#notesArea::-webkit-scrollbar { 
     display: none; 
 }
 
@@ -393,13 +393,13 @@ button {
 }
 
 #searchUsersDiv {
-    margin-left: 18.75em;
-    margin-top: 5em;
     background: repeat;
     background-color: white;
     opacity: 0.9;
     color: black;
     position:absolute;
+    left:18.75em;
+    top:5em;
     height: 33em;
     width: 30em;
     border: 1px solid #919191;
@@ -410,7 +410,17 @@ button {
     -webkit-border-radius: 11px 11px 11px 11px;
     border: 3px solid #ff0839;
 }
+.resultsContainerDiv {
+    position:absolute;
+    width:10em;
+    height: 20em;
+    bottom:13em;
+    top:20em;
+    :-webkit-scrollbar { 
+        display: initial; 
+    }
 
+}
 
 #noteTable tr {
     height: 11.1em;
@@ -439,7 +449,12 @@ button {
 #individualNotePeExp {
     background-image: url(noteImagePeEX.png);
 }
-
+#individualNoteCh {
+    background-image: url(noteImageCh.png);
+}
+#individualNoteChPe {
+    background-image: url(noteImageChPe.png);
+}
 
 
 #alepaCucumber {
