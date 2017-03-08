@@ -376,8 +376,8 @@ var main = function() {
             });
             $("#sendNoteToButton").click(function() {
                 $("#newNoteTarget").val($("#sendNoteField").val());
-                newNoteImg.trigger("click");
                 shadow.hide();
+                newNoteImg.trigger("click");
             });
         }
     }
