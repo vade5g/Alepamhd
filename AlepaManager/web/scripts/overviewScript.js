@@ -1,7 +1,7 @@
 /* global req, responseXML */
 
 var main = function() {
-    console.log("main");
+//declarations for individual elements for easier selection
     var shadow = $("#shade");
     var newNoteImg = $("#writeMessage");
     var historyViewImg = $("#viewHistory");
@@ -17,49 +17,80 @@ var main = function() {
     whiteBorderAnimation($("#bellArea"));
     whiteBorderAnimation($(".rightPanel"));
     whiteBorderAnimation($('#noteTable td'));
+    
+    //hide stuff that gets toggled from menus
     shadow.hide();
     newNote.hide();
     userDatabase.hide();
     note.hide();
     $("#notificationWindow").hide();
+    
+    //add toggle onclick events to newnote and search and their close-buttons
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
     addPanelClickEvent($("#newNote .closeButton"), newNote);
     addPanelClickEvent($("#searchUsersDiv .closeButton"), userDatabase);
     
+    //give the first notes their click events
     refreshNoteClickEvents();
+    
+    //store name of logged in user and his ID
     var storedUser = sessionStorage.getItem('loggedInUser');
     $("#newNoteAuthor").val(storedUser);
     var storedUserID;
-    setStoredUserID();
     
-    function setStoredUserID() {
-        var action = "findUser";
-        var type="GET";
-        var url = "resources/users/find/"+storedUser.toString().split(" ")[1];
-        sendRequest(type, url, action);
-        req = new XMLHttpRequest();
-        req.open(type, url, true);
-        req.onreadystatechange = function() {
-            if (req.readyState===4) {
-                var users = req.responseXML.getElementsByTagName("useris")[0];
+    //refresh notifications
+    var type="GET";
+    var storedUser = sessionStorage.getItem('loggedInUser');
+    var url = "resources/users/find/"+storedUser;
+    var req1 = new XMLHttpRequest();
+    req1.open(type, url, true);
+    req1.onreadystatechange = function() {
+        if (req1.readyState===4) {
+            if (req1.status === 200) {
+                var users = req1.responseXML.getElementsByTagName("useris")[0];
                 var user = users.childNodes[0];
-                console.log(user);
+                var notifications = user.getElementsByTagName("notifications")[0].childNodes[0].nodeValue;
+                updateNotifications(notifications);
+            }
+        }
+    };
+    req1.send(null);
+    
+    //function for getting the user's ID based on the login firstname and lastname
+    var type="GET";
+    var storedUser = sessionStorage.getItem('loggedInUser');
+    var url = "resources/users/find/"+storedUser;
+    var req2 = new XMLHttpRequest();
+    req2.open(type, url, true);
+    req2.onreadystatechange = function() {
+        if (req2.readyState===4) {
+            if (req2.status === 200) {
+                var users = req2.responseXML.getElementsByTagName("useris")[0];
+                var user = users.childNodes[0];
                 storedUserID = user.getElementsByTagName("id")[0].childNodes[0].nodeValue;
                 storedUserID = parseInt(storedUserID);
                 sessionStorage.setItem('storedUserID', storedUserID);
             }
-        };
-        req.send(null);
-    }
+        }
+    };
+    req2.send(null);
     
+    //get initial view:
+    var type="GET";
+    var url = "resources/activenotes/personal/"+sessionStorage.getItem('storedUserID');
+    var action="getPersonalNotes";
+    sendRequest(type, url, action);
+    
+    //give the basic toggle action click event for the 1st paremeter(clickelement)
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
             closeOthersExcept(toggleElement);
+            shadow.toggle();
         }); 
     }
     
-        //close elements except the one defined in the parameter
+    //close elements except the one defined in the parameter
     function closeOthersExcept(element) {
         for (var i = 0; i < panelElementsList.length; i++) {
             if (panelElementsList[i] !== element) {
@@ -69,6 +100,7 @@ var main = function() {
         element.toggle();
     }
     
+    //select all the visible notes and give them their click-event
     function refreshNoteClickEvents() {
         $(".individualNote").click(function() {
             var action="getNote";
@@ -76,12 +108,28 @@ var main = function() {
             var title = $(this).text();
             var url = "resources/activenotes/"+title;
             sendRequest(type, url, action);
+            shadow.show();
         }); 
         //at the moment, both send and close do same thing
-        $("#note button").click(function() {
+        $("#closeButton").click(function() {
             note.hide();
+            shadow.hide();
         }); 
     }
+    
+    //clicking DONE on the note
+    $("#note .doneBtn").click(function() {
+        var r = confirm("Are you sure you want to mark note as finished?");
+        if (r === true) {
+            var action="disable";
+            var type="GET";
+            var parentDiv = $(this).parent();
+            var title = parentDiv.children().first().text();
+            var url = "resources/activenotes/disable/"+title;
+            sendRequest(type, url, action);
+            shadow.hide();
+        } 
+    });
     
     //what happens when you click a category button:
     $(".topAnimation").click(function() {
@@ -89,12 +137,12 @@ var main = function() {
         sessionStorage.setItem('currentCategory', name);
         $("#topInfoBar").animate({
                 height: "-=5em"
-            }, 250, function() {
+            }, 150, function() {
                 $("#topInfoBar p").text("Category: " + name);
             });
         $("#topInfoBar").animate({
                 height: "+=5em"
-            }, 250);
+            }, 150);
         var url, action;
             if (name==="Your view") {
                 url = "resources/activenotes/personal/"+storedUserID;
@@ -128,6 +176,15 @@ var main = function() {
             $("#notificationWindow").hide();
         }
     }); 
+    
+    $("#notificationWindow").click(function() {
+        $("#personalBar").children().first().trigger("click");
+        $("#notificationNumber").text(0);
+        $("#notificationWindow").text(0 + " new personal notes");
+        var type="GET"; var url="resources/users/resetnotifications/"+sessionStorage.getItem("storedUserID");
+        var action="resetnotifications";
+        sendRequest(type, url, action);
+    });
 
     function whiteBorderAnimation(x) {
         $(x).css('border', "solid 0.15em rgba(255, 255, 255, 0.0)");
@@ -166,6 +223,9 @@ var main = function() {
             url = checkNoteFields();
             sendRequest(type, url, action);
             alert("new note added!");
+            shadow.hide();
+            newNote.hide();
+            $('#categoryBar button:contains('+$("#CategoryOptions").val()+')').trigger("click");
         } else {
             alert(noteFieldsOK());
         }
@@ -176,7 +236,6 @@ var main = function() {
         var category = sessionStorage.getItem('currentCategory');
         var action, url;
         storedUserID = sessionStorage.getItem('storedUserID');
-        console.log(category);
         action="getHistory";
         if (category==="Your view") {
             url = "resources/history/"+storedUserID;
@@ -184,15 +243,23 @@ var main = function() {
             url = "resources/history/category/"+category;
         }
         var type="GET";
-        console.log(type+ "-"+url+"-"+action);
+        $("#topInfoBar").animate({
+                height: "-=5em"
+            }, 150, function() {
+                $("#topInfoBar p").text($("#topInfoBar p").text()+" (history)");
+            });
+        $("#topInfoBar").animate({
+                height: "+=5em"
+            }, 150);
         sendRequest(type, url, action);
+        
     }); 
     
     $(searchButton).click(function() {
         var action = "findUser";
         var type="GET";
         var entry = findUserField.val();
-        if (/^\w+$/.test(entry)===false) {
+        if (/^[A-Za-z ]+$/.test(entry)===false) {
             entry="";
         }
         var url = "resources/users/find/"+entry;
@@ -201,6 +268,7 @@ var main = function() {
     
     //AJAX request function for sending requests
     function sendRequest(type, url, action) {
+        console.log(action);
         req = new XMLHttpRequest();
         req.open(type, url, true);
         req.onreadystatechange = function() {
@@ -212,18 +280,10 @@ var main = function() {
     function callback(action) {
         if (req.readyState === 4) {
             if (req.status === 200) {
-                console.log(action +" successful");
                 if (action === "findUser") {
                     processSearchResults(req.responseXML);
                 } else if (action === "addNote") {
-                    action="getNotes";
-                    var type="GET";
-                    if (sessionStorage.getItem("currentCategory")==="Your view") {
-                        var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
-                    } else {
-                        var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
-                    }
-                    sendRequest(type, url, action);
+                    refreshCurrentNotes();
                 } else if (action==="getNote") {
                     changeNote(req.responseXML);
                 } else if (action==="getHistory") {
@@ -232,13 +292,27 @@ var main = function() {
                     changeArea(req.responseXML);
                 } else if (action==="getPersonalNotes") {
                     changeArea(req.responseXML);
+                } else if (action==="disable") {
+                    refreshCurrentNotes();
+                } else if (action==="updateNotifications") {
+                    updateNotifications(req.responseText);
                 }
             }
         }
     }
+    
+    function refreshCurrentNotes() {
+        action="getNotes";
+        var type="GET";
+        if (sessionStorage.getItem("currentCategory")==="Your view") {
+            var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
+        } else {
+            var url = "resources/activenotes/category/"+sessionStorage.getItem("currentCategory");
+        }
+        sendRequest(type, url, action);
+    }
 
     function changeArea(responseXML) {
-        console.log("changeArea invoked");
         clearNotesArea();
         var notes = responseXML.getElementsByTagName("notes")[0];
         for (var loop = 0; loop < notes.childNodes.length; loop++) {
@@ -296,6 +370,7 @@ var main = function() {
             $("#sendNoteToButton").click(function() {
                 $("#newNoteTarget").val($("#sendNoteField").val());
                 newNoteImg.trigger("click");
+                shadow.hide();
             });
         }
     }
@@ -328,9 +403,7 @@ var main = function() {
         }
         return "ok";
     }
-    
-    
-    
+
     function checkNoteFields() {
         //initialize as none, if the field is not empty it's replaced anyway
         //on the backend side "none" is puts that variable as null
@@ -351,39 +424,43 @@ var main = function() {
     }
     
     function addNoteToView(title,active,target) {
+        if (active==="true") {
+            active=true;
+        } else if (active==="false") {
+            active=false;
+        }
         var storedUser = sessionStorage.getItem('loggedInUser');
-        console.log(active);
         if ($("#noteTable tr").length === 0) {
-            if (target!==storedUser && active) {
+            if (target!==storedUser && active===true) {
                 $("#noteTable").append("<tr><td id='individualNote' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
-            }  else if (target!==storedUser && !active) {
+            }  else if (target!==storedUser && active===false) {
                 $("#noteTable").append("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>"+title+"</p></td></tr>");
-            } else if (target === storedUser && active) {
+            } else if (target === storedUser && active===true) {
                 $("#noteTable").append("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-            } else if (target === storedUser && !active) {
+            } else if (target === storedUser && active===false) {
                 $("#noteTable").append("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
             }
         } else {
             var lastRowLength = $("#noteTable tr:last td").length;
             if (lastRowLength === 6) {
-                if (target !== storedUser && active) {
+                if (target !== storedUser && active===true) {
                     $('#noteTable tr:last').after("<tr><td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target !== storedUser && !active) {
+                } else if (target !== storedUser && active===false) {
                     $('#noteTable tr:last').after("<tr><td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target === storedUser && active) {
+                } else if (target === storedUser && active===true) {
                     $('#noteTable tr:last').after("<tr><td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
-                } else if (target === storedUser && !active) {
+                } else if (target === storedUser && active===false) {
                     $('#noteTable tr:last').after("<tr><td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td></tr>");
                 }
                  
             } else {  
-                if (target !== storedUser && active) {
+                if (target !== storedUser && active===true) {
                    $('#noteTable tr:last td:last').after("<td id='individualNote' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target !== storedUser && !active) {
+                } else if (target !== storedUser && active===false) {
                    $('#noteTable tr:last td:last').after("<td id='individualNoteExp' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target === storedUser && active) {
+                } else if (target === storedUser && active===true) {
                    $('#noteTable tr:last td:last').after("<td id='individualNotePe' class='individualNote'><p class='noteText'>" + title + "</p></td>"); 
-                } else if (target === storedUser && !active) {
+                } else if (target === storedUser && active===false) {
                    $('#noteTable tr:last td:last').after("<td id='individualNotePeExp' class='individualNote'><p class='noteText'>" + title + "</p></td>");
                 }
             }
@@ -404,7 +481,6 @@ var main = function() {
         target = target.childNodes[0].nodeValue;
         author = author.childNodes[0].nodeValue;
         message = message.childNodes[0].nodeValue;
-        console.log(title+" "+target+" "+author+" "+message+" "+deadline+" "+category);
         deadline = deadline.childNodes[0].nodeValue;
         category = category.childNodes[0].nodeValue;
         $("#noteTitle").text(title);
@@ -414,6 +490,37 @@ var main = function() {
         $("#noteDueDate").text("Due by: " + deadline);
         $("#noteCategory").text("Category: " + category);
         note.show();
+    }
+
+    function refreshNotifications() {
+//        console.log("refreshNotifications called");
+//        action="updateNotifications";
+//        var type="GET";
+//        var userID = sessionStorage.getItem("storedUserID");
+//        var url = "resources/users/notifications/"+userID;
+//        console.log("refreshNotifications sends "+ url);
+//        sendRequest(type, url, action);
+        var type="GET";
+        var storedUser = sessionStorage.getItem('loggedInUser');
+        var url = "resources/users/find/"+storedUser;
+        req = new XMLHttpRequest();
+        req.open(type, url, true);
+        req.onreadystatechange = function() {
+            if (req.readyState===4) {
+                if (req.status === 200) {
+                    var users = req.responseXML.getElementsByTagName("useris")[0];
+                    var user = users.childNodes[0];
+                    var notifications = user.getElementsByTagName("notifications")[0].childNodes[0].nodeValue;
+                    updateNotifications(notifications);
+                }
+            }
+        };
+        req.send(null);
+    }
+    
+    function updateNotifications(number) {
+        $("#notificationNumber").text(number);
+        $("#notificationWindow").text(number + " new personal notes");
     }
     
 };
