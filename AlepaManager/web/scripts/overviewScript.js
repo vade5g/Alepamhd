@@ -352,8 +352,10 @@ var main = function() {
                 var user = users.childNodes[loop];
                 var firstname = user.getElementsByTagName("firstname")[0];
                 var lastname = user.getElementsByTagName("lastname")[0];
+                var category = user.getElementsByTagName("category")[0];
                 appendUserListElement(firstname.childNodes[0].nodeValue,
-                                      lastname.childNodes[0].nodeValue);
+                                      lastname.childNodes[0].nodeValue,
+                                      category.childNodes[0].nodeValue);
             }
             $("li p").css({
                 "display" : "inline-block",
