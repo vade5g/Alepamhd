@@ -71,17 +71,24 @@ var main = function() {
                 storedUserID = user.getElementsByTagName("id")[0].childNodes[0].nodeValue;
                 storedUserID = parseInt(storedUserID);
                 sessionStorage.setItem('storedUserID', storedUserID);
+                //get initial view:
+                var type="GET";
+                var url = "resources/activenotes/personal/"+sessionStorage.getItem('storedUserID');
+                var req3 = new XMLHttpRequest();
+                req3.open(type, url, true);
+                req3.onreadystatechange = function() {
+                    if (req3.readyState===4) {
+                        if (req3.status === 200) {
+                            changeArea(req3.responseXML);
+                        }
+                    }
+                };
+                req3.send(null);
             }
         }
     };
     req2.send(null);
-    
-    //get initial view:
-    var type="GET";
-    var url = "resources/activenotes/personal/"+sessionStorage.getItem('storedUserID');
-    var action="getPersonalNotes";
-    sendRequest(type, url, action);
-    
+
     //give the basic toggle action click event for the 1st paremeter(clickelement)
     function addPanelClickEvent(clickElement, toggleElement) {
         $(clickElement).click(function() {
