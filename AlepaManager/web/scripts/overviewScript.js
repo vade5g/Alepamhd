@@ -327,7 +327,7 @@ var main = function() {
             var target = note.getElementsByTagName("targetUser")[0];
             target = target.childNodes[0].nodeValue;
             var expired = note.getElementsByTagName("expired")[0];
-            target = target.childNodes[0].nodeValue;
+            expired = expired.childNodes[0].nodeValue;
             addNoteToView(title,active,target,expired);
             
         }
