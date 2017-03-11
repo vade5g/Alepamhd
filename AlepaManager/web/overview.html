@@ -18,9 +18,9 @@
         <p id="loggedUser"></p>
         <div id="logout">
             <button class="logoutButton" type="button">Logout</button>
-            <img id="logoutImg" src="css/logout.png">
         </div>
-        
+        <div id='logoutArea'></div>
+        <img id="logoutImg" src="css/logout.png">
         <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
         <div id="topInfoBar"><p>Your view</p></div>
         <div class="bigWindow">
@@ -66,7 +66,8 @@
                     <form>
                         <h1>Create a new note</h1>
                         <div id="nNoteTitle"><label>Title* </label><input id="newNoteTitle" type="text" name="newNoteTite" placeholder="Your Title"></div>
-                        <div id="nNoteTarget"><label>Target person </label><input id="newNoteTarget" type="text" name="newNoteTarget" placeholder="Who is this for?"></div>
+                        <div id="nNoteTarget"><label>Target person </label><input id="newNoteTarget" type="text" name="newNoteTarget" placeholder="Who is this for?-------------->" readonly></div>
+                        <img id='plussign' src="css/plussign.png" style='position: absolute; top:6.63em;left:43em;height: 2em;width:2em;cursor:pointer;'>
                         <div id="nNoteAuthor"><label>Author:  </label><input id="newNoteAuthor" type="text" name="newNoteAuthor" readonly></div>
                         <div id="nNoteMessage"><label>Message* </label><br><textarea id="newNoteMessage" name="newNoteMessage" placeholder="Everything is wrong again..."></textarea></div>
                         <div id="nNoteDeadline"><label>Deadline </label><input id="newNoteDeadline" type="text" name="newNoteDeadline" placeholder="dd.mm.yyyy"></div>
@@ -95,9 +96,10 @@
                                 
                             </ul>
                         </div>
-                        <div style="position: absolute; bottom: 1em;"><label>Send note to:</label>
-                            <input id="sendNoteField" type="text">
-                            <button type="button" id="sendNoteToButton" class="doneBtn">Send</button>
+                        <div style="position: absolute; bottom: 1em; left: 2em;"><label id="sendNoteTagLabel">Tag person:</label>
+                            <input id="sendNoteField" type="text" readonly>
+                            <button type="button" id="sendNoteToButton" class="doneBtn">Select</button>
+                            <button type="button" id='clearSearchTag'>Empty</button>
                         </div>
                         <button type="button" class="closeButton pointer"
                                 style="position: absolute; top:0.3em; right:0.3em; font-size:1.4em; color:white;background-color: red;"><b>X</b></button>

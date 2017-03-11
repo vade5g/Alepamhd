@@ -24,7 +24,7 @@ button {
     height: 400em;
     left: -100em;
     top: -100em;
-    background-color: rgba(119, 120, 122, 0.4);
+    background-color: rgba(119, 120, 122, 0.7);
 }
 
 .bigWindow {
@@ -179,6 +179,7 @@ button {
     -webkit-border-radius: 11px 11px 11px 11px;
     border: 3px solid #ff0839;
     z-index: 2;
+    box-shadow: 0 0 10px white;
 }
 #newNote h1 {
     text-align: center;
@@ -340,6 +341,12 @@ button {
     background: #d12323;
     text-decoration: none;
 }
+
+#closeButton:hover {
+    background: #a8051f;
+    text-decoration: none;
+}
+
 #doneButton {
     position: absolute;
     bottom: 0.4em;
@@ -395,7 +402,7 @@ button {
 #searchUsersDiv {
     background: repeat;
     background-color: white;
-    opacity: 0.9;
+    opacity: 1;
     color: black;
     position:absolute;
     left:18.75em;
@@ -409,6 +416,7 @@ button {
     -moz-border-radius: 11px 11px 11px 11px;
     -webkit-border-radius: 11px 11px 11px 11px;
     border: 3px solid #ff0839;
+    box-shadow: 0 0 10px white;
 }
 .resultsContainerDiv {
     position:absolute;
@@ -497,8 +505,10 @@ button {
     position: absolute;
     width : 2em;
     height: 2em;
-    left: 4.5em;
-    top: -0.3em;
+    left: 95.4em;
+    top: 2.6em;
+    z-index: 0;
+    cursor: pointer;
 }
 
 .logoutButton {
@@ -512,11 +522,16 @@ button {
   padding: 3px 15px 3px 15px;
   border: solid #ffffff 1px;
   text-decoration: none;
+  width: 7em;
 }
 
 .logoutButton:hover {
   background: #27a829;
   text-decoration: none;
+}
+
+#plussign:hover {
+    content: url('plussigngrey.png');
 }
 
 #bottomText {

@@ -31,8 +31,24 @@ var main = function() {
     //add toggle onclick events to newnote and search and their close-buttons
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
-    addPanelClickEvent($("#newNote .closeButton"), newNote);
-    addPanelClickEvent($("#searchUsersDiv .closeButton"), userDatabase);
+    
+    $(searchUsersImg).click(function() {
+        $("#searchUsersDiv").show();
+        $("#sendNoteTagLabel").text("Selected:");
+        $("#sendNoteToButton").text("User info");
+    });
+    
+    $("#searchUsersDiv .closeButton").click(function() {
+        $(userDatabase).hide();
+        if ($(newNote).is(":hidden")) {
+            shadow.hide();
+        } 
+    });
+    
+    $("#newNote .closeButton").click(function() {
+        $(newNote).hide();
+        shadow.hide();
+    }); 
     
     //give the first notes their click events
     refreshNoteClickEvents();
@@ -141,7 +157,11 @@ var main = function() {
         } 
     });
     
-    $("#logout button").click(function() {
+    $("#logoutArea").click(function() {
+        window.location.href = "index.html";
+    });
+    
+    $("#logoutImg").click(function() {
         window.location.href = "index.html";
     });
     
@@ -229,6 +249,17 @@ var main = function() {
         }
     });
     
+    //what happens when you click plus 
+    $("#plussign").click(function() {
+        $("#searchUsersDiv").show();
+        $("#sendNoteTagLabel").text("Tag person:");
+        $("#sendNoteToButton").text("Select");
+    });
+
+    $("#clearSearchTag").click(function() {
+        $("#sendNoteField").val("");
+    });
+
     $(submitNoteButton).click(function() {
         var action="addNote";
         var type="POST";
@@ -390,8 +421,7 @@ var main = function() {
             });
             $("#sendNoteToButton").click(function() {
                 $("#newNoteTarget").val($("#sendNoteField").val());
-                shadow.hide();
-                newNoteImg.trigger("click");
+                userDatabase.hide();
             });
         }
     }
