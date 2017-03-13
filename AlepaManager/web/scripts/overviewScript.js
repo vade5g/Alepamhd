@@ -8,6 +8,7 @@ var main = function() {
     var searchUsersImg = $("#searchUsers");
     var newNote = $("#newNote");
     var userDatabase = $("#searchUsersDiv");
+    var userInfo = $("#infoArea");
     var note = $("#note");
     var panelElementsList = [newNote, userDatabase, note];
     var findUserField = $("#findUserField");
@@ -25,6 +26,7 @@ var main = function() {
     shadow.hide();
     newNote.hide();
     userDatabase.hide();
+    userInfo.hide();
     note.hide();
     $("#notificationWindow").hide();
     
@@ -48,6 +50,14 @@ var main = function() {
     $("#newNote .closeButton").click(function() {
         $(newNote).hide();
         shadow.hide();
+    }); 
+    
+    $("#loggedUser").click(function() {
+        var action = "findUserInfoSelf";
+        var type="GET";
+        var entry = sessionStorage.getItem("loggedInUser");
+        var url = "resources/users/find/"+entry;
+        sendRequest(type, url, action);
     }); 
     
     //give the first notes their click events
@@ -344,6 +354,10 @@ var main = function() {
                     refreshCurrentNotes();
                 } else if (action==="updateNotifications") {
                     updateNotifications(req.responseText);
+                } else if (action==="findUserInfo") {
+                    updateUserInfo(req.responseXML);
+                } else if (action==="findUserInfoSelf") {
+                    updateUserInfo(req.responseXML, sessionStorage.getItem("loggedInUser"));
                 }
             }
         }
@@ -420,11 +434,42 @@ var main = function() {
                 $("#sendNoteField").val($(this).text());
             });
             $("#sendNoteToButton").click(function() {
-                $("#newNoteTarget").val($("#sendNoteField").val());
-                userDatabase.hide();
+                if ($("#newNote").is(":visible")===true) {
+                    $("#newNoteTarget").val($("#sendNoteField").val());
+                    userDatabase.hide();
+                } else {
+                    var entry = $("#sendNoteField").val();
+                    if (entry!=="") {
+                        var action = "findUserInfo";
+                        var type="GET";
+                        var entry = $("#sendNoteField").val();
+                        var url = "resources/users/find/"+entry;
+                        sendRequest(type, url, action);
+                    }
+                }
             });
         }
     }
+    function updateUserInfo(responseXML, name) {
+        var users = responseXML.getElementsByTagName("useris")[0];
+        var user = users.childNodes[0];
+        var username = user.getElementsByTagName("username")[0].childNodes[0].nodeValue;
+        var category = user.getElementsByTagName("category")[0].childNodes[0].nodeValue;
+        var email = user.getElementsByTagName("email")[0].childNodes[0].nodeValue;
+        if (name!==undefined) {
+            $("#infoName").text(name);
+        } else {
+            $("#infoName").text($("#sendNoteField").val());
+        }
+        $("#infoUsername").text("Username: "+username);
+        $("#infoCategory").text("Category: "+category);
+        $("#infoEmail").text("E-mail: "+email);
+        userInfo.show();
+    }
+    
+    $("#infoArea button").click(function() {
+        userInfo.hide();
+    });
     
     function appendUserListElement(firstname, lastname) {
         searchResultsList.append('<li><p>'+firstname+" "+lastname+'</p></li>');
