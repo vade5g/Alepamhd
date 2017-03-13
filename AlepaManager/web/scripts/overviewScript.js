@@ -155,6 +155,13 @@ var main = function() {
     
     //clicking DONE on the note
     $("#note .doneBtn").click(function() {
+        var target = $("#noteTarget").text();
+        var category = $("#noteCategory").text();
+        if (category.includes("manager") && target.includes(sessionStorage.getItem("loggedInUser"))===false) {
+            alert("You are not authorized to complete this task!\n"
+                    + "Only the manager can complete tasks in the manager category.");
+            return;
+        }
         if ($("#topInfoBar p").text().includes("history")) {
             var r = confirm("Are you sure you want to permanently remove note?");
         } else {
