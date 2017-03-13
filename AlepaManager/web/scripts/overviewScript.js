@@ -155,7 +155,11 @@ var main = function() {
     
     //clicking DONE on the note
     $("#note .doneBtn").click(function() {
-        var r = confirm("Are you sure you want to mark note as finished?");
+        if ($("#topInfoBar p").text().includes("history")) {
+            var r = confirm("Are you sure you want to permanently remove note?");
+        } else {
+            var r = confirm("Are you sure you want to mark note as finished?");
+        }
         if (r === true) {
             var action="disable";
             var type="GET";
@@ -164,6 +168,7 @@ var main = function() {
             var url = "resources/activenotes/disable/"+title;
             sendRequest(type, url, action);
             shadow.hide();
+            note.hide();
         } 
     });
     
@@ -222,11 +227,10 @@ var main = function() {
     }); 
     
     $("#notificationWindow").click(function() {
-        $("#personalBar").children().first().trigger("click");
         $("#notificationNumber").text(0);
         $("#notificationWindow").text(0 + " new personal notes");
         var type="GET"; var url="resources/users/resetnotifications/"+sessionStorage.getItem("storedUserID");
-        var action="resetnotifications";
+        var action="resetNotifications";
         sendRequest(type, url, action);
     });
 
@@ -351,9 +355,10 @@ var main = function() {
                 } else if (action==="getPersonalNotes") {
                     changeArea(req.responseXML);
                 } else if (action==="disable") {
-                    refreshCurrentNotes();
-                } else if (action==="updateNotifications") {
-                    updateNotifications(req.responseText);
+                    historyViewImg.trigger("click");
+                } else if (action==="resetNotifications") {
+                    $("#personalBar").children().first().trigger("click");
+                    //$('#categoryBar button:contains('+"Your view"+')').trigger("click");
                 } else if (action==="findUserInfo") {
                     updateUserInfo(req.responseXML);
                 } else if (action==="findUserInfoSelf") {
@@ -364,7 +369,7 @@ var main = function() {
     }
     
     function refreshCurrentNotes() {
-        action="getNotes";
+        var action="getNotes";
         var type="GET";
         if (sessionStorage.getItem("currentCategory")==="Your view") {
             var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
