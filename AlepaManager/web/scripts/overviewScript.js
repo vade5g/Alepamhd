@@ -187,6 +187,10 @@ var main = function() {
         window.location.href = "index.html";
     });
     
+    $(".logoutButton").click(function() {
+        window.location.href = "index.html";
+    });
+    
     //what happens when you click a category button:
     $(".topAnimation").click(function() {
         var name = ($(this).text());
