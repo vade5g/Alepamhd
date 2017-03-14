@@ -8,6 +8,7 @@ var main = function() {
     var searchUsersImg = $("#searchUsers");
     var newNote = $("#newNote");
     var userDatabase = $("#searchUsersDiv");
+    var userInfo = $("#infoArea");
     var note = $("#note");
     var panelElementsList = [newNote, userDatabase, note];
     var findUserField = $("#findUserField");
@@ -25,14 +26,39 @@ var main = function() {
     shadow.hide();
     newNote.hide();
     userDatabase.hide();
+    userInfo.hide();
     note.hide();
     $("#notificationWindow").hide();
     
     //add toggle onclick events to newnote and search and their close-buttons
     addPanelClickEvent(newNoteImg, newNote);
     addPanelClickEvent(searchUsersImg, userDatabase);
-    addPanelClickEvent($("#newNote .closeButton"), newNote);
-    addPanelClickEvent($("#searchUsersDiv .closeButton"), userDatabase);
+    
+    $(searchUsersImg).click(function() {
+        $("#searchUsersDiv").show();
+        $("#sendNoteTagLabel").text("Selected:");
+        $("#sendNoteToButton").text("User info");
+    });
+    
+    $("#searchUsersDiv .closeButton").click(function() {
+        $(userDatabase).hide();
+        if ($(newNote).is(":hidden")) {
+            shadow.hide();
+        } 
+    });
+    
+    $("#newNote .closeButton").click(function() {
+        $(newNote).hide();
+        shadow.hide();
+    }); 
+    
+    $("#loggedUser").click(function() {
+        var action = "findUserInfoSelf";
+        var type="GET";
+        var entry = sessionStorage.getItem("loggedInUser");
+        var url = "resources/users/find/"+entry;
+        sendRequest(type, url, action);
+    }); 
     
     //give the first notes their click events
     refreshNoteClickEvents();
@@ -129,7 +155,18 @@ var main = function() {
     
     //clicking DONE on the note
     $("#note .doneBtn").click(function() {
-        var r = confirm("Are you sure you want to mark note as finished?");
+        var target = $("#noteTarget").text();
+        var category = $("#noteCategory").text();
+        if (category.includes("manager") && target.includes(sessionStorage.getItem("loggedInUser"))===false) {
+            alert("You are not authorized to complete this task!\n"
+                    + "Only the manager can complete tasks in the manager category.");
+            return;
+        }
+        if ($("#topInfoBar p").text().includes("history")) {
+            var r = confirm("Are you sure you want to permanently remove note?");
+        } else {
+            var r = confirm("Are you sure you want to mark note as finished?");
+        }
         if (r === true) {
             var action="disable";
             var type="GET";
@@ -138,10 +175,19 @@ var main = function() {
             var url = "resources/activenotes/disable/"+title;
             sendRequest(type, url, action);
             shadow.hide();
+            note.hide();
         } 
     });
     
-    $("#logout button").click(function() {
+    $("#logoutArea").click(function() {
+        window.location.href = "index.html";
+    });
+    
+    $("#logoutImg").click(function() {
+        window.location.href = "index.html";
+    });
+    
+    $(".logoutButton").click(function() {
         window.location.href = "index.html";
     });
     
@@ -192,11 +238,10 @@ var main = function() {
     }); 
     
     $("#notificationWindow").click(function() {
-        $("#personalBar").children().first().trigger("click");
         $("#notificationNumber").text(0);
         $("#notificationWindow").text(0 + " new personal notes");
         var type="GET"; var url="resources/users/resetnotifications/"+sessionStorage.getItem("storedUserID");
-        var action="resetnotifications";
+        var action="resetNotifications";
         sendRequest(type, url, action);
     });
 
@@ -229,6 +274,17 @@ var main = function() {
         }
     });
     
+    //what happens when you click plus 
+    $("#plussign").click(function() {
+        $("#searchUsersDiv").show();
+        $("#sendNoteTagLabel").text("Tag person:");
+        $("#sendNoteToButton").text("Select");
+    });
+
+    $("#clearSearchTag").click(function() {
+        $("#sendNoteField").val("");
+    });
+
     $(submitNoteButton).click(function() {
         var action="addNote";
         var type="POST";
@@ -310,16 +366,21 @@ var main = function() {
                 } else if (action==="getPersonalNotes") {
                     changeArea(req.responseXML);
                 } else if (action==="disable") {
-                    refreshCurrentNotes();
-                } else if (action==="updateNotifications") {
-                    updateNotifications(req.responseText);
+                    historyViewImg.trigger("click");
+                } else if (action==="resetNotifications") {
+                    $("#personalBar").children().first().trigger("click");
+                    //$('#categoryBar button:contains('+"Your view"+')').trigger("click");
+                } else if (action==="findUserInfo") {
+                    updateUserInfo(req.responseXML);
+                } else if (action==="findUserInfoSelf") {
+                    updateUserInfo(req.responseXML, sessionStorage.getItem("loggedInUser"));
                 }
             }
         }
     }
     
     function refreshCurrentNotes() {
-        action="getNotes";
+        var action="getNotes";
         var type="GET";
         if (sessionStorage.getItem("currentCategory")==="Your view") {
             var url = "resources/activenotes/personal/"+sessionStorage.getItem("storedUserID");
@@ -389,12 +450,42 @@ var main = function() {
                 $("#sendNoteField").val($(this).text());
             });
             $("#sendNoteToButton").click(function() {
-                $("#newNoteTarget").val($("#sendNoteField").val());
-                shadow.hide();
-                newNoteImg.trigger("click");
+                if ($("#newNote").is(":visible")===true) {
+                    $("#newNoteTarget").val($("#sendNoteField").val());
+                    userDatabase.hide();
+                } else {
+                    var entry = $("#sendNoteField").val();
+                    if (entry!=="") {
+                        var action = "findUserInfo";
+                        var type="GET";
+                        var entry = $("#sendNoteField").val();
+                        var url = "resources/users/find/"+entry;
+                        sendRequest(type, url, action);
+                    }
+                }
             });
         }
     }
+    function updateUserInfo(responseXML, name) {
+        var users = responseXML.getElementsByTagName("useris")[0];
+        var user = users.childNodes[0];
+        var username = user.getElementsByTagName("username")[0].childNodes[0].nodeValue;
+        var category = user.getElementsByTagName("category")[0].childNodes[0].nodeValue;
+        var email = user.getElementsByTagName("email")[0].childNodes[0].nodeValue;
+        if (name!==undefined) {
+            $("#infoName").text(name);
+        } else {
+            $("#infoName").text($("#sendNoteField").val());
+        }
+        $("#infoUsername").text("Username: "+username);
+        $("#infoCategory").text("Category: "+category);
+        $("#infoEmail").text("E-mail: "+email);
+        userInfo.show();
+    }
+    
+    $("#infoArea button").click(function() {
+        userInfo.hide();
+    });
     
     function appendUserListElement(firstname, lastname) {
         searchResultsList.append('<li><p>'+firstname+" "+lastname+'</p></li>');

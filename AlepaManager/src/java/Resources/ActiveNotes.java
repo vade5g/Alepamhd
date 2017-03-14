@@ -104,7 +104,11 @@ public class ActiveNotes {
         matchList = criteria.list();
         if (!matchList.isEmpty()) {
             note = matchList.get(0);
-            note.setActive(false);
+            if (note.getActive()==false) {
+                session.delete(note);
+            } else {
+                note.setActive(false);
+            }
         }
         session.getTransaction().commit();
         return note;

@@ -63,6 +63,12 @@ var main = function() {
         }
     });
     
+    $("#loginPassword").keypress(function(e) {
+        if (e.which === 13) {
+            $("#loginButton").trigger("click");
+        }
+    });
+    
     var loginUsernameField = $("#loginUsername");
     var loginPasswordField = $("#loginPassword");
     var registerFullNameField = $("#registerFullName");
