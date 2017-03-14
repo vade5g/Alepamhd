@@ -26,6 +26,7 @@ import org.hibernate.criterion.Restrictions;
 @Path("/history")
 public class History {
 
+    //get personal history of user by their user ID
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -57,6 +58,7 @@ public class History {
         return notes;
     }
     
+    //get all inactive notes by category
     @Path("/category/{category}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -65,21 +67,8 @@ public class History {
         SessionFactory sf = HibernateStuff.getInstance().getSessionFactory();
         Session session = sf.openSession();
         session.beginTransaction();
-        
-        //stuff begins
-//        Criteria criteria = session.createCriteria(Useri.class);
-//        criteria.add(Restrictions.like("id", userID));
-//        List<Useri> userList = new ArrayList<>(); Useri user;
+
         List<Note> notes = new ArrayList<>();
-//        userList = criteria.list();
-//        if (!userList.isEmpty()) {
-//            //get the user by this ID
-//            user = userList.get(0);
-//        } else {
-//            return notes;
-//        }
-//        String author = user.getFirstname() + " " + user.getLastname();
-        //reset criteria
         Criteria criteria = session.createCriteria(Note.class);
         criteria.add(Restrictions.like("category", category));
         criteria.add(Restrictions.eq("active", false));

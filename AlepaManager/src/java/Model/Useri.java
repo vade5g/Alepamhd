@@ -32,6 +32,7 @@ public class Useri implements Serializable {
     public Useri() {
     }
     
+    //constructor always the same, fields enforced on javascript side
     public Useri(String firstname, String lastname, String username, String password, String category, String email) {
         this.firstname = firstname;
         this.lastname = lastname;

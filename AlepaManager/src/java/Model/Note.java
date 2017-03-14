@@ -33,26 +33,28 @@ import javax.persistence.Temporal;
 public class Note implements Serializable {
     @Id
     @GeneratedValue
-    private int id; //ID for database table
+    private int id; 
     
-    private String title;       //The title of the note
-    private String targetUser;  //The name the note is targeted at (optional)
-    private String author;      //The one who made the note
+    private String title; 
+    private String targetUser;  //User that note is targeted to
+    private String author;
     private String message; //Content of the note (written task)
     private String deadline; //The given date the note expires (optional)
-    private String category; //The category the note was assigned to
+    private String category;
     private boolean active; //Is the task done or not
-    private boolean expired; //Value that checks if the note is expired
+    private boolean expired; //Is the date expired in terms of date
 
     public Note() {
     }
 
+    //constructor for notes created from client rather than populate
     public Note(String title, String targetUser, String author, String message,
             String deadline, String category) {
-        
+        //the date format is enforced by regex on the javascript side
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.title = title;
-        if (targetUser != null) { //Checks if any input was given
+        //target user can be left empty, put as "-" if this is the case
+        if (targetUser != null) { 
             this.targetUser = targetUser; 
         } else {
             this.targetUser = "-";
@@ -61,8 +63,10 @@ public class Note implements Serializable {
         this.message = message;
         //set expired to false, if deadline is given it's changed after
         this.expired = false;
+        //deadline can be left empty, in this case put as "-"
         if(deadline != null) {
             this.deadline = deadline;
+            //if the date isnt null, check against current date to see if ecpired
             try {
                 Date deadlineDate = dateFormat.parse(this.deadline);
                 if (checkIfExpired(deadlineDate)==true) {
@@ -78,19 +82,20 @@ public class Note implements Serializable {
         this.active = true;  
     }
     
+    //constructor with option to set inactive right off the bat (for populate only)
+    //other than that exactly the same
     public Note(String title, String targetUser, String author,
             String message, String deadline, String category, boolean active) {
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.title = title;
-        if (targetUser != null) { //Checks if any input was given
+        if (targetUser != null) { 
             this.targetUser = targetUser; 
         } else {
             this.targetUser = "-";
         }
         this.author = author;
         this.message = message;
-        //set expired to false, if deadline is given it's changed after
         this.expired = false;
         if(deadline != null) {
             this.deadline = deadline;
@@ -114,6 +119,7 @@ public class Note implements Serializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         Date currentDate;
         try {
+            //new date is always current date
             currentDate = dateFormat.parse(dateFormat.format(new Date()));
             System.out.println("Tried to compare current date("+currentDate+") and "+otherDate);
         } catch (ParseException ex) {
@@ -127,6 +133,7 @@ public class Note implements Serializable {
         this.active = false;
     }
     
+    //check if the date has expired
     public void updateExpired() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         try {
@@ -192,12 +199,8 @@ public class Note implements Serializable {
     public void setExpired(boolean input) {
         this.expired = input;
     }
-    //takes the formal input of "dd-MM-yyyy hh:mm:ss" and sets it as the expiration date
-    public void setExpireDate(String input) throws ParseException {
-        
-    }
-    
-    //Prints out all the information
+
+    //Prints out all the information about Note
     @Override
     public String toString() {
         return "Content: " + getMessage() + "\nCategory: " + getCategory() + 

@@ -1,4 +1,6 @@
-
+/*
+ * REST basic configuration
+ */
 package org.netbeans.rest.application.config;
 
 import java.util.Set;

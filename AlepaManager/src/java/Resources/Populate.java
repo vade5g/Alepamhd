@@ -1,3 +1,6 @@
+/*
+ * Only has one use, to populate with fake users and notes for testing purposes
+ */
 
 package Resources;
 
@@ -29,7 +32,8 @@ public class Populate {
         Session session = sf.openSession();
         session.beginTransaction();
         //actual stuff begins
-        //adding users to database
+        
+        //Create a mass of notes and users, save them to tables
         List<Useri> users = new ArrayList<>();
         
         users.add(new Useri("Matti", "Miettinen", "masa", "maza", "manager", "masa@gmail.com"));        
@@ -115,6 +119,7 @@ public class Populate {
                 
         session.getTransaction().commit();
         
+        //success!
         return "database populated!";
     }
     

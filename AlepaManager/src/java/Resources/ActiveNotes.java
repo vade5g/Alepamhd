@@ -1,3 +1,6 @@
+/*
+ * General REST address for handling notes that are visible on category click
+ */
 
 package Resources;
 
@@ -23,6 +26,7 @@ import org.hibernate.criterion.Restrictions;
 @Path("/activenotes")
 public class ActiveNotes {
     
+    //creating new note 
     @Path("{title}/{target}/{author}/{message}/{deadline}/{category}")
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -37,11 +41,14 @@ public class ActiveNotes {
         Session session = sf.openSession();
         session.beginTransaction();
         //actual stuff begins
+        
+        //set these as null if they come back as "none" from JS
         if (target.equals("none")) {
             target=null;
         } else if (deadline.equals("none")) {
             deadline=null;
         }
+        //create actual note
         Note newNote = new Note(title, target, author,  message, deadline, category);
         
         //if the target is a valid person, give him a notification
@@ -65,6 +72,7 @@ public class ActiveNotes {
         return title;
     }
     
+    //get individual note (clicking on small icon in notesArea)
     @Path("{title}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -87,6 +95,7 @@ public class ActiveNotes {
         return note;
     }
     
+    //set note by this title as inactive, or if it's already, delete from table
     @Path("/disable/{title}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -114,6 +123,7 @@ public class ActiveNotes {
         return note;
     }
     
+    //return all notes that have category set as the parameter
     @Path("/category/{category}")
     @GET
     @Produces(MediaType.APPLICATION_XML)
@@ -123,28 +133,17 @@ public class ActiveNotes {
         Session session = sf.openSession();
         session.beginTransaction();
         
-        //stuff begins
-//        Criteria criteria = session.createCriteria(Useri.class);
-//        criteria.add(Restrictions.like("id", userID));
-//        List<Useri> userList = new ArrayList<>(); Useri user;
         List<Note> notes = new ArrayList<>();
-//        userList = criteria.list();
-//        if (!userList.isEmpty()) {
-//            //get the user by this ID
-//            user = userList.get(0);
-//        } else {
-//            return notes;
-//        }
-//        String author = user.getFirstname() + " " + user.getLastname();
-        //reset criteria
         Criteria criteria = session.createCriteria(Note.class);
         criteria.add(Restrictions.like("category", category));
+        //only active ones, inactive ones are retrieved from history
         criteria.add(Restrictions.eq("active", true));
         notes = criteria.list();
         session.getTransaction().commit();
         return notes;
     }
     
+    //get notes of specific user by user's ID
     @Path("/personal/{id}")
     @GET
     @Produces(MediaType.APPLICATION_XML)

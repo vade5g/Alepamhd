@@ -13,6 +13,7 @@
     </head>
     <body>
         <img src="css/alepalogo.png" style="left: 2.3em; position:absolute; height: 4.5em; width: 10em;">
+        <!--logged user, login, manager text-->
         <p id="managerText">MANAGER</p>
         <p id="loggedAs">Logged in as: </p>
         <p id="loggedUser"></p>
@@ -20,11 +21,14 @@
             <button class="logoutButton" type="button">Logout</button>
         </div>
         <div id='logoutArea'></div>
-        <!---<img id="logoutImg" src="css/logout.png">--->
         <p id="bottomText">Made by: Team Alepa Managers HD (current v2.1)</p>
+        <!--Top info rectangle that gets changed on category click-->
         <div id="topInfoBar"><p>Your view</p></div>
+        <!--Container div for entire overview-->
         <div class="bigWindow">
+            <!--shadow effect that gets toggled-->
             <div id="shade"></div>
+            <!--Area on top of categories (notification bell, your view)-->
             <div id="personalBar">
                 <button class="categoryButton topAnimation">Your view</button>
                 <div id="bellArea"></div>
@@ -34,6 +38,7 @@
                     <button id="notificationWindow" class="categoryButton">[x] new notes</button>
                 </div>
             </div>
+            <!--Role categories-->
             <div id="categoryBar">
                 <button class="categoryButton topAnimation">Manager</button>
                 <button class="categoryButton topAnimation">Cashier</button>
@@ -42,12 +47,14 @@
                 <button class="categoryButton topAnimation">Guard</button>
                 <button class="categoryButton topAnimation">3rd party</button>
             </div>
+            <!--Square within container where all the notes appear-->
             <div id="notesArea">
                 <table id="noteTable" class="noteTable">
                     <tr>
 
                     </tr>
                 </table>
+                <!--The actual note, appears when you click a smaller note icon-->
                 <div id="note">
                     <h1 id="noteTitle">Title of note</h1>
                     <p id="noteTarget">Targeted to: Jaska</p>
@@ -62,6 +69,7 @@
                     <button id="closeButton" class="btn">CLOSE</button>
                     <button id="doneButton" class="doneBtn">DONE</button>
                 </div>
+                <!--New note template, appears when clicking on right panel newnote-->
                 <div id="newNote">
                     <form>
                         <h1>Create a new note</h1>
@@ -84,6 +92,7 @@
                         <button type="button" id="closeButton" class="closeButton">Close</button>
                     </form>
                 </div>
+                <!--The user search button, toggled from right panel/newnote-->
                 <div id="searchUsersDiv">
                     <form>
                         <h1 style="text-align: center;">Search user database</h1>
@@ -106,6 +115,7 @@
                     </form>
                 </div>
             </div>
+            <!--Info square with profile image, toggled from logged name/search-->
             <div id="infoArea">
                 <br>
                 <h1 id="infoName">Name: Matti</h1>
@@ -116,6 +126,7 @@
                 <button type="button" class="closeButton pointer"
                             style="position: absolute; top:0.3em; right:0.3em; font-size:1.4em; color:white;background-color: red;"><b>X</b></button>
             </div>
+            <!--Container for the buttons in the right side panel of overview-->
             <div id="rightPanelContainer">
                 <div id="writeMessage" class='rightPanel'>
                     <img id="newNoteImg" src="css/writemessage.png" style="width:5em;height:5em;">

@@ -1,3 +1,6 @@
+/*
+ * Hibernate basic config
+ */
 
 package Util;
 

@@ -1,4 +1,6 @@
-
+/*
+ * More hibernate configuration
+ */
 package Util;
 
 import javax.servlet.ServletContextEvent;
